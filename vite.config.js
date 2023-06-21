@@ -5,6 +5,11 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react()
+    react(),
+    eslintPlugin({
+      cache: false,
+      include: ['./src/**/*.js', './src/**/*.jsx'],
+      exclude: [],
+    }),
   ],
 });

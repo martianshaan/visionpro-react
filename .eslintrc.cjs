@@ -6,6 +6,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'airbnb',
   ],
   overrides: [
@@ -16,6 +17,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    "react-hooks"
   ],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
@@ -42,4 +44,4 @@ module.exports = {
   ],
   rules: {
   },
-};
+}}
