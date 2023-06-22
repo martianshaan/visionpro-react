@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="flex-row">
       <Navbar />
-      <Home/>
-      <ProductListing/>
+      <Home />
+      <ProductListing />
     </div>
   );
 }
