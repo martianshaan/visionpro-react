@@ -4,11 +4,11 @@ import bannerHero from '../assets/bannerHero.jpg';
 
 function Signup() {
   return (
-    <section>
-      <figure className=" hidden lg:block max-h-screen rounded-lg">
+    <section className="mt-2">
+      <figure className=" hidden lg:block max-h-screen rounded-lg w-full ">
         <img src={bannerHero} alt="bannerHero" className="w-full h-full object-cover" />
       </figure>
-      <div className="flex items-center justify-center w-full px-5">
+      <div className="flex items-center justify-center w-full px-5 mt-3">
         <section className="px-7 py-10 rounded-md shadow-md bg-white/[0.75] flex flex-col gap-6 w-full max-w-lg">
           <h6 className="font-monoton text-3xl hover:text-red-400 cursor-pointer text-center">
             sunbun
