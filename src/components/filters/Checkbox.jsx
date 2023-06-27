@@ -7,14 +7,14 @@ function Checkbox({ data: { name, value }, index }) {
     <form>
       <label
         htmlFor={inputId}
-        className={`p-2 rounded-md  shadow-sm text-center ${
+        className={`p-2 rounded-md  shadow-sm text-center  cursor-pointer my-2 ${
           index
             ? 'bg-black/[0.1] hover:bg-[--primary-text-color] hover:text-white'
-            : 'bg-[--primary-text-color] text-white cursor-pointer'
+            : 'bg-[--primary-text-color] text-white '
         }`}
       >
         {name}
-        <input id={inputId} type="checkbox" hidden name="category" value={value} />
+        <input id={inputId} type="checkbox" className="my-2" hidden name="category" value={value} />
       </label>
     </form>
   );

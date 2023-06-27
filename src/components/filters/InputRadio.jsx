@@ -5,7 +5,7 @@ function InputRadio({ data, name }) {
   return (
     <form>
       <label htmlFor="radio">
-        <input id="radio" type="radio" className="" name={name} />
+        <input id="radio" type="radio" className="mr-2" name={name} />
         {data}
         {' '}
         Stars and above

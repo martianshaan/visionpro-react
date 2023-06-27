@@ -33,7 +33,7 @@ const categories = ['Vision', 'Sunglasses', 'Sports'];
 
 function Filters() {
   return (
-    <aside className="flex flex-col p-3 gap-3 overflow-auto scrollbar">
+    <aside className="screen filtersContainer fixed left-0 top-0  flex flex-col p-3 gap-3 overflow-auto scrollbar">
       <div className="flex justify-between items-center">
         <div className="text-3xl text-gray-800 "> Filter Products</div>
         <AiFillCloseCircle className="text-2xl" />
@@ -41,9 +41,7 @@ function Filters() {
       <h5 className="text-sm text-gray-600">clear</h5>
       <section className="py-4">
         <FilterHeading text="Gender" />
-        <div className="grid grid-rows-2 grid-cols-2 gap-2">
-          *
-          {' '}
+        <div className="grid grid-rows-2 gap-4  grid-cols-2 gap-2">
           {checkboxCategories.map((item, index) => (
             <Checkbox data={item} index={index} />
           ))}
@@ -69,7 +67,7 @@ function Filters() {
         ))}
       </section>
 
-      <section className="py-3">
+      <section className="py-3 flex flex-col gap-2 mr-2">
         <FilterHeading text="Rating" />
         {ratings.map((data) => (
           <InputRadio data={data} name="rating" />
