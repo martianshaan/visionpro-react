@@ -33,7 +33,7 @@ const categories = ['Vision', 'Sunglasses', 'Sports'];
 
 function Filters() {
   return (
-    <aside className="screen filtersContainer fixed left-0 top-0  flex flex-col p-3 gap-3 overflow-auto scrollbar">
+    <aside className="screen filtersContainer fixed left-0 top-0  flex flex-col p-3 gap-3 overflow-auto">
       <div className="flex justify-between items-center">
         <div className="text-3xl text-gray-800 "> Filter Products</div>
         <AiFillCloseCircle className="text-2xl" />
