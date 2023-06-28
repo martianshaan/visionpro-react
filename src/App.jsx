@@ -4,7 +4,6 @@ import Navbar from './components/navbar/Navbar';
 import Home from './pages/Home';
 import ProductListing from './pages/ProductListing';
 import Signup from './pages/Signup';
-import Filters from './components/filters/Filters';
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
       <Home />
       <ProductListing />
       <Signup />
-      <Filters />
     </div>
   );
 }
