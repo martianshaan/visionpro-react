@@ -3,10 +3,10 @@ import React from 'react';
 import { Star } from '@phosphor-icons/react';
 import { Heart } from 'lucide-react';
 
-function SingleProduct({ glass }) {
+function SingleProduct({ product }) {
   const {
     id, image, name, rating, price, description,
-  } = glass;
+  } = product;
 
   return (
     <section
@@ -29,10 +29,10 @@ function SingleProduct({ glass }) {
         </figcaption>
         <aside className="flex flex-col items-end">
           <p className="flex justify-between">
-            <h5 className="text-amber-400">
+            <span className="text-amber-400">
               ₹
               {price}
-            </h5>
+            </span>
             {/* <span className="text-gray-500 px-1">(incl.tax)</span> */}
           </p>
           <h6 className="text-sm text-gray-400 line-through">
