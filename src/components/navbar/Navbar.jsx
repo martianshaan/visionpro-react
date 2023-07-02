@@ -4,6 +4,7 @@ import { React, useEffect, useState } from 'react';
 import { Bag, Bookmark, List } from '@phosphor-icons/react';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
+import Logo from './Logo';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
@@ -29,16 +30,17 @@ function Navbar() {
     ${colorChange ? 'shadow-sm drop-shadow-sm' : ''} z-10 transition  delay-75 ease-in-out
     `}
     >
-      <div className="flex justify-between w-full items-center">
-        <section className="relative flex items-center">
+      <div className="flex justify-between w-full items-center md:gap-3 ">
+        <section className="relative flex items-center gap-3 ">
           <img
             className="rounded-full-border-2 bg-yellow-300 me-3 hover:bg-yellow-800 cursor-pointer"
             src={defaultUser}
             alt="userProfileImage"
             width={40}
           />
+          <Logo />
         </section>
-        <div className="hidden sm:block sm:w-1/3 relative">
+        <div className="hidden sm:block sm:w-1/3 relative sm:mx-2">
           Search
         </div>
 
