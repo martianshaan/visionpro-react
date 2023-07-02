@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import ProductListing from './pages/ProductListing';
 import Signup from './pages/Signup';
 import ProductData from './pages/ProductData';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <ProductListing />
       <Signup />
       <ProductData />
+      <Login />
     </div>
   );
 }
