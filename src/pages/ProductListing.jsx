@@ -4,7 +4,7 @@ import React from 'react';
 import { Filter } from 'lucide-react';
 import bannerHero from '../assets/bannerHero.jpg';
 import { ProductData } from '../data/ProductsData';
-import { SingleProduct, Filters } from '../components';
+import { SingleProduct } from '../components';
 
 function ProductListing() {
   return (
@@ -15,7 +15,7 @@ function ProductListing() {
       <section className="flex justify-between py-3">
         <h1 className="text-2xl font-bold">Glasses for You! </h1>
         <div className="flex items-center gap-2">
-          <Filters />
+          {/* <Filters /> */}
           <form htmlFor="sortby">
             <label id="sortby">
               <select name="sortby" className="text-lg">
