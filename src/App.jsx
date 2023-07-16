@@ -1,6 +1,6 @@
-import './custom.styles.css';
 import { React } from 'react';
 import Index from './routes/Index';
+import './custom.styles.css';
 
 function App() {
   return (
