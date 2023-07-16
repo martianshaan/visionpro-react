@@ -4,7 +4,7 @@ import Navbar from './components/navbar/Navbar';
 import Profile from './pages/Profile';
 // import Home from './pages/Home';
 // import ProductListing from './pages/ProductListing';
-// import Signup from './pages/Signup';
+import Signup from './pages/Signup';
 // import ProductData from './pages/ProductData';
 // import Login from './pages/Login';
 // import Checkout from './pages/Checkout';
@@ -20,6 +20,7 @@ function App() {
       <Login /> */}
       {/* <Checkout /> */}
       <Profile />
+      <Signup />
     </div>
   );
 }

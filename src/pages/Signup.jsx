@@ -5,16 +5,16 @@ import { Logo } from '../components';
 
 function Signup() {
   return (
-    <section className="mt-2">
+    <section className="grid grid-rows-1  md:grid-cols-2 w-full h-screen m-auto">
       <figure className=" hidden lg:block max-h-screen rounded-lg w-full ">
         <img src={bannerHero} alt="bannerHero" className="w-full h-full object-cover" />
       </figure>
-      <div className="flex items-center justify-center w-full px-5 mt-3">
+      <div className="flex items-center justify-center w-full px-5 mt-3 ml-3">
         <section className="px-7 py-10 rounded-md shadow-md bg-white/[0.75] flex flex-col gap-6 w-full max-w-lg">
           <Logo />
           <section className="flex flex-col gap-3">
             <h1 className="text-4xl font-bold text-center">Sign up</h1>
-            <form className="flex flex-col gap-3">
+            <form className="py-3 flex flex-col gap-3 ">
               <label className="flex flex-col">
                 Username
                 <input type="text" className="border rounded-md p-1.5 shadown-sm w-full" />
