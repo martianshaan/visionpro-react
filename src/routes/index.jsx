@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 import { Routes, Route } from 'react-router';
 
@@ -33,4 +34,4 @@ function Index() {
   );
 }
 
-export default Index;
+export { Index };
