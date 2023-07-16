@@ -20,14 +20,14 @@ export default function Login() {
         <form className="flex flex-col  gap-3 mt-2">
           <label className="flex flex-col gap-1">
             <span className="text-lg">E-mail</span>
-            <input type="email" className="rounded-md w-full border w-full p-1.5 shadow-sm" />
+            <input type="email" className="rounded-md border w-full p-1.5 shadow-sm" />
           </label>
           <label className="flex flex-col gap-1">
             <span className="text-lg">Password</span>
             <input
               type="password"
               className="rounded-md
-    w-full border w-full p-1.5 shadow-sm"
+   border w-full p-1.5 shadow-sm"
             />
           </label>
         </form>
