@@ -41,7 +41,7 @@ function Filters() {
       <h5 className="text-sm text-gray-600">clear</h5>
       <section className="py-4">
         <FilterHeading text="Gender" />
-        <div className="grid grid-rows-2 gap-4  grid-cols-2 gap-2">
+        <div className="grid grid-rows-2 gap-4  grid-cols-2 ">
           {checkboxCategories.map((item, index) => (
             <Checkbox data={item} index={index} key={item.id} />
           ))}

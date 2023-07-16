@@ -36,7 +36,7 @@ function ProductData() {
         </div>
         <div className="flex flex-col gap-3">
           <strong className="text-2xl">About Product</strong>
-          <ul className="grid grid-col-2 gap-2 grid-rows-2 gap-2">
+          <ul className="grid grid-col-2 gap-2 grid-rows-2">
             <li className="gap-2">
               <span className="text-gray-400 text-sm">
                 Brand :
