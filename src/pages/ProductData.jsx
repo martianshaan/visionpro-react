@@ -16,7 +16,7 @@ function ProductData() {
       'These classic aviator sunglasses are perfect for any occasion.',
   };
   return (
-    <section className="md:min-h-[80vh] grid grid-rows-1 gap-2 sm:grid-cols-2 sm:gap-10 justify-center items-center ">
+    <section className="md:min-h-[80vh] grid grid-rows-1 gap-2 py-4 sm:grid-cols-2 sm:gap-10 justify-center items-center ">
       <figure className="p-1  bg-black/[0.075] rounded-md m-2">
         <img src={product.image} alt="product" className="w-full p-20" />
       </figure>
