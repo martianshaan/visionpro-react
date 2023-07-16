@@ -1,7 +1,9 @@
 import React from 'react';
 import Login from '../pages/Login';
 
-import { ProductData, ProductListing, Signup } from '../pages';
+import {
+  ProductData, ProductListing, Signup, Checkout, Profile,
+} from '../pages';
 
 export const authRoutes = [{
   id: 1,
@@ -21,4 +23,12 @@ export const contentRoutes = [{
   id: 2,
   path: '/productdetails',
   element: <ProductData />,
+}];
+
+export const privateRoutes = [{
+  path: '/checkout',
+  element: <Checkout />,
+}, {
+  path: '/profile',
+  element: <Profile />,
 }];

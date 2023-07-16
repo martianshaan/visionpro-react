@@ -2,11 +2,10 @@
 import { Routes, Route } from 'react-router';
 
 import React from 'react';
-import { authRoutes, contentRoutes } from './PublicRoutes';
+import { authRoutes, contentRoutes, privateRoutes } from './PublicRoutes';
 import SharedLayout from './SharedLayout';
 import { Home } from '../pages';
 import RequiresAuth from './RequiresAuth';
-import PrivateRoutes from './PrivateRoutes';
 
 function Index() {
   return (
@@ -24,8 +23,9 @@ function Index() {
         ))}
 
         <Route element={<RequiresAuth />}>
-          {PrivateRoutes.map((route) => (
+          {privateRoutes.map((route) => (
             <Route key={route.id} path={route.path} element={route.element} />
+
           ))}
         </Route>
       </Route>
