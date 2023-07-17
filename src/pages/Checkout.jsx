@@ -16,7 +16,7 @@ const product = {
 
 function ProductCard() {
   return (
-    <main className="flex flex-col gap-2 shadow-sm p-2 bg-gray-100/[0.8] rounded-sm items-center flex-wrap w-full gap-1">
+    <main className="flex flex-col shadow-sm p-2 bg-gray-100/[0.8] rounded-sm items-center flex-wrap w-full gap-1">
       <section className="flex flex-wrap w-full gap-4">
         <div className="bg-black/[0.075] h-16 w-16 rounded-md flex items-center p-2">
           <img src={glassCategory1} alt="glass" className="object-fit w-full " />
