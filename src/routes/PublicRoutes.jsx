@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import Mockman from 'mockman-js';
 import Login from '../pages/Login';
 
 import {
@@ -23,6 +25,9 @@ export const contentRoutes = [{
   id: 2,
   path: '/productdetails',
   element: <ProductData />,
+}, {
+  path: '/mockman',
+  element: <Mockman />,
 }];
 
 export const privateRoutes = [{
