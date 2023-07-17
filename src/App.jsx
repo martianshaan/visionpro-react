@@ -4,9 +4,12 @@ import './custom.styles.css';
 
 function App() {
   return (
-    <main className="flex-row">
-      <Route />
-    </main>
+    <React.StrictMode>
+      <main className="flex-row">
+        <Route />
+      </main>
+    </React.StrictMode>
+
   );
 }
 
