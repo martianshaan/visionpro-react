@@ -1,9 +1,12 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Logo } from '../components';
+import { useAuthContext } from '../contexts/index';
 import bannerHero from '../assets/bannerHero.jpg';
 
 export default function Login() {
@@ -12,12 +15,26 @@ export default function Login() {
     password: '',
   });
 
-  const [userInfo, setUserInfo] = useState('');
+  const { login, isAutheneticated, loggingIn } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let id;
+    if (
+      isAutheneticated || loginData.email || loginData.password
+    ) {
+      id = setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    }
+    return () => {
+      clearInterval(id);
+    };
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserInfo(loginData);
-    console.log(userInfo);
+    login(loginData);
   };
   return (
     <main className="grid  grid-rows-1 lg:grid-cols-2 w-full  m-auto justify-center h-screen">
@@ -61,8 +78,16 @@ export default function Login() {
             />
           </label>
           <section className="flex flex-col gap-5 w-full py-1 items-center  ">
-            <button type="submit" className="font-bold rounded-md btn-primary text-xl w-2/3  text-center">
-              Login
+            <button
+              type="submit"
+              className="font-bold rounded-md btn-primary text-xl w-2/3  text-center"
+              disabled={
+              loggingIn
+              || !loginData.email
+              || !loginData.password
+            }
+            >
+              {loggingIn ? 'Logging In...' : 'Login'}
             </button>
             <button
               type="submit"
