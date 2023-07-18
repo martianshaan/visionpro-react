@@ -9,8 +9,8 @@ function Signup() {
       <figure className=" hidden lg:block max-h-screen rounded-lg w-full ">
         <img src={bannerHero} alt="bannerHero" className="w-full h-full object-cover" />
       </figure>
-      <div className="flex items-center justify-center w-full px-5 mt-3 ml-3">
-        <section className="px-7 py-10 rounded-md shadow-md bg-white/[0.75] flex flex-col gap-6 w-full max-w-lg">
+      <div className="">
+        <section className="px-7 py-7 rounded-md shadow-md bg-white/[0.75] flex flex-col gap-6 max-w-lg ml-20  max-h-min my-6">
           <Logo />
           <section className="flex flex-col gap-3">
             <h1 className="text-4xl font-bold text-center">Sign up</h1>
