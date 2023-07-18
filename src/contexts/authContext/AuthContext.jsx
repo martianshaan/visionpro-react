@@ -2,12 +2,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState } from 'react';
-import { useNavigate } from 'react-router';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const navigate = useNavigate();
   const [isAutheneticated, setIsAutheneticated] = useState(
     localStorage.getItem('authenticated'),
   );
@@ -21,7 +19,6 @@ function AuthContextProvider({ children }) {
       setIsAutheneticated(true);
       setTimeout(() => {
         setLoggingIn(false);
-        navigate('/');
       }, 1000);
     }
   };
@@ -31,8 +28,5 @@ function AuthContextProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useAuthContext = () => useContext(AuthContext);
 
 export default AuthContextProvider;
