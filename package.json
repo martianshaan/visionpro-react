@@ -13,6 +13,9 @@
     "@phosphor-icons/react": "^2.0.10",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
+    "dayjs": "^1.11.9",
+    "jwt-decode": "^3.1.2",
+    "jwt-encode": "^1.0.1",
     "lucide-react": "^0.244.0",
     "mockman-js": "^1.1.5",
     "prop-types": "^15.8.1",
@@ -36,9 +39,22 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "miragejs": "^0.1.47",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
     "vite": "^4.3.9",
     "vite-plugin-eslint": "^1.8.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
