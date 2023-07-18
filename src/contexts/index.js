@@ -7,4 +7,5 @@ export { default as AuthContextProvider } from './authContext/AuthContext';
 export { default as ProductContextProvider } from './productContext/ProductContext';
 
 export const useAuthContext = () => useContext(AuthContext);
+
 export const useProductContext = () => useContext(ProductContext);
