@@ -70,8 +70,8 @@ export default function Login() {
               onClick={() => {
                 setLoginData({
                   ...loginData,
-                  email: 'welcomeguest@visionpro.com',
-                  password: 'earth1818',
+                  email: 'welcomeguest@glasses.com',
+                  password: '****@***',
                 });
               }}
             >
