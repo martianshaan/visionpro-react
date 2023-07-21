@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export const AuthContext = createContext();
 
@@ -10,9 +10,9 @@ function AuthContextProvider({ children }) {
     localStorage.getItem('authenticated'),
   );
 
-  const [logginIn, setLoggingIn] = useState(false);
+  const [loggingIn, setLoggingIn] = useState(false);
 
-  const Login = ({ email, password }) => {
+  const login = ({ email, password }) => {
     setLoggingIn(true);
     if (email && password) {
       localStorage.setItem('authenticated', true);
@@ -23,7 +23,7 @@ function AuthContextProvider({ children }) {
     }
   };
   return (
-    <AuthContext.Provider value={{ isAutheneticated, logginIn, Login }}>
+    <AuthContext.Provider value={{ isAutheneticated, loggingIn, login }}>
       {children}
     </AuthContext.Provider>
   );

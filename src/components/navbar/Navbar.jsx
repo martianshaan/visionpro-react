@@ -25,10 +25,13 @@ function Navbar() {
     };
   }, []);
   return (
+    /* py-3 max-w-screen mb-3 fixed left-0 right-0
+    px-[4%] md:px-[10%] bg-[--theme-color]  */
     /* removed fixed from css */
-    <nav className={`flex flex-col sticky sm:flex-row py-3 max-w-screen mb-20  left-0 right-0 px-[4%] md:px-[10%] bg-[--theme-color] 
-    ${colorChange ? 'shadow-sm drop-shadow-sm' : ''} z-10 transition  delay-75 ease-in-out
-    `}
+    <nav className={`flex flex-col 
+    sm:flex-row py-3.5 px-[4%] fixed max-w-screen top-0 left-0 right-0 md:px-[10%] bg-[--theme-color]
+    ${colorChange ? 'shadow-sm  drop-shadow-sm' : ''} 
+    z-10 transition delay-75 ease-in-out`}
     >
       <div className="flex justify-between w-full items-center md:gap-3 ">
         <section className="relative flex items-center gap-3 ">
@@ -62,9 +65,15 @@ function Navbar() {
               onClick={() => { ''; }}
             >
               <Bag size={26} />
+              <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
+              items-center justify-center text-xs font-bold border-3 border-white rounded-full
+               dark:border-gray-500 "
+              >
+                20
+              </div>
             </li>
           </ul>
-          <section className="md:hidden cursor-pointer relative">
+          <section className="md:hidden  cursor-pointer relative">
             <List
               size={32}
               className="text-lg"
