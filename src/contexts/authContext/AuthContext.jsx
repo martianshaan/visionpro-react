@@ -1,29 +1,48 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
-import { createContext, useState } from 'react';
+/* eslint-disable no-console */
+/* eslint-disable react/jsx-no-constructed-context-values */
+import { React, createContext, useState } from 'react';
+import { loginService } from '../../api/apiServices';
 
 export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const [isAutheneticated, setIsAutheneticated] = useState(
-    localStorage.getItem('authenticated'),
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem('token'),
   );
-
   const [loggingIn, setLoggingIn] = useState(false);
 
-  const login = ({ email, password }) => {
+  const loginHandler = async ({ email = '', password = '' }) => {
     setLoggingIn(true);
-    if (email && password) {
-      localStorage.setItem('authenticated', true);
-      setIsAutheneticated(true);
-      setTimeout(() => {
-        setLoggingIn(false);
-      }, 1000);
+    try {
+      const response = await loginService(email, password);
+      console.log({ response });
+      if (response.status === 200 || response.status === 201) {
+        localStorage.setItem('token', response?.data?.encodedToken);
+        localStorage.setItem(
+          'userInfo',
+          JSON.stringify(response?.data?.foundUser),
+        );
+        setIsAuthenticated(response?.data?.encodedToken);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoggingIn(false);
     }
   };
+
+  const logoutHandler = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userInfo');
+    setIsAuthenticated(null);
+  };
   return (
-    <AuthContext.Provider value={{ isAutheneticated, loggingIn, login }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated, loggingIn, loginHandler, logoutHandler,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
