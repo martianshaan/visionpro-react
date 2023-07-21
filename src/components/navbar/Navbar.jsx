@@ -62,9 +62,15 @@ function Navbar() {
               onClick={() => { ''; }}
             >
               <Bag size={26} />
+              <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
+              items-center justify-center text-xs font-bold border-3 border-white rounded-full
+               dark:border-gray-500 "
+              >
+                20
+              </div>
             </li>
           </ul>
-          <section className="md:hidden cursor-pointer relative">
+          <section className="md:hidden  cursor-pointer relative">
             <List
               size={32}
               className="text-lg"
