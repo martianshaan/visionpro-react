@@ -4,6 +4,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Plus, SignOut } from '@phosphor-icons/react';
 import React, { useState } from 'react';
+import { useAuthContext } from '../contexts';
 
 function AddressCard({ address, pincode }) {
   return (
@@ -23,6 +24,7 @@ function AddressCard({ address, pincode }) {
 }
 
 function Profile() {
+  const userDetails = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;
   const [selectedItem, setSelectedItem] = useState('profile');
   const [addNewAddress, setAddNewAddress] = useState(false);
   const [addressData, setAddressData] = useState([{
@@ -37,6 +39,18 @@ function Profile() {
     town: 'aaa y698590809',
     pincode: '123345',
   });
+
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const { logoutHandler } = useAuthContext();
+
+  const handleLogout = () => {
+    setLoggingOut(true);
+    setTimeout(() => {
+      logoutHandler();
+      setLoggingOut(false);
+    }, 1000);
+  };
 
   function AddressForm() {
     return (
@@ -191,7 +205,13 @@ function Profile() {
         </section>
         {selectedItem === 'profile' ? (
           <aside className="flex flex-col items-center w-full text-center p-1  gap-2 mt-3 text-lg ">
-            <p>UserName: Test User</p>
+            <p>
+              <span className="text-gray-600">
+                UserName:
+              </span>
+              {userDetails ? `${userDetails?.firstName} ${userDetails?.lasName}`
+                : ''}
+            </p>
             <p>Email: testuser@gmail.com</p>
             <hr />
             <button
@@ -202,12 +222,14 @@ function Profile() {
               Your Orders
             </button>
             <button
+              disabled={loggingOut}
+              onClick={handleLogout}
               type="submit"
               className="text-lg flex w-1/2 items-center justify-center gap-3 bg-red-400 hover:bg-white px-6 py-2 text-white
              hover:text-red-500 border hover:border-red-500  rounded-md "
             >
               <SignOut size={28} weight="fill" />
-              <p className="font-bold items-center">Sign-out</p>
+              <p className="font-bold items-center">{loggingOut ? 'Signing-Out...' : 'Sign-out'}</p>
             </button>
           </aside>
         ) : (
