@@ -3,7 +3,7 @@
 import React from 'react';
 import { Filter } from 'lucide-react';
 import bannerHero from '../assets/bannerHero.jpg';
-import { ProductData } from '../data/ProductsData';
+import { glassesData } from '../data/ProductsData';
 import { SingleProduct } from '../components';
 
 function ProductListing() {
@@ -32,7 +32,7 @@ function ProductListing() {
         </div>
       </section>
       <main className="grid grid-col-1  gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 ">
-        {ProductData.map((product) => (
+        {glassesData.map((product) => (
           <SingleProduct key={product.id} product={product} />
         ))}
       </main>
