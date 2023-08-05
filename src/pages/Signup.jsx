@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import bannerHero from '../assets/bannerHero.jpg';
 import { Logo } from '../components';
 
@@ -37,9 +38,11 @@ function Signup() {
               Already have an account ?
               {' '}
               {' '}
-              <span className="underline text-base ml-1">
-                Login
-              </span>
+              <Link to="/login">
+                <span className="underline text-base ml-1">
+                  Login
+                </span>
+              </Link>
             </p>
           </section>
 
