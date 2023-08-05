@@ -7,4 +7,4 @@ export const loginService = (email, password) => {
   axios.post(LOGIN_URL, { email, password });
 };
 
-export const getAllProductsUrl = () => axios.get(GET_ALL_PRODUCTS_URL);
+export const getAllProductsService = () => axios.get(GET_ALL_PRODUCTS_URL);
