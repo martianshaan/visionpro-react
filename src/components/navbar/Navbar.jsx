@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { React, useEffect, useState } from 'react';
 import { Bag, Bookmark, List } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
@@ -35,13 +36,18 @@ function Navbar() {
     >
       <div className="flex justify-between w-full items-center md:gap-3 ">
         <section className="relative flex items-center gap-3 ">
-          <img
-            className="rounded-full-border-2 bg-yellow-300 me-3 hover:bg-yellow-800 cursor-pointer"
-            src={defaultUser}
-            alt="userProfileImage"
-            width={40}
-          />
-          <Logo />
+          <Link to="/profile">
+            <img
+              className="rounded-full-border-2 bg-yellow-300 me-3 hover:bg-yellow-800 cursor-pointer"
+              src={defaultUser}
+              alt="userProfileImage"
+              width={40}
+            />
+          </Link>
+          <Link to="/">
+            <Logo />
+          </Link>
+
         </section>
         <div className="hidden sm:block sm:w-1/3 relative sm:mx-2">
           Search
