@@ -42,7 +42,7 @@ export function makeServer({ environment = 'development' } = {}) {
 
     // Runs on the start of the server
     seeds(server) {
-      // disballing console logs from Mirage
+      // disbaling console logs from Mirage
       server.logging = false;
       products.forEach((item) => {
         server.create('product', { ...item });

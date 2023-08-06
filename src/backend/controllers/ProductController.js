@@ -11,7 +11,8 @@ import { Response } from 'miragejs';
  * send GET Request at /api/products
  * */
 
-export const getAllProductsHandler = () => (new Response(200, {}, { products: this.db.products }));
+export const getAllProductsHandler = () => (
+  new Response(200, {}, { products: this.db.products }));
 
 /**
  * This handler handles gets all products in the db.
