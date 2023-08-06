@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-console */
 import React, {
-  createContext, useState, useReducer, useEffect, useMemo,
+  createContext, useState, useReducer, useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
@@ -33,13 +34,13 @@ function ProductContextProvider({ children }) {
     fetchData();
   }, []);
 
-  const productContextvalues = useMemo(
-    () => ({ allProducts: state.allProducts, loading }),
-    [loading, state.allProducts],
-  );
+  // const productContextvalues = useMemo(
+  //   () => ({ allProducts: state.allProducts, loading }),
+  //   [loading, state.allProducts],
+  // );
 
   return (
-    <ProductContext.Provider value={productContextvalues}>
+    <ProductContext.Provider value={{ allProducts: state.allProducts, loading }}>
       {children}
     </ProductContext.Provider>
   );
