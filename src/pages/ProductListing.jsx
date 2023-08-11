@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
@@ -9,6 +10,7 @@ import loadingGif from '../assets/loading.gif';
 
 function ProductListing() {
   const { allProducts, loading } = useProductContext();
+  // console.log(allProducts);
   return (
     <div>
       {loading ? (
