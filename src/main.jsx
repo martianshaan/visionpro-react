@@ -7,7 +7,7 @@ import './index.css';
 import { AuthContextProvider, ProductContextProvider } from './contexts';
 import { makeServer } from './server';
 
-makeServer({ environment: 'development' });
+makeServer();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
