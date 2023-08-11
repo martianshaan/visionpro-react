@@ -38,6 +38,7 @@ export function makeServer({ environment = 'development' } = {}) {
       user: Model,
       cart: Model,
       wishlist: Model,
+      todo: Model,
     },
 
     // Runs on the start of the server
@@ -51,6 +52,11 @@ export function makeServer({ environment = 'development' } = {}) {
       users.forEach((item) => server.create('user', { ...item, cart: [], wishlist: [] }));
 
       categories.forEach((item) => server.create('category', { ...item }));
+
+      // for to do
+      server.create('todo', { name: 'Groom the cat' });
+      server.create('todo', { name: 'Do the dishes' });
+      server.create('todo', { name: 'Go shopping' });
     },
 
     routes() {
@@ -83,6 +89,24 @@ export function makeServer({ environment = 'development' } = {}) {
         '/user/wishlist/:productId',
         removeItemFromWishlistHandler.bind(this),
       );
+
+      // for to do
+      // GET REQUEST
+      this.get('/api/todos', (schema) => schema.todos.all());
+
+      // POST REQUEST
+      this.post('/api/todos', (schema, request) => {
+        const attrs = JSON.parse(request.requestBody);
+
+        return schema.todos.create(attrs);
+      });
+
+      // DELETE TODO
+      this.delete('/api/todos/:id', (schema, request) => {
+        const { id } = request.params;
+
+        return schema.todos.find(id).destroy();
+      });
     },
   });
 }
