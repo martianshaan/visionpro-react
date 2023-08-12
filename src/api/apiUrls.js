@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5173/api';
+const baseUrl = '/api';
 
 // auth urls
 export const SIGNUP_URL = `${baseUrl}/auth/signup`;
