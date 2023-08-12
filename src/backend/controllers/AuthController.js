@@ -2,9 +2,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { v4 as uuid } from 'uuid';
 import { Response } from 'miragejs';
+import sign from 'jwt-encode';
 import { formatDate } from '../utils/authUtils';
 
-const sign = require('jwt-encode');
 /**
  * All the routes related to Auth are present here.
  * These are Publicly accessible routes.

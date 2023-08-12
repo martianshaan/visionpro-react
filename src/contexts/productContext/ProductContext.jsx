@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-console */
 import React, {
-  createContext, useState, useReducer, useEffect, useMemo,
+  createContext, useState, useReducer, useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
@@ -23,8 +24,17 @@ function ProductContextProvider({ children }) {
           payload: response.data.products,
         });
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
     } finally {
       setLoading(false);
     }
@@ -33,13 +43,13 @@ function ProductContextProvider({ children }) {
     fetchData();
   }, []);
 
-  const productContextvalues = useMemo(
-    () => ({ allProducts: state.allProducts, loading }),
-    [loading, state.allProducts],
-  );
+  // const productContextvalues = useMemo(
+  //   () => ({ allProducts: state.allProducts, loading }),
+  //   [loading, state.allProducts],
+  // );
 
   return (
-    <ProductContext.Provider value={productContextvalues}>
+    <ProductContext.Provider value={{ allProducts: state.allProducts, loading }}>
       {children}
     </ProductContext.Provider>
   );

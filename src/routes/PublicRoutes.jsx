@@ -2,6 +2,7 @@
 import React from 'react';
 import Mockman from 'mockman-js';
 import Login from '../pages/Login';
+import Todo from './Todo';
 
 import {
   ProductData, ProductListing, Signup, Checkout, Profile,
@@ -28,6 +29,9 @@ export const contentRoutes = [{
 }, {
   path: '/mockman',
   element: <Mockman />,
+}, {
+  path: '/todo',
+  element: <Todo />,
 }];
 
 export const privateRoutes = [{
