@@ -5,21 +5,21 @@ import { Heart } from 'lucide-react';
 
 function SingleProduct({ product }) {
   const {
-    id, image, name, rating, price, description,
+    id, image, name, rating, price, brand,
   } = product;
 
   return (
     <section
       key={id}
-      className="flex flex-col justify-between bg-white/[0.5] rounded-sd
+      className="flex flex-col justify-between bg-white/[0.5] rounded-2xl
         shadwow-lg border-2 border-black/[0.05] overflow-hidden
-        "
+        hover:scale-105 transition ease-in-out delay-75"
     >
-      <figure className="p-10 bg-black/[0.075]">
-        <img src={image} alt={name} className="rounded-md" />
+      <figure className="p-10 bg-yellow-50 h-1/2 flex items-center justify-center">
+        <img src={image} alt={name} className="rounded-md w-full h-full object-cover hover:scale-110 hover:rotate-0.5 " />
       </figure>
-      <main className="p-3 gap-2 mt-2 flex flex-row">
-        <figcaption className="flex flex-col">
+      <main className="px-4 gap-2 flex flex-row mt-1 justify-between ">
+        <figcaption className="flex flex-col justify-between">
           <strong className="text-xl font-medium">{name}</strong>
           <span className="flex items-center gap-1.5">
             <span>{rating}</span>
@@ -41,7 +41,7 @@ function SingleProduct({ product }) {
           </h6>
         </aside>
       </main>
-      <p className="text-sm text-gray-600 px-3">{description}</p>
+      <p className="text-sm text-gray-600 px-3">{brand}</p>
       <div className="px-3 py-2 border-t justify-between flex items-center w-full">
         <button
           type="button"
