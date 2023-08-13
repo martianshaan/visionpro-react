@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { React, createContext, useState } from 'react';
-import { loginService } from '../../api/apiServices';
+import { loginService, signupService } from '../../api/apiServices';
 
 export const AuthContext = createContext();
 
@@ -11,6 +11,7 @@ function AuthContextProvider({ children }) {
     localStorage.getItem('token'),
   );
   const [loggingIn, setLoggingIn] = useState(false);
+  const [signingUp, setSigningUp] = useState(false);
 
   const loginHandler = async ({ email = '', password = '' }) => {
     setLoggingIn(true);
@@ -37,10 +38,31 @@ function AuthContextProvider({ children }) {
     localStorage.removeItem('userInfo');
     setIsAuthenticated(null);
   };
+
+  const signupHandler = async ({ userName = '', email = '', password = '' }) => {
+    setSigningUp(true);
+    try {
+      const response = await signupService(userName, email, password);
+      if (response.status === 200) {
+        localStorage.setItem('token', response?.data?.encodedToken);
+        localStorage.setItem('userInfo', JSON.stringify(response?.data?.foundUser));
+        setIsAuthenticated(response?.data?.encodedToken);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSigningUp(false);
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated, loggingIn, loginHandler, logoutHandler,
+        isAuthenticated,
+        loggingIn,
+        loginHandler,
+        logoutHandler,
+        signingUp,
+        signupHandler,
       }}
     >
       {children}
