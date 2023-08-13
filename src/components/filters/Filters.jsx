@@ -31,12 +31,15 @@ const checkboxCategories = [
 const ratings = [1, 2, 3, 4];
 const categories = ['Vision', 'Sunglasses', 'Sports'];
 
-function Filters() {
+function Filters({ isFilterOpen, setIsFilterOpen }) {
   return (
     <aside className="screen filtersContainer fixed left-0 top-0  flex flex-col p-3 gap-3 overflow-auto">
       <div className="flex justify-between items-center">
         <div className="text-3xl text-gray-800 "> Filter Products</div>
-        <AiFillCloseCircle className="text-2xl" />
+        <AiFillCloseCircle
+          className="text-2xl"
+          onClick={() => setIsFilterOpen(!isFilterOpen)}
+        />
       </div>
       <h5 className="text-sm text-gray-600">clear</h5>
       <section className="py-4">
