@@ -1,18 +1,19 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
-const app = firebase.initializeApp({
-  apiKey: process.env.VISION_FIREBASE_API_KEY,
-  authDomain: process.env.VISION_FIREBASE_AuthDomain,
-  projectId: process.env.VISION_FIREBASE_ProjectId,
-  storageBucket: process.env.VISION_FIREBASE_StorageBucket,
-  messagingSenderId: process.env.VISION_FIREBASE_MessagingSenderId,
-  appId: process.env.VISION_FIREBASE_AppId,
-  measurementId: process.env.VISION_FIREBASE_MeasurementId,
-});
+const firebaseConfig = {
+  apiKey: 'AIzaSyDYDZSoLpY090X43ETkxrXNBbpJR-w4w2Y',
+  authDomain: 'visionpro-auth.firebaseapp.com',
+  projectId: 'visionpro-auth',
+  storageBucket: 'visionpro-auth.appspot.com',
+  messagingSenderId: '398060853531',
+  appId: '1:398060853531:web:61c51d0c053f3fc7aa1bbe',
+  measurementId: 'G-2XY7ZQ3VLD',
+};
 
-export const auth = app.auth();
-
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 export default app;
