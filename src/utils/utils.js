@@ -7,6 +7,8 @@ export const notify = (type, message, delay) => {
     toast.success(message, {
       position: toast.POSITION.BOTTOM_CENTER,
       delay,
+    }, {
+      icon: '👋',
     });
   } else if (type === 'error') {
     toast.error(message, {
