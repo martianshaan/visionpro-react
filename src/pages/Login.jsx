@@ -1,8 +1,12 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable import/no-cycle */
 /* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { Logo } from '../components';
@@ -14,27 +18,37 @@ export default function Login() {
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
 
-  const { login, isAutheneticated, loggingIn } = useAuthContext();
+  const { loginHandler } = useAuthContext();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    let id;
-    if (
-      isAutheneticated || loginData.email || loginData.password
-    ) {
-      id = setTimeout(() => {
-        navigate('/');
-      }, 1000);
-    }
-    return () => {
-      clearInterval(id);
-    };
-  });
+  // useEffect(() => {
+  //   let id;
+  //   if (
+  //     token || loginData.email || loginData.password
+  //   ) {
+  //     id = setTimeout(() => {
+  //       navigate('/');
+  //     }, 1000);
+  //   }
+  //   return () => {
+  //     clearInterval(id);
+  //   };
+  // });
+  // localStorage.setItem('age', '30');
+  // console.log(localStorage.getItem('age'));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(loginData);
+    setError('');
+    loginHandler(loginData);
+    try {
+      await loginHandler(loginData.email, loginData.password);
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    }
   };
   return (
     <main className="grid  grid-rows-1 lg:grid-cols-2 w-full  m-auto justify-center h-screen">
@@ -48,6 +62,7 @@ export default function Login() {
         <h1 className="text-4xl font-bold text-center w-full max-w-lg">
           Sign in to explore your eyewear collection !
         </h1>
+        {error && <p className="bg-red-400 text-white border-rose-300 rounded-md">{error}</p>}
         <form className="flex flex-col  gap-3 mt-2" onSubmit={handleSubmit}>
           <label className="flex flex-col gap-1">
             <span className="text-lg">E-mail</span>
@@ -81,13 +96,8 @@ export default function Login() {
             <button
               type="submit"
               className="font-bold rounded-md btn-primary text-xl w-2/3  text-center"
-              disabled={
-              loggingIn
-              || !loginData.email
-              || !loginData.password
-            }
             >
-              {loggingIn ? 'Logging In...' : 'Login'}
+              Login
             </button>
             <button
               type="submit"
@@ -95,8 +105,8 @@ export default function Login() {
               onClick={() => {
                 setLoginData({
                   ...loginData,
-                  email: 'welcomeguest@glasses.com',
-                  password: '****@***',
+                  email: 'kookie@bangtan.com',
+                  password: 'bangtan0707',
                 });
               }}
             >

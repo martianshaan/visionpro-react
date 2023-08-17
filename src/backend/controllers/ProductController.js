@@ -1,6 +1,7 @@
+/* eslint-disable func-names */
 /* eslint-disable import/no-extraneous-dependencies */
 import { Response } from 'miragejs';
-import { products } from '../db/products';
+
 /**
  * All the routes related to Product are present here.
  * These are Publicly accessible routes.
@@ -11,19 +12,16 @@ import { products } from '../db/products';
  * send GET Request at /api/products
  * */
 
-export const getAllProductsHandler = () => (
-  new Response(200, {}, { products }));
-// export const getAllProductsHandler = (schema) => {
-//   const products = schema.products.all(); // Use the appropriate model query method
-//   return new Response(200, {}, { products });
-// };
+export const getAllProductsHandler = function () {
+  return new Response(200, {}, { products: this.db.products });
+};
 
 /**
  * This handler handles gets all products in the db.
  * send GET Request at /api/user/products/:productId
  * */
 
-export const getProductHandler = (schema, request) => {
+export const getProductHandler = function (schema, request) {
   const { productId } = request.params;
   try {
     const product = schema.products.findBy({ _id: productId });

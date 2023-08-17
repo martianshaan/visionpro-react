@@ -1,9 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 import {
-  Routes, Route, Navigate, Outlet,
+  Routes, Route, Navigate, Outlet, useLocation,
 } from 'react-router';
-
 import React from 'react';
 import { authRoutes, contentRoutes, privateRoutes } from './PublicRoutes';
 import SharedLayout from './SharedLayout';
@@ -12,11 +11,17 @@ import RequiresAuth from './RequiresAuth';
 import { useAuthContext } from '../contexts';
 
 function Index() {
-  const { isAuthenticated } = useAuthContext();
+  const { user } = useAuthContext();
+  const location = useLocation();
   return (
     <Routes>
       <Route element={
-        isAuthenticated ? <Navigate to="/" replace /> : <Outlet />
+        user ? (
+          <Navigate
+            to={location?.state?.from?.pathname ?? '/'}
+            replace
+          />
+        ) : (<Outlet />)
       }
       >
         {authRoutes.map((route) => (
@@ -29,7 +34,6 @@ function Index() {
         <Route path="*" element={<div>Error 404</div>} />
         {contentRoutes.map((route) => (
           <Route key={route.id} path={route.path} element={route.element} />
-
         ))}
 
         <Route element={<RequiresAuth />}>

@@ -1,10 +1,10 @@
+/* eslint-disable func-names */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-extraneous-dependencies */
 import { v4 as uuid } from 'uuid';
 import { Response } from 'miragejs';
 import sign from 'jwt-encode';
 import { formatDate } from '../utils/authUtils';
-
 /**
  * All the routes related to Auth are present here.
  * These are Publicly accessible routes.
@@ -16,7 +16,7 @@ import { formatDate } from '../utils/authUtils';
  * body contains {firstName, lastName, email, password}
  * */
 
-export const signupHandler = (schema, request) => {
+export const signupHandler = function (schema, request) {
   const { email, password, ...rest } = JSON.parse(request.requestBody);
   try {
     // check if email already exists
@@ -61,7 +61,7 @@ export const signupHandler = (schema, request) => {
  * body contains {email, password}
  * */
 
-export const loginHandler = (schema, request) => {
+export const loginHandler = function (schema, request) {
   const { email, password } = JSON.parse(request.requestBody);
   try {
     const foundUser = schema.users.findBy({ email });
