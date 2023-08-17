@@ -12,44 +12,40 @@ import { useNavigate } from 'react-router';
 import { Logo } from '../components';
 import { useAuthContext } from '../contexts/index';
 import bannerHero from '../assets/bannerHero.jpg';
+import { notify } from '../utils/utils';
 
 export default function Login() {
   const [loginData, setLoginData] = useState({
+    userName: '',
     email: '',
     password: '',
   });
   const [error, setError] = useState('');
 
+  const [loggingIn, setLoggingIn] = useState(false);
+
   const { loginHandler } = useAuthContext();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   let id;
-  //   if (
-  //     token || loginData.email || loginData.password
-  //   ) {
-  //     id = setTimeout(() => {
-  //       navigate('/');
-  //     }, 1000);
-  //   }
-  //   return () => {
-  //     clearInterval(id);
-  //   };
-  // });
-  // localStorage.setItem('age', '30');
-  // console.log(localStorage.getItem('age'));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoggingIn(true);
     loginHandler(loginData);
     try {
-      await loginHandler(loginData.email, loginData.password);
+      await loginHandler(loginData.email, loginData.password, loginData.userName);
+      notify('success', 'Logged in Successfully!!');
       navigate('/');
     } catch (err) {
-      setError(err.message);
+      notify('error', err?.message ? err?.message : 'Login failed. Please check your credentials.');
+      setError(err?.message);
+    } finally {
+      setLoggingIn(false);
     }
   };
+
+  const isDisabled = loggingIn || !loginData.email || !loginData.password;
+
   return (
     <main className="grid  grid-rows-1 lg:grid-cols-2 w-full  m-auto justify-center h-screen">
       <section className=" hidden lg:block max-h-screen  rounded-lg">
@@ -96,8 +92,9 @@ export default function Login() {
             <button
               type="submit"
               className="font-bold rounded-md btn-primary text-xl w-2/3  text-center"
+              disabled={isDisabled}
             >
-              Login
+              {loggingIn ? 'Logging In...' : 'Login'}
             </button>
             <button
               type="submit"
@@ -105,8 +102,9 @@ export default function Login() {
               onClick={() => {
                 setLoginData({
                   ...loginData,
-                  email: 'kookie@bangtan.com',
-                  password: 'bangtan0707',
+                  userName: 'Jethalal',
+                  email: 'jethalal@gadaelectronics.com',
+                  password: 'daya0707',
                 });
               }}
             >
