@@ -42,7 +42,7 @@ function Profile() {
 
   const [loggingOut, setLoggingOut] = useState(false);
 
-  const { logoutHandler } = useAuthContext();
+  const { logoutHandler, user } = useAuthContext();
 
   const handleLogout = () => {
     setLoggingOut(true);
@@ -208,6 +208,8 @@ function Profile() {
             <p>
               <span className="text-gray-600">
                 UserName:
+                {' '}
+                {user.displayName}
               </span>
               {userDetails ? `${userDetails?.firstName} ${userDetails?.lasName}`
                 : ''}
