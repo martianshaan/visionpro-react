@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
+import { useAuthContext } from '../../contexts';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { token } = useAuthContext();
 
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
@@ -52,6 +55,7 @@ function Navbar() {
         <div className="hidden sm:block sm:w-1/3 relative sm:mx-2">
           Search
         </div>
+        {token ? <h5>yes</h5> : <h5>no</h5>}
 
         <section className="flex items-center">
           <div to="/products" className="mx-2 px-3 py-1 shadow-sm rounded-md text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition">

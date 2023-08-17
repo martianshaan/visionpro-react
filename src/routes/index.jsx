@@ -1,9 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 import {
-  Routes, Route, Navigate, Outlet,
+  Routes, Route, Navigate, Outlet, useLocation,
 } from 'react-router';
-
 import React from 'react';
 import { authRoutes, contentRoutes, privateRoutes } from './PublicRoutes';
 import SharedLayout from './SharedLayout';
@@ -12,11 +11,17 @@ import RequiresAuth from './RequiresAuth';
 import { useAuthContext } from '../contexts';
 
 function Index() {
-  const { isAuthenticated } = useAuthContext();
+  const { token } = useAuthContext();
+  const location = useLocation();
   return (
     <Routes>
       <Route element={
-        isAuthenticated ? <Navigate to="/" replace /> : <Outlet />
+        token ? (
+          <Navigate
+            to={location?.state?.from?.pathname ?? '/'}
+            replace
+          />
+        ) : (<Outlet />)
       }
       >
         {authRoutes.map((route) => (
