@@ -4,10 +4,9 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../contexts';
 
 function RequiresAuth() {
-  const { token } = useAuthContext();
+  const { user } = useAuthContext();
   const location = useLocation();
-  return token ? (<Outlet />)
-    : (<Navigate to="/login" state={{ from: location }} replace />);
+  return user ? (<Outlet />) : (<Navigate to="/login" state={{ from: location }} replace />);
 }
 
 export default RequiresAuth;

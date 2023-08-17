@@ -11,12 +11,12 @@ import RequiresAuth from './RequiresAuth';
 import { useAuthContext } from '../contexts';
 
 function Index() {
-  const { token } = useAuthContext();
+  const { user } = useAuthContext();
   const location = useLocation();
   return (
     <Routes>
       <Route element={
-        token ? (
+        user ? (
           <Navigate
             to={location?.state?.from?.pathname ?? '/'}
             replace
@@ -34,7 +34,6 @@ function Index() {
         <Route path="*" element={<div>Error 404</div>} />
         {contentRoutes.map((route) => (
           <Route key={route.id} path={route.path} element={route.element} />
-
         ))}
 
         <Route element={<RequiresAuth />}>
