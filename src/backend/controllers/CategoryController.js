@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable import/no-extraneous-dependencies */
 import { Response } from 'miragejs';
 
@@ -11,7 +12,7 @@ import { Response } from 'miragejs';
  * send GET Request at /api/categories
  * */
 
-export const getAllCategoriesHandler = () => {
+export const getAllCategoriesHandler = function () {
   try {
     return new Response(200, {}, { categories: this.db.categories });
   } catch (error) {
@@ -30,7 +31,7 @@ export const getAllCategoriesHandler = () => {
  * send GET Request at /api/user/category/:categoryId
  * */
 
-export const getCategoryHandler = (schema, request) => {
+export const getCategoryHandler = function (schema, request) {
   const { categoryId } = request.params;
   try {
     const category = schema.categories.findBy({ _id: categoryId });

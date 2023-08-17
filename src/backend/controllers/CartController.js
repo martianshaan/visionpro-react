@@ -1,6 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable func-names */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable import/no-extraneous-dependencies */
 import { Response } from 'miragejs';
 import { formatDate, requiresAuth } from '../utils/authUtils';
 
@@ -14,7 +15,7 @@ import { formatDate, requiresAuth } from '../utils/authUtils';
  * This handler handles getting items to user's cart.
  * send GET Request at /api/user/cart
  * */
-export const getCartItemsHandler = (schema, request) => {
+export const getCartItemsHandler = function (schema, request) {
   const userId = requiresAuth.call(this, request);
   if (!userId) {
     return new Response(
@@ -35,7 +36,7 @@ export const getCartItemsHandler = (schema, request) => {
  * body contains {product}
  * */
 
-export const addItemToCartHandler = (schema, request) => {
+export const addItemToCartHandler = function (schema, request) {
   const userId = requiresAuth.call(this, request);
   try {
     if (!userId) {
@@ -73,7 +74,7 @@ export const addItemToCartHandler = (schema, request) => {
  * send DELETE Request at /api/user/cart/:productId
  * */
 
-export const removeItemFromCartHandler = (schema, request) => {
+export const removeItemFromCartHandler = function (schema, request) {
   const userId = requiresAuth.call(this, request);
   try {
     if (!userId) {
@@ -107,7 +108,7 @@ export const removeItemFromCartHandler = (schema, request) => {
  * body contains {action} (whose 'type' can be increment or decrement)
  * */
 
-export const updateCartItemHandler = (schema, request) => {
+export const updateCartItemHandler = function (schema, request) {
   const { productId } = request.params;
   const userId = requiresAuth.call(this, request);
   try {

@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable func-names */
 /* eslint-disable import/no-extraneous-dependencies */
 import { Response } from 'miragejs';
 import { formatDate, requiresAuth } from '../utils/authUtils';
@@ -14,7 +15,7 @@ import { formatDate, requiresAuth } from '../utils/authUtils';
  * send GET Request at /api/user/wishlist
  * */
 
-export const getWishlistItemsHandler = (schema, request) => {
+export const getWishlistItemsHandler = function (schema, request) {
   const userId = requiresAuth.call(this, request);
   if (!userId) {
     return new Response(
@@ -35,7 +36,7 @@ export const getWishlistItemsHandler = (schema, request) => {
  * body contains {product}
  * */
 
-export const addItemToWishlistHandler = (schema, request) => {
+export const addItemToWishlistHandler = function (schema, request) {
   const userId = requiresAuth.call(this, request);
   try {
     if (!userId) {
@@ -73,7 +74,7 @@ export const addItemToWishlistHandler = (schema, request) => {
  * body contains {product}
  * */
 
-export const removeItemFromWishlistHandler = (schema, request) => {
+export const removeItemFromWishlistHandler = function (schema, request) {
   const userId = requiresAuth.call(this, request);
   try {
     if (!userId) {

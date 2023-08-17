@@ -1,11 +1,12 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable camelcase */
+/* eslint-disable func-names */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-underscore-dangle */
 import { Response } from 'miragejs';
 import dayjs from 'dayjs';
 import jwt_decode from 'jwt-decode';
 
-export const requiresAuth = (request) => {
+export const requiresAuth = function (request) {
   const encodedToken = request.requestHeaders.authorization;
   const decodedToken = jwt_decode(
     encodedToken,
