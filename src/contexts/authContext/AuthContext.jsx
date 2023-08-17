@@ -15,10 +15,11 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from 'firebase/auth';
 import { auth } from '../../firebase';
 
-// import { notify } from '../../utils/utils';
+import { notify } from '../../utils/utils';
 
 export const AuthContext = createContext();
 
@@ -28,15 +29,37 @@ function AuthContextProvider({ children }) {
   const [signingUp, setSigningUp] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
 
-  function signupHandler(email, password) {
+  async function signupHandler(email, password, userName) {
+    console.log('username', userName);
     setSigningUp(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    try {
+      // Create the user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      notify('success', 'Signup successful! You can now log in.');
+      // Update the user's display name
+      await updateProfile(userCredential.user, {
+        displayName: userName,
+      });
+      // Refresh the user object with updated information
+      setUser(userCredential.user);
+
+      return userCredential;
+    } catch (error) {
+      // Handle errors
+      console.error(error.message);
+      throw error;
+    } finally {
+      setSigningUp(false);
+    }
   }
+
   function loginHandler(email, password) {
+    notify('success', 'Logged in Successfully!!');
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  function logOut() {
+  function logoutHandler() {
+    notify('success', 'Logged out Successfully!!');
     return signOut(auth);
   }
   function googleSignIn() {
@@ -59,7 +82,7 @@ function AuthContextProvider({ children }) {
         signupHandler,
         loginHandler,
         user,
-        logOut,
+        logoutHandler,
         googleSignIn,
         signingUp,
       }}
@@ -70,104 +93,3 @@ function AuthContextProvider({ children }) {
 }
 
 export default AuthContextProvider;
-
-// import { createContext, useState } from 'react';
-// import { loginService, signupService } from '../../api/apiServices';
-// import { notify } from '../../utils/utils';
-
-// export const AuthContext = createContext();
-
-// function AuthContextProvider({ children }) {
-//   const [token, setToken] = useState(localStorage.getItem('token'));
-//   const [userInfo, setUserInfo] = useState(
-//     localStorage.getItem('userInfo')
-//       ? JSON.parse(localStorage.getItem('userInfo'))
-//       : null,
-//   );
-//   const [loggingIn, setLoggingIn] = useState(false);
-//   const [signingUp, setSigningUp] = useState(false);
-
-//   const signupHandler = async ({
-//     username = '',
-//     email = '',
-//     password = '',
-//   }) => {
-//     setSigningUp(true);
-//     try {
-//       const response = await signupService(username, email, password);
-//       console.log(response);
-//       if (response.status === 200 || response.status === 201) {
-//         localStorage.setItem('token', response?.data?.encodedToken);
-//         localStorage.setItem(
-//           'userInfo',
-//           JSON.stringify(response?.data?.createdUser),
-//         );
-//         setToken(response?.data?.encodedToken);
-//         notify('success', 'Signed Up Successfully!!');
-//       }
-//     } catch (err) {
-//       console.log(err);
-//       notify(
-//         'error',
-//         err?.response?.data?.errors
-//           ? err?.response?.data?.errors[0]
-//           : 'Some Error Occurred!!',
-//       );
-//     } finally {
-//       setSigningUp(false);
-//     }
-//   };
-
-//   const loginHandler = async ({ email, password }) => {
-//     setLoggingIn(true);
-//     console.log(email);
-//     console.log(password);
-//     try {
-//       const response = await loginService(email, password);
-//       console.log({ response });
-//       if (response.status === 200 || response.status === 201) {
-//         localStorage.setItem('token', response?.data?.encodedToken);
-//         localStorage.setItem(
-//           'userInfo',
-//           JSON.stringify(response?.data?.foundUser),
-//         );
-//         setToken(response?.data?.encodedToken);
-//         notify('success', 'Logged In Successfully!!');
-//       }
-//     } catch (err) {
-//       console.log(err);
-//       notify(
-//         'error',
-//         err?.response?.data?.errors
-//           ? err?.response?.data?.errors[0]
-//           : 'Some Error Occurred!!',
-//       );
-//     } finally {
-//       setLoggingIn(false);
-//     }
-//   };
-
-//   const logoutHandler = () => {
-//     localStorage.removeItem('token');
-//     localStorage.removeItem('userInfo');
-//     setToken(null);
-//     notify('info', 'Logged out successfully!!', 100);
-//   };
-//   return (
-//     <AuthContext.Provider
-//       value={{
-//         token,
-//         loggingIn,
-//         loginHandler,
-//         logoutHandler,
-//         signupHandler,
-//         signingUp,
-//         userInfo,
-//       }}
-//     >
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// }
-
-// export default AuthContextProvider;
