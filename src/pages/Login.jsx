@@ -102,7 +102,7 @@ export default function Login() {
               onClick={() => {
                 setLoginData({
                   ...loginData,
-                  userName: 'Jethalal',
+                  userName: 'Jethalal Gada',
                   email: 'jethalal@gadaelectronics.com',
                   password: 'daya0707',
                 });
