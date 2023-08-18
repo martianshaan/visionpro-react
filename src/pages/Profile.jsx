@@ -1,9 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Plus, SignOut } from '@phosphor-icons/react';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useAuthContext } from '../contexts';
 
 function AddressCard({ address, pincode }) {
@@ -48,6 +50,7 @@ function Profile() {
     setLoggingOut(true);
     setTimeout(() => {
       logoutHandler();
+      toast.success('Logged Out Successfully!!');
       setLoggingOut(false);
     }, 1000);
   };

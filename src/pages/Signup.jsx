@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-no-undef */
@@ -12,15 +13,14 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { useAuthContext } from '../contexts';
 import bannerHero from '../assets/bannerHero.jpg';
 import { Logo } from '../components';
-import { notify } from '../utils/utils';
 
 function Signup() {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
   const [password, setPassword] = useState('');
   const [signingUp, setSigningUp] = useState(false);
   const [userName, setUserName] = useState('');
@@ -37,15 +37,13 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     setSigningUp(true);
     try {
       await signupHandler(email, password, userName);
-      notify('success', 'Signup successful! You can now log in.');
+      toast.success('Signup successful! You can now log in.');
       navigate('/login');
     } catch (err) {
-      notify('error', err ? (err.message) : ('Signup failed. Please try again.'));
-      setError(err.message);
+      toast.error('error', err ? (err.message) : ('Signup failed. Please try again.'));
     } finally {
       setSigningUp(false);
     }
@@ -69,7 +67,6 @@ shadow-md bg-white/[0.75] flex flex-col gap-6 max-w-lg ml-20  max-h-min my-6"
           <Logo />
           <section className="flex flex-col gap-3">
             <h1 className="text-4xl font-bold text-center">Sign up</h1>
-            {error && <p className="bg-red-400 text-white border-rose-300 rounded-md">{error}</p>}
             <form className="py-3 flex flex-col gap-3 " onSubmit={handleSubmit}>
               <label className="flex flex-col">
                 <input
