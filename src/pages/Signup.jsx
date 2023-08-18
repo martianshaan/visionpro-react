@@ -42,7 +42,7 @@ function Signup() {
     try {
       await signupHandler(email, password, userName);
       notify('success', 'Signup successful! You can now log in.');
-      navigate('/');
+      navigate('/login');
     } catch (err) {
       notify('error', err ? (err.message) : ('Signup failed. Please try again.'));
       setError(err.message);
