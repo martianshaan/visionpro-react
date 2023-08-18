@@ -206,7 +206,7 @@ function Profile() {
         {selectedItem === 'profile' ? (
           <aside className="flex flex-col items-center w-full text-center p-1  gap-2 mt-3 text-lg ">
             <p>
-              <span className="text-gray-600">
+              <span className="text-gray-900">
                 UserName:
                 {' '}
                 {user.displayName}
@@ -214,7 +214,11 @@ function Profile() {
               {userDetails ? `${userDetails?.firstName} ${userDetails?.lasName}`
                 : ''}
             </p>
-            <p>Email: testuser@gmail.com</p>
+            <p>
+              Email:
+              {' '}
+              {user.email}
+            </p>
             <hr />
             <button
               type="button"
