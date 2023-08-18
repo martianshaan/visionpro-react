@@ -1,0 +1,13 @@
+.loader{
+    margin: auto;
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+    width: 8rem;
+}
+.loader img{
+    height: 100%;
+    width: 100%;
+}
