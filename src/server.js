@@ -107,6 +107,9 @@ export function makeServer({ environment = 'development' } = {}) {
 
         return schema.todos.find(id).destroy();
       });
+
+      // passthrough apis
+      this.passthrough('https://identitytoolkit.googleapis.com/**');
     },
   });
 }
