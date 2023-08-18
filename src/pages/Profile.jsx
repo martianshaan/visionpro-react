@@ -1,9 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Plus, SignOut } from '@phosphor-icons/react';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useAuthContext } from '../contexts';
 
 function AddressCard({ address, pincode }) {
@@ -42,12 +44,13 @@ function Profile() {
 
   const [loggingOut, setLoggingOut] = useState(false);
 
-  const { logoutHandler } = useAuthContext();
+  const { logoutHandler, user } = useAuthContext();
 
   const handleLogout = () => {
     setLoggingOut(true);
     setTimeout(() => {
       logoutHandler();
+      toast.success('Logged Out Successfully!!');
       setLoggingOut(false);
     }, 1000);
   };
@@ -206,13 +209,19 @@ function Profile() {
         {selectedItem === 'profile' ? (
           <aside className="flex flex-col items-center w-full text-center p-1  gap-2 mt-3 text-lg ">
             <p>
-              <span className="text-gray-600">
+              <span className="text-gray-900">
                 UserName:
+                {' '}
+                {user.displayName}
               </span>
               {userDetails ? `${userDetails?.firstName} ${userDetails?.lasName}`
                 : ''}
             </p>
-            <p>Email: testuser@gmail.com</p>
+            <p>
+              Email:
+              {' '}
+              {user.email}
+            </p>
             <hr />
             <button
               type="button"
