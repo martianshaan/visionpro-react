@@ -1,18 +1,12 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable import/no-cycle */
 /* eslint-disable no-console */
-/* eslint-disable react/button-has-type */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { Logo } from '../components';
 import { useAuthContext } from '../contexts/index';
 import bannerHero from '../assets/bannerHero.jpg';
-import { notify } from '../utils/utils';
 
 export default function Login() {
   const [loginData, setLoginData] = useState({
@@ -20,25 +14,32 @@ export default function Login() {
     email: '',
     password: '',
   });
-  const [error, setError] = useState('');
 
   const [loggingIn, setLoggingIn] = useState(false);
 
-  const { loginHandler } = useAuthContext();
+  const { loginHandler, user } = useAuthContext();
   const navigate = useNavigate();
-
+  console.log('Authuser:', user);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     setLoggingIn(true);
     loginHandler(loginData);
     try {
-      await loginHandler(loginData.email, loginData.password, loginData.userName);
-      notify('success', 'Logged in Successfully!!');
+      // to access data from api do await and save it in variable
+      const userCredential = await loginHandler(
+        loginData.email,
+        loginData.password,
+        loginData.userName,
+      );
+      // Get the user's display name or user name
+      const { displayName } = userCredential.user;
+      toast.success(`Welcome Back, ${displayName}. 
+      Logged in Successfully !!`, {
+        icon: '👋',
+      });
       navigate('/');
     } catch (err) {
-      notify('error', err?.message ? err?.message : 'Login failed. Please check your credentials.');
-      setError(err?.message);
+      toast.error(err?.message ? err?.message : 'Login failed. Please check your credentials.');
     } finally {
       setLoggingIn(false);
     }
@@ -58,12 +59,12 @@ export default function Login() {
         <h1 className="text-4xl font-bold text-center w-full max-w-lg">
           Sign in to explore your eyewear collection !
         </h1>
-        {error && <p className="bg-red-400 text-white border-rose-300 rounded-md">{error}</p>}
         <form className="flex flex-col  gap-3 mt-2" onSubmit={handleSubmit}>
-          <label className="flex flex-col gap-1">
+          <label className="flex flex-col gap-1" htmlFor="email">
             <span className="text-lg">E-mail</span>
             <input
               type="email"
+              id="email"
               className="rounded-md border w-full p-1.5 shadow-sm"
               value={loginData.email}
               onChange={(e) => (
@@ -74,10 +75,11 @@ export default function Login() {
               )}
             />
           </label>
-          <label className="flex flex-col gap-1">
+          <label className="flex flex-col gap-1" htmlFor="password">
             <span className="text-lg">Password</span>
             <input
               type="password"
+              id="password"
               className="rounded-md border w-full p-1.5 shadow-sm"
               value={loginData.password}
               onChange={(e) => {
