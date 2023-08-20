@@ -10,7 +10,7 @@ import loadingGif from '../assets/loading.gif';
 
 function ProductListing() {
   const { allProducts, loading } = useProductContext();
-  // console.log(allProducts);
+  console.log(allProducts);
   return (
     <div>
       {loading ? (

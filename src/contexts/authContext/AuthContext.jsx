@@ -13,7 +13,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, createUserDocumentFromAuth } from '../../firebase';
 
 export const AuthContext = createContext();
 
@@ -44,6 +44,7 @@ function AuthContextProvider({ children }) {
   }
 
   function loginHandler(email, password) {
+    createUserDocumentFromAuth(auth);
     return signInWithEmailAndPassword(auth, email, password);
   }
 
