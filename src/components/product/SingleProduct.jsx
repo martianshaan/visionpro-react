@@ -2,11 +2,14 @@
 import React from 'react';
 import { Star } from '@phosphor-icons/react';
 import { Heart } from 'lucide-react';
+import { useProductContext } from '../../contexts';
 
 function SingleProduct({ product }) {
   const {
     id, image, name, rating, price, brand,
   } = product;
+
+  const { addProductToCart } = useProductContext();
 
   return (
     <section
@@ -48,8 +51,13 @@ function SingleProduct({ product }) {
           className="border border-[--primary-text-color]
                 py-1.5 text-sm  rounded-full px-5 hover:bg-[--primary-text-color]
                  hover:text-white transition"
+          onClick={() => {
+            if (!product?.inCart) {
+              addProductToCart(product);
+            }
+          }}
         >
-          Add to Cart
+          {product?.inCart ? 'Go to Cart' : 'Add to Cart'}
         </button>
         <button type="button">
           <Heart className="text-xl hover:text-rose-600 transition" />

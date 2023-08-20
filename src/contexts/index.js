@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { useContext } from 'react';
 import { AuthContext } from './authContext/AuthContext';
 import { ProductContext } from './productContext/ProductContext';
