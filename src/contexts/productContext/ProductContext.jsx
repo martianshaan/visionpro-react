@@ -22,6 +22,8 @@ function ProductContextProvider({ children }) {
   const [state, dispatch] = useReducer(productReducer, initialState);
   // const useAuthContext = useContext(AuthContext);
   const { user } = useAuthContext();
+  // const useAuthContext = useContext(AuthContext);
+  const { user } = useAuthContext();
 
   const fetchData = async () => {
     setLoading(true);
@@ -29,8 +31,21 @@ function ProductContextProvider({ children }) {
       const productResponse = await getAllProductsService();
       console.log('productResponse', productResponse);
       if (productResponse.status === 200) {
+      const productResponse = await getAllProductsService();
+      console.log('productResponse', productResponse);
+      if (productResponse.status === 200) {
         dispatch({
           type: actionTypes.INITIALIZE_PRODUCTS,
+          payload: productResponse.data.products,
+        });
+      }
+
+      const cartResponse = await getCartItemsService(user.token);
+      if (cartResponse.status === 200) {
+        console.log(cartResponse);
+        dispatch({
+          type: actionTypes.INITIALIZE_CART,
+          payload: cartResponse.data.cart,
           payload: productResponse.data.products,
         });
       }
@@ -59,8 +74,10 @@ function ProductContextProvider({ children }) {
     }
   };
 
+
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
