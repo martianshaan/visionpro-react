@@ -7,15 +7,15 @@ import { Link } from 'react-router-dom';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
-import { useAuthContext, useProductContext } from '../../contexts';
+import { useAuthContext } from '../../contexts';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user } = useAuthContext();
-  const { cart } = useProductContext();
-  console.log(cart);
+  // const { cart } = useProductContext();
+  // console.log(cart);
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
       setColorChange(true);

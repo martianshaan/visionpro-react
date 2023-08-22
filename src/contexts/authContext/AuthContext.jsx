@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 import React, {
@@ -13,7 +14,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, createUserDocumentFromAuth } from '../../firebase';
 
 export const AuthContext = createContext();
 
@@ -56,6 +57,9 @@ function AuthContextProvider({ children }) {
   }
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
+      if (currentuser) {
+        createUserDocumentFromAuth(currentuser);
+      }
       setUser(currentuser);
     });
 
