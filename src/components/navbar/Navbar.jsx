@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { React, useEffect, useState } from 'react';
@@ -6,14 +7,15 @@ import { Link } from 'react-router-dom';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
-import { useAuthContext } from '../../contexts';
+import { useAuthContext, useProductContext } from '../../contexts';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user } = useAuthContext();
-
+  const { cart } = useProductContext();
+  console.log(cart);
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
       setColorChange(true);
