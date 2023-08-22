@@ -1,3 +1,7 @@
+/* eslint-disable max-len */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -9,8 +13,15 @@ import { useProductContext } from '../contexts';
 import loadingGif from '../assets/loading.gif';
 
 function ProductListing() {
-  const { allProducts, loading } = useProductContext();
+  const { allProducts, loading, products } = useProductContext();
   console.log(allProducts);
+  console.log('products', typeof products);
+  for (const id in products) {
+    if (products.hasOwnProperty(id)) {
+      console.log('product', products[id]);
+    }
+  }
+  // products.map((product) => console.log('product', product));
   return (
     <div>
       {loading ? (
@@ -43,11 +54,22 @@ function ProductListing() {
               </button>
             </div>
           </section>
-          <main className="grid grid-col-1  gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 ">
+          {/* <main className="grid grid-col-1  gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  ">
             {allProducts.map((product) => (
               <SingleProduct key={product.id} product={product} />
             ))}
+          </main> */}
+          {/* <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+            {Object.keys(products).map((id) => (
+              <SingleProduct key={id} product={products.id} />
+            ))}
+          </main> */}
+          <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+            {Object.entries(products).map(([id, product]) => (
+              <SingleProduct key={id} product={product} />
+            ))}
           </main>
+
         </section>
       )}
     </div>

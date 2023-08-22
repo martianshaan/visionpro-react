@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-console */
@@ -9,12 +10,15 @@ import { initialState, productReducer } from '../../reducers/productsReducers';
 import { getAllProductsService, getCartItemsService } from '../../api/apiServices';
 import { actionTypes } from '../../utils/actionTypes';
 // import { AuthContext } from '../authContext/AuthContext';
+// import { addCollectionAndDocuments } from '../../firebase';
 import { useAuthContext } from '../index';
+import { getProductsandDocuments } from '../../firebase';
 
 export const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
   const [state, dispatch] = useReducer(productReducer, initialState);
   // const useAuthContext = useContext(AuthContext);
   const { user } = useAuthContext();
@@ -60,10 +64,22 @@ function ProductContextProvider({ children }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // useEffect(() => {
+  //   addCollectionAndDocuments('products', products);
+  // }, []);
   // const productContextvalues = useMemo(
   //   () => ({ allProducts: state.allProducts, loading }),
   //   [loading, state.allProducts],
   // );
+
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoryMap = await getProductsandDocuments();
+      console.log('products', categoryMap);
+      setProducts(categoryMap);
+    };
+    getCategoriesMap();
+  }, []);
 
   const addProductToCart = (product) => {
     const foundInCart = state.cart.find((item) => item.id === product.id);
@@ -98,6 +114,7 @@ function ProductContextProvider({ children }) {
       cart: state.cart,
       loading,
       addProductToCart,
+      products,
     }}
     >
       {children}
