@@ -13,18 +13,20 @@ function CartContextProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
   const { user } = useAuthContext();
-  const addToCart = (id, image, name, newPrice, brand) => {
+
+  const addToCart = (product) => {
     if (user !== null) {
       dispatch({
         type: 'ADD_TO_CART',
         payload: {
-          id, image, name, newPrice, brand, qty: 1,
+          ...product, qty: 1,
         },
       });
     } else {
       alert('login first ');
     }
   };
+
   return (
     <CartContext.Provider value={{ ...state, cart: state.cart, addToCart }}>
       {children}
