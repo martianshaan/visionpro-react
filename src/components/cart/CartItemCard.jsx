@@ -14,7 +14,6 @@ function CartItemCard({ product }) {
           </div>
           <div className="flex flex-col gap-3">
             <h2 className="text-xl py-3 font-semibold">{product.name}</h2>
-
             <div className="flex flex-col gap-3">
               <div className="flex gap-2 items-center">
                 <span className="text-gray-700">Quantity: </span>
@@ -22,7 +21,7 @@ function CartItemCard({ product }) {
                   <AiOutlineMinus />
                 </button>
                 <span className="h-full w-10 bg-black/[0.075]  rounded-sm flex items-center justify-center">
-                  5
+                  {product.qty}
                 </span>
                 <button className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs">
                   <AiOutlinePlus />
@@ -39,7 +38,15 @@ function CartItemCard({ product }) {
             </div>
           </div>
         </div>
-        <div className="">{product.price}</div>
+        <div className="flex flex-col items-end">
+          <span className="text-amber-600">
+            ₹
+            {product.newPrice}
+          </span>
+          <span className="text-sm text-gray-600 line-through">
+            {product.price}
+          </span>
+        </div>
       </div>
     </div>
   );
