@@ -5,7 +5,7 @@ import Login from '../pages/Login';
 import Todo from './Todo';
 
 import {
-  ProductData, ProductListing, Signup, Checkout, Profile,
+  ProductData, ProductListing, Signup, Checkout, Profile, Cart,
 } from '../pages';
 
 export const authRoutes = [{
@@ -26,10 +26,18 @@ export const contentRoutes = [{
   id: 2,
   path: '/productdetails',
   element: <ProductData />,
-}, {
+},
+{
+  id: 3,
+  path: '/cart',
+  element: <Cart />,
+},
+{
+  id: 4,
   path: '/mockman',
   element: <Mockman />,
 }, {
+  id: 5,
   path: '/todo',
   element: <Todo />,
 }];
