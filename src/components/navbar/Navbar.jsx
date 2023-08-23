@@ -7,13 +7,14 @@ import { Link } from 'react-router-dom';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
-import { useAuthContext } from '../../contexts';
+import { useAuthContext, useCartContext } from '../../contexts';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user } = useAuthContext();
+  const { cart } = useCartContext();
   // const { cart } = useProductContext();
   // console.log(cart);
   const changeNavbarColor = () => {
@@ -77,12 +78,14 @@ function Navbar() {
               onClick={() => { ''; }}
             >
               <Bag size={26} />
-              <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
-              items-center justify-center text-xs font-bold border-3 border-white rounded-full
-               dark:border-gray-500 "
-              >
-                20
-              </div>
+              {user && cart.length > 0 && (
+                <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
+                   items-center justify-center text-xs font-bold border-3 border-white rounded-full
+                   dark:border-gray-500 "
+                >
+                  {cart.length}
+                </div>
+              )}
             </li>
           </ul>
           <section className="md:hidden  cursor-pointer relative">
