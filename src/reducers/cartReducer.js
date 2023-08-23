@@ -20,7 +20,7 @@ export const cartReducer = (state, action) => {
         const updatedCart = state.cart.map((item, index) => (index === existingCartItemIndex
           ? { ...item, qty: item.qty + 1 } // Increment quantity for the existing product
           : item));
-
+        console.log('upcart', updatedCart);
         return {
           ...state,
           cart: updatedCart,
@@ -30,6 +30,13 @@ export const cartReducer = (state, action) => {
       return {
         ...state,
         cart: [...state.cart, { ...payload, qty: 1 }],
+      };
+
+    case 'REMOVE_PRODUCTS_FROM_CART':
+      const updatedCart = state.cart.filter((currentItem) => currentItem.id !== action.payload);
+      return {
+        ...state,
+        cart: updatedCart,
       };
 
     default:
