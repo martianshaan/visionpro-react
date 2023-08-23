@@ -17,13 +17,12 @@ export default function Login() {
 
   const [loggingIn, setLoggingIn] = useState(false);
 
-  const { loginHandler, user } = useAuthContext();
+  const { loginHandler } = useAuthContext();
   const navigate = useNavigate();
-  console.log('Authuser:', user);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoggingIn(true);
-    loginHandler(loginData);
+    // loginHandler(loginData);
     try {
       // to access data from api do await and save it in variable
       const userCredential = await loginHandler(

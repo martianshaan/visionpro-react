@@ -20,7 +20,7 @@ export const authRoutes = [{
 
 export const contentRoutes = [{
   id: 1,
-  path: '/product-listing',
+  path: '/glasses',
   element: <ProductListing />,
 }, {
   id: 2,
