@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable no-case-declarations */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
@@ -14,7 +15,7 @@ export const cartReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case 'ADD_TO_CART':
-      const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
+      const existingCartItemIndex = state.cart.findIndex((item) => item.id === payload.id);
 
       if (existingCartItemIndex !== -1) {
         const updatedCart = state.cart.map((item, index) => (index === existingCartItemIndex
@@ -25,12 +26,13 @@ export const cartReducer = (state, action) => {
           ...state,
           cart: updatedCart,
         };
+      } else {
+        // If the product is not found in the cart, a new entry with qty set to 1 is added.
+        return {
+          ...state,
+          cart: [...state.cart, payload],
+        };
       }
-      // If the item is not in the cart, add it with quantity
-      return {
-        ...state,
-        cart: [...state.cart, { ...payload, qty: 1 }],
-      };
 
     case 'REMOVE_PRODUCTS_FROM_CART':
       const updatedCart = state.cart.filter((currentItem) => currentItem.id !== action.payload);
@@ -40,9 +42,12 @@ export const cartReducer = (state, action) => {
       };
 
     default:
-      return state;
+      if (process.env.NODE_ENV === 'development') {
+        // Throw an error in development mode
+        throw new Error(`Unhandled type of ${type} in cartReducer`);
+      } else {
+        // Return the state as a fallback in production mode
+        return state;
+      }
   }
-
-  // default:
-  //   throw new Error(`unhandled type of ${type} in cartReducer`);
 };
