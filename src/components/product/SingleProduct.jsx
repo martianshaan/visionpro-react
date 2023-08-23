@@ -1,70 +1,77 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Star } from '@phosphor-icons/react';
 import { Heart } from 'lucide-react';
-import { useProductContext } from '../../contexts';
+// import { useProductContext } from '../../contexts';
 
 function SingleProduct({ product }) {
   const {
     id, image, name, rating, price, brand,
   } = product;
+  console.log(id, image, name, rating, price, brand);
 
-  const { addProductToCart } = useProductContext();
+  // const { addProductToCart } = useProductContext();
 
   return (
     <section
-      key={id}
-      className="flex flex-col justify-between bg-white/[0.5] rounded-2xl
-        shadwow-lg border-2 border-black/[0.05] overflow-hidden
-        hover:scale-105 transition ease-in-out delay-75"
+      className="flex flex-col xs:flex-row sm:flex-col  bg-white/[0.5] rounded-lg shadow-md border-2 border-black/[0.05] overflow-hidden
+    cursor-pointer
+    transition-transform
+    hover:scale-[1.02] hover:shadow-lg y ease-in-out delay-75"
     >
-      <figure className="p-10 bg-yellow-50 h-1/2 flex items-center justify-center">
-        <img src={image} alt={name} className="rounded-md w-full h-full object-cover hover:scale-110 hover:rotate-0.5 " />
+      <figure
+        className="flex items-center justify-center p-10 xs:p-5 sm:p-10 bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
+      >
+        <img
+          src={image}
+          alt=""
+          className="w-full object-cover xs:object-contain sm:object-cover h-28"
+        />
       </figure>
-      <main className="px-4 gap-2 flex flex-row mt-1 justify-between ">
-        <figcaption className="flex flex-col justify-between">
-          <strong className="text-xl font-medium">{name}</strong>
-          <span className="flex items-center gap-1.5">
-            <span>{rating}</span>
-            <Star className="text-yellow-400 mb-1" />
-            <h3 className="text-xs text-gray-400">Rating</h3>
-          </span>
-        </figcaption>
-        <aside className="flex flex-col items-end">
-          <p className="flex justify-between">
-            <span className="text-amber-400">
-              ₹
-              {price}
-            </span>
-            {/* <span className="text-gray-500 px-1">(incl.tax)</span> */}
-          </p>
-          <h6 className="text-sm text-gray-400 line-through">
-            ₹
-            {price + 100}
-          </h6>
-        </aside>
-      </main>
-      <p className="text-sm text-gray-600 px-3">{brand}</p>
-      <div className="px-3 py-2 border-t justify-between flex items-center w-full">
-        <button
-          type="button"
-          className="border border-[--primary-text-color]
-                py-1.5 text-sm  rounded-full px-5 hover:bg-[--primary-text-color]
-                 hover:text-white transition"
-          onClick={() => {
-            if (!product?.inCart) {
-              addProductToCart(product);
-            }
-          }}
-        >
-          {product?.inCart ? 'Go to Cart' : 'Add to Cart'}
-        </button>
-        <button type="button">
-          <Heart className="text-xl hover:text-rose-600 transition" />
-        </button>
-      </div>
 
+      <main className="p-3 flex flex-col justify-between gap-2 mt-2 h-1/2 xs:h-full sm:h-1/2 xs:w-2/3 w-full sm:w-full">
+        <section>
+          <figcaption className=" flex justify-between">
+            <section className="flex flex-col">
+              <strong className="text-xl font-medium">{name}</strong>
+              <span className="flex items-center gap-1">
+                <span>{product.rating}</span>
+
+                <Star className=" text-yellow-400 mb-1" />
+                <span className="text-xs text-gray-400">Rating</span>
+              </span>
+            </section>
+
+            <aside className="flex flex-col items-end">
+              <p className="flex justify-between">
+                <span className="text-amber-600">
+                  ₹
+                  {' '}
+                  {product.newPrice}
+                </span>
+              </p>
+              <span className="text-sm text-gray-600 line-through">
+                {product.price}
+              </span>
+            </aside>
+          </figcaption>
+          <p className="text-sm text-gray-600">{product.brand}</p>
+        </section>
+        <div className="w-full pt-2 border-t flex justify-between items-center">
+          <button
+            className="border border-[--primary-text-color]  py-1.5 text-sm  rounded-full px-6 hover:bg-[--primary-text-color] hover:text-white transition hover:shadow-md disabled:cursor-not-allowed"
+          >
+            Add to Bag
+          </button>
+          <button
+            className="disabled:cursor-not-allowed"
+          >
+            <Heart className="text-xl hover:text-rose-600  transition" />
+          </button>
+        </div>
+      </main>
     </section>
   );
 }
