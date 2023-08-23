@@ -60,9 +60,9 @@ function Navbar() {
         {user ? <h5>yes</h5> : <h5>no</h5>}
 
         <section className="flex items-center">
-          <div to="/products" className="mx-2 px-3 py-1 shadow-sm rounded-md text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition">
+          <Link to="/glasses" className="mx-2 px-3 py-1 shadow-sm rounded-md text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition">
             <span className="xs:block">Explore</span>
-          </div>
+          </Link>
           <ul className="hidden md:flex justify-between text-2xl ps-1">
             <li
               className="relative bg-gray-200 p-2 rounded-full
