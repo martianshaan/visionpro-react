@@ -8,14 +8,15 @@ import { useCartContext } from '../../contexts';
 
 function SingleProduct({ product }) {
   const {
-    id, image, name, rating, price, brand, newPrice,
+    image, name, newPrice, price, rating,
   } = product;
+
   // console.log('newPrice', newPrice);
 
   // const { addProductToCart } = useProductContext();
 
-  const { addToCart, cart } = useCartContext();
-  console.log(cart);
+  const { addToCart } = useCartContext();
+  // console.log('product', product);
   return (
     <section
       className="flex flex-col xs:flex-row sm:flex-col  bg-white/[0.5] rounded-lg shadow-md border-2 border-black/[0.05] overflow-hidden
@@ -64,7 +65,7 @@ function SingleProduct({ product }) {
         <div className="w-full pt-2 border-t flex justify-between items-center">
           <button
             className="border border-[--primary-text-color]  py-1.5 text-sm  rounded-full px-6 hover:bg-[--primary-text-color] hover:text-white transition hover:shadow-md disabled:cursor-not-allowed"
-            onClick={() => addToCart(id, image, name, newPrice, brand)}
+            onClick={() => addToCart(product)}
           >
             Add to Bag
           </button>

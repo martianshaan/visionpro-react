@@ -13,14 +13,14 @@ import { useProductContext } from '../contexts';
 import loadingGif from '../assets/loading.gif';
 
 function ProductListing() {
-  const { allProducts, loading, products } = useProductContext();
-  console.log(allProducts);
-  console.log('products', typeof products);
-  for (const id in products) {
-    if (products.hasOwnProperty(id)) {
-      console.log('product', products[id]);
-    }
-  }
+  const { loading, products } = useProductContext();
+  // console.log(allProducts);
+  // console.log('products', typeof products);
+  // for (const id in products) {
+  //   if (products.hasOwnProperty(id)) {
+  //     console.log('product', products[id]);
+  //   }
+  // }
   // products.map((product) => console.log('product', product));
   return (
     <div>

@@ -13,7 +13,7 @@ function PriceCard({ product }) {
       </p>
       <p className="text-lg">
         ₹
-        {product.price}
+        {product.newPrice}
       </p>
     </div>
   );
