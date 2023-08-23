@@ -18,7 +18,7 @@ function CartContextProvider({ children }) {
       dispatch({
         type: 'ADD_TO_CART',
         payload: {
-          id, image, name, newPrice, brand,
+          id, image, name, newPrice, brand, qty: 1,
         },
       });
     } else {
