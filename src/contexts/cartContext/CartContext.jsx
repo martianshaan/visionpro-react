@@ -27,8 +27,18 @@ function CartContextProvider({ children }) {
     }
   };
 
+  const removeProductsFromCart = (id) => {
+    dispatch({
+      type: 'REMOVE_PRODUCTS_FROM_CART',
+      payload: id,
+    });
+  };
+
   return (
-    <CartContext.Provider value={{ ...state, cart: state.cart, addToCart }}>
+    <CartContext.Provider value={{
+      ...state, cart: state.cart, addToCart, removeProductsFromCart,
+    }}
+    >
       {children}
     </CartContext.Provider>
   );
