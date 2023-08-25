@@ -7,7 +7,11 @@ module.exports = {
     './src/**/*.ts',
     './src/**/*.tsx'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-blue': 'var(--dark-blue-100)',
+      },
+    },
   },
   plugins: [],
 };
