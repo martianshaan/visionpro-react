@@ -34,9 +34,19 @@ function CartContextProvider({ children }) {
     });
   };
 
+  const clearCartHandler = () => {
+    dispatch({
+      type: 'CLEAR_CART',
+    });
+  };
+
   return (
     <CartContext.Provider value={{
-      ...state, cart: state.cart, addToCart, removeProductsFromCart,
+      ...state,
+      cart: state.cart,
+      addToCart,
+      removeProductsFromCart,
+      clearCartHandler,
     }}
     >
       {children}
