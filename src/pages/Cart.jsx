@@ -34,7 +34,7 @@ function Cart() {
                 ))}
               </section>
             </section>
-            <section className="flex flex-col gap-2">
+            <section className="flex flex-col gap-4">
               <h1 className="text-xl text-custom-blue">Bill Details</h1>
               <CartTotalCard cart={cart} />
             </section>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/button-has-type */
@@ -11,9 +12,13 @@ function CartItemCard({ product }) {
   const { removeProductsFromCart } = useCartContext();
   return (
     <div>
-      <div className="flex flex-row pt-3 pr-5 pl-3 pb-2 w-[550px] md:w-[550px] font-bold shadow-md bg-white rounded-lg transition-shadow duration-200 ">
-        <figure className="flex flex-col w-1/3 drop-shadow-md decoration-slate-300  justify-center items-center m-auto  rounded-md">
-          <img src={product.image} alt="" className="object-cover  max-w-full h-auto  align-middle" />
+      <main className="flex flex-row pt-3 pr-5 pl-3 pb-2 w-[550px] md:w-[550px] font-bold shadow-md bg-white rounded-lg transition-shadow duration-200  gap-3">
+        <figure className="h-1/3 w-1/3 flex-shrink-0 justify-center items-center m-auto overflow-hidden drop-shadow-md  rounded-md  ">
+          <img
+            src={product.image}
+            alt=""
+            className="h-full w-full object-cover object-center"
+          />
         </figure>
         <section className="flex   flex-col gap-0.5 mr-1 w-2/3 ">
           <section className="flex justify-between md:gap-10 lg:gap-20  items-center">
@@ -51,7 +56,7 @@ function CartItemCard({ product }) {
             </section>
           </section>
           <hr className="w-full border border-dashed border-purple-haze" />
-          <div className="flex gap-3 m-2 justify-between ">
+          <section className="flex gap-3 m-2 justify-between ">
             <button className="btn-rounded-secondary flex align-middle justify-center gap-2 text-sm mt-2 max-w-xs" onClick={() => removeProductsFromCart(product.id)}>
               <span> Remove from Bag </span>
               <BsTrash3 className="text-red-900 text-base hover:text-white " />
@@ -59,10 +64,9 @@ function CartItemCard({ product }) {
             <button>
               <Heart size={27} className="text-sm hover:text-rose-600 transition mt-1" />
             </button>
-          </div>
+          </section>
         </section>
-      </div>
-
+      </main>
     </div>
   );
 }
