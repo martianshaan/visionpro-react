@@ -72,7 +72,8 @@ function CartItemCard({ product }) {
                 {product.qty}
               </span>
               <button
-                className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs"
+                className={`bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs
+                ${product.qty >= product.quantity ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={() => updateHandler('increment')}
               >
                 <AiOutlinePlus />
