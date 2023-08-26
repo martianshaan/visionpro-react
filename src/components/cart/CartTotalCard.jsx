@@ -1,11 +1,14 @@
+/* eslint-disable camelcase */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useNavigate } from 'react-router';
 import PriceCard from './PriceCard';
+import { useCartContext } from '../../contexts';
 
 function CartTotalCard({ cart }) {
   const navigate = useNavigate();
+  const { total_amount } = useCartContext();
   return (
     <main className="md:col-span-1 py-4 px-7 rounded-md shadow-sm bg-white/[0.7] flex flex-col gap-6 w-full h-min">
       {cart.map((product) => (
@@ -15,7 +18,11 @@ function CartTotalCard({ cart }) {
       <hr />
       <section className="flex justify-between items-center">
         <p className=" text-gray-600">Total</p>
-        <p className="text-2xl">₹ 90000</p>
+        <p className="text-2xl">
+          ₹
+          {' '}
+          {total_amount}
+        </p>
       </section>
 
       <section className="w-full mt-1 flex flex-col gap-3 items-center justify-center">
