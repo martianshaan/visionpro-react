@@ -1,8 +1,18 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-fallthrough */
 /* eslint-disable no-else-return */
 /* eslint-disable no-case-declarations */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
+
+// const getLocalCartData = () => {
+//   const localCartData = localStorage.getItem('userCart');
+//   if (localCartData === []) {
+//     return [];
+//   }
+//   return JSON.parse(localCartData);
+// };
 
 export const INITIAL_STATE = {
   cart: [],
@@ -43,6 +53,40 @@ export const cartReducer = (state, action) => {
 
     case 'CLEAR_CART':
       return { ...state, cart: [] };
+
+    case 'UPDATE_PRODUCT_QTY_IN_CART':
+      return { ...state, cart: payload };
+
+    case 'DECREMENT':
+      const updatedProduct = state.cart.map((currentProduct) => {
+        if (currentProduct.id === payload) {
+          let decrementQty = currentProduct.qty - 1;
+          if (decrementQty <= 1) {
+            decrementQty = 1;
+          }
+          return { ...currentProduct, qty: decrementQty };
+        } else {
+          return currentProduct;
+        }
+      });
+
+      return { ...state.cart, cart: updatedProduct };
+
+    case 'CART_TOTAL_AMOUNT':
+      const updatedTotalAmount = state.cart.reduce((accumulator, currentProduct) => {
+        const { newPrice, qty } = currentProduct;
+        accumulator += newPrice * qty;
+        return accumulator;
+      }, 0);
+      return { ...state, total_amount: updatedTotalAmount };
+
+    case 'CART_TOTAL_ITEMS':
+      const updatedItemsInCart = state.cart.reduce((initialItems, currentProduct) => {
+        const { qty } = currentProduct;
+        initialItems += qty;
+        return initialItems;
+      }, 0);
+      return { ...state, total_item: updatedItemsInCart };
 
     default:
       if (process.env.NODE_ENV === 'development') {
