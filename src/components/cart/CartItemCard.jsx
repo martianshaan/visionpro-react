@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
@@ -6,10 +8,26 @@ import React from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { BsTrash3 } from 'react-icons/bs';
 import { Heart } from '@phosphor-icons/react';
+import { toast } from 'react-hot-toast';
 import { useCartContext } from '../../contexts';
 
 function CartItemCard({ product }) {
-  const { removeProductsFromCart } = useCartContext();
+  const { removeProductsFromCart, updateProductQtyHandler } = useCartContext();
+
+  const updateHandler = (type) => {
+    if (type === 'increment') {
+      if (product.qty >= product.quantity) {
+        toast.error('Cannot add more than available quantity');
+      } else {
+        updateProductQtyHandler(product.id, type);
+      }
+    } else if (product.qty > 1) {
+      updateProductQtyHandler(product.id, type);
+    } else {
+      removeProductsFromCart(product.id);
+    }
+  };
+
   return (
     <div>
       <main className="flex flex-row pt-3 pr-5 pl-3 pb-2 w-[550px] md:w-[550px] font-bold shadow-md bg-white rounded-lg transition-shadow duration-200  gap-3">
@@ -44,13 +62,19 @@ function CartItemCard({ product }) {
           <section className="flex justify-between gap-2 items-center my-2">
             <span className="text-base"> Quantity : </span>
             <section className="flex gap-2 items-center">
-              <button className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md  text-xs">
+              <button
+                className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md  text-xs"
+                onClick={() => updateHandler('decrement')}
+              >
                 <AiOutlineMinus />
               </button>
               <span className="h-full w-10 bg-black/[0.075]   rounded-md flex items-center justify-center">
                 {product.qty}
               </span>
-              <button className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs">
+              <button
+                className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs"
+                onClick={() => updateHandler('increment')}
+              >
                 <AiOutlinePlus />
               </button>
             </section>
