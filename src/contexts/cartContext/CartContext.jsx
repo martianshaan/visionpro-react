@@ -3,16 +3,38 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/prop-types */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { createContext, useReducer } from 'react';
-import { cartReducer, INITIAL_STATE } from '../../reducers/cartReducer';
+import React, { createContext, useReducer, useEffect } from 'react';
+import { cartReducer } from '../../reducers/cartReducer';
 import { useAuthContext } from '../index';
 
+/* eslint-disable import/prefer-default-export */
+
+const getLocalCartData = () => {
+  const localCartData = localStorage.getItem('userCart');
+  if (localCartData === []) {
+    return [];
+  }
+  return JSON.parse(localCartData);
+};
+
+const INITIAL_STATE = {
+  cart: getLocalCartData(),
+  total_item: '',
+  total_amount: '',
+  shipping_fee: 50000,
+};
 export const CartContext = createContext();
 
 function CartContextProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
   const { user } = useAuthContext();
+
+  useEffect(() => {
+    dispatch({ type: 'CART_TOTAL_ITEMS' });
+    dispatch({ type: 'CART_TOTAL_AMOUNT' });
+    localStorage.setItem('userCart', JSON.stringify(state.cart));
+  }, [state.cart]);
 
   const addToCart = (product) => {
     if (user !== null) {
@@ -25,6 +47,29 @@ function CartContextProvider({ children }) {
     } else {
       alert('login first ');
     }
+  };
+
+  const updateProductQtyHandler = (productId, type) => {
+    if (type === 'increment') {
+      dispatch({
+        type: 'UPDATE_PRODUCT_QTY_IN_CART',
+        payload: state.cart.map((product) => (
+          product.id === productId ? { ...product, qty: product.qty + 1 } : product)),
+      });
+    } else {
+      dispatch({
+        type: 'UPDATE_PRODUCT_QTY_IN_CART',
+        payload: state.cart.map((product) => (
+          product.id === productId ? { ...product, qty: product.qty - 1 } : product)),
+      });
+    }
+  };
+
+  const setDecrement = (productId) => {
+    dispatch({
+      type: 'DECREMENT',
+      payload: productId,
+    });
   };
 
   const removeProductsFromCart = (id) => {
@@ -47,6 +92,8 @@ function CartContextProvider({ children }) {
       addToCart,
       removeProductsFromCart,
       clearCartHandler,
+      updateProductQtyHandler,
+      setDecrement,
     }}
     >
       {children}
