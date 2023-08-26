@@ -13,7 +13,7 @@ function PriceCard({ product }) {
       </p>
       <p className="text-lg">
         ₹
-        {product.newPrice}
+        {product.newPrice * product.qty}
       </p>
     </div>
   );
