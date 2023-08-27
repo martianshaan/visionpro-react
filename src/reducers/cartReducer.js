@@ -14,12 +14,12 @@
 //   return JSON.parse(localCartData);
 // };
 
-export const INITIAL_STATE = {
-  cart: [],
-  totalItem: '',
-  totalAmount: '',
-  shippingFee: 200,
-};
+// export const INITIAL_STATE = {
+//   cart: [],
+//   totalItem: '',
+//   totalAmount: '',
+//   shippingFee: 200,
+// };
 
 export const cartReducer = (state, action) => {
   const { type, payload } = action;
@@ -89,7 +89,12 @@ export const cartReducer = (state, action) => {
       //   return { ...state, totalItem: updatedItemsInCart };
 
       // comibined both two
+
     case 'CART_TOTAL_ITEMS_AMOUNT':
+      if (state.cart.length === 0) {
+        return state; // Return the unmodified state since there are no items
+      }
+
       const { totalItem, totalAmount } = state.cart.reduce((accumulator, currentProduct) => {
         const { newPrice, qty } = currentProduct;
         accumulator.totalItem += qty;
@@ -98,7 +103,6 @@ export const cartReducer = (state, action) => {
       }, {
         totalItem: 0,
         totalAmount: 0,
-
       });
       return { ...state, totalItem, totalAmount };
 

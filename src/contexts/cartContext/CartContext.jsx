@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-constructed-context-values */
@@ -27,6 +28,8 @@ export const CartContext = createContext();
 
 function CartContextProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+
+  console.log('state.cart:', state.cart);
 
   const { user } = useAuthContext();
 
