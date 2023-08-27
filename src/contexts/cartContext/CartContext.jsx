@@ -19,9 +19,9 @@ const getLocalCartData = () => {
 
 const INITIAL_STATE = {
   cart: getLocalCartData(),
-  total_item: '',
-  total_amount: '',
-  shipping_fee: 50000,
+  totalItem: '',
+  totalAmount: '',
+  shippingFee: 200,
 };
 export const CartContext = createContext();
 
@@ -31,8 +31,9 @@ function CartContextProvider({ children }) {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    dispatch({ type: 'CART_TOTAL_ITEMS' });
-    dispatch({ type: 'CART_TOTAL_AMOUNT' });
+    // dispatch({ type: 'CART_TOTAL_ITEMS' });
+    // dispatch({ type: 'CART_TOTAL_AMOUNT' });
+    dispatch({ type: 'CART_TOTAL_ITEMS_AMOUNT' });
     localStorage.setItem('userCart', JSON.stringify(state.cart));
   }, [state.cart]);
 
