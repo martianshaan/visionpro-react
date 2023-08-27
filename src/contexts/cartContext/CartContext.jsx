@@ -5,17 +5,24 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { createContext, useReducer, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import { cartReducer } from '../../reducers/cartReducer';
 import { useAuthContext } from '../index';
 
-/* eslint-disable import/prefer-default-export */
-
 const getLocalCartData = () => {
-  const localCartData = localStorage.getItem('userCart');
-  if (localCartData === []) {
-    return [];
+  try {
+    const localCartData = localStorage.getItem('userCart');
+    /* handle empty,null,undefined initialcart for by checking falsy value
+    which check both null and undefined .
+    use the JSON.parse directly and handle the potential error with a try-catch block
+    */
+    if (localCartData) {
+      return JSON.parse(localCartData);
+    }
+  } catch (error) {
+    toast.error('Error parsing localCartData:', error);
   }
-  return JSON.parse(localCartData);
+  return [];
 };
 
 const INITIAL_STATE = {
