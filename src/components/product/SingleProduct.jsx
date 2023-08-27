@@ -1,16 +1,23 @@
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Star } from '@phosphor-icons/react';
 import { Heart } from 'lucide-react';
-import { useCartContext } from '../../contexts';
+import { toast } from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router';
+import { useAuthContext, useCartContext } from '../../contexts';
 
 function SingleProduct({ product }) {
   const {
     image, name, newPrice, price, rating,
   } = product;
 
-  const { addToCart } = useCartContext();
-  // console.log('product', product);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = useAuthContext();
+  const { addToCart, isInCart } = useCartContext();
+
+  const productIsInCart = isInCart(product.id);
   return (
     <section
       className="flex flex-col xs:flex-row sm:flex-col  bg-white/[0.5] rounded-lg shadow-md border-2 border-black/[0.05] overflow-hidden
@@ -60,9 +67,20 @@ function SingleProduct({ product }) {
           <button
             type="button"
             className="border border-[--primary-text-color]  py-1.5 text-sm  rounded-full px-6 hover:bg-[--primary-text-color] hover:text-white transition hover:shadow-md disabled:cursor-not-allowed"
-            onClick={() => addToCart(product)}
+            onClick={() => {
+              if (!user) {
+                navigate('/login', { state: { from: location.pathname } });
+                toast('Please login to continue shopping', {
+                  icon: '⚠️',
+                });
+              } else if (!productIsInCart) {
+                addToCart(product);
+              } else {
+                navigate('/cart');
+              }
+            }}
           >
-            Add to Bag
+            {productIsInCart ? 'Go to Bag' : 'Add to Bag'}
           </button>
           <button
             type="button"
