@@ -1,22 +1,22 @@
 /* eslint-disable import/no-cycle */
 import { useContext } from 'react';
-import { AuthContext } from './authContext/AuthContext';
-import { ProductContext } from './productContext/ProductContext';
-import { CartContext } from './cartContext/cartContext';
-import { categoriesContext } from './categoriesContext/CategoriesContext';
+import { AuthContext } from './AuthContext/AuthContext';
+import { ProductContext } from './ProductContext/ProductContext';
+import { CategoriesContext } from './CategoriesContext/CategoriesContext';
+import { CartContext } from './CartContext/CartContext';
 
-export { default as AuthContextProvider } from './authContext/AuthContext';
+export { default as AuthContextProvider } from './AuthContext/AuthContext';
 
-export { default as ProductContextProvider } from './productContext/ProductContext';
+export { default as ProductContextProvider } from './ProductContext/ProductContext';
 
-export { default as CategoriesContextProvider } from './categoriesContext/CategoriesContext';
+export { default as CategoriesContextProvider } from './CategoriesContext/CategoriesContext';
 
-export { default as CartContextProvider } from './cartContext/cartContext';
+export { default as CartContextProvider } from './CartContext/CartContext';
 
 export const useAuthContext = () => useContext(AuthContext);
 
 export const useProductContext = () => useContext(ProductContext);
 
-export const useCategoriesContext = () => useContext(categoriesContext);
+export const useCategoriesContext = () => useContext(CategoriesContext);
 
 export const useCartContext = () => useContext(CartContext);

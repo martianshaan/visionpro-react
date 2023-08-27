@@ -35,6 +35,7 @@ const INITIAL_STATE = {
   totalAmount: '',
   shippingFee: 200,
 };
+
 export const CartContext = createContext();
 
 function CartContextProvider({ children }) {
