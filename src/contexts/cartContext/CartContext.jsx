@@ -1,11 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-console */
-/* eslint-disable no-alert */
 /* eslint-disable import/no-cycle */
-/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/prop-types */
-/* eslint-disable implicit-arrow-linebreak */
 import React, {
   createContext, useReducer, useEffect, useMemo,
 } from 'react';
@@ -40,7 +35,6 @@ export const CartContext = createContext();
 
 function CartContextProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
-  console.log('state', state);
 
   const { user } = useAuthContext();
 
@@ -100,9 +94,9 @@ function CartContextProvider({ children }) {
     });
   };
 
-  const isInCart = (productId) => state.cart.find((
+  const isInCart = useMemo((productId) => state.cart.find((
     item,
-  ) => item.id === productId);
+  ) => item.id === productId), [state.cart]);
 
   const value = useMemo(() => ({
     ...state,
@@ -113,8 +107,7 @@ function CartContextProvider({ children }) {
     updateProductQtyHandler,
     setDecrement,
     isInCart,
-  }), [state, addToCart, removeProductsFromCart, clearCartHandler,
-    updateProductQtyHandler, setDecrement]);
+  }), [state, addToCart, updateProductQtyHandler, isInCart]);
 
   return (
     <CartContext.Provider value={value}>

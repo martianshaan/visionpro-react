@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-constructed-context-values */

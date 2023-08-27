@@ -19,9 +19,9 @@ function CategoriesContextProvider({ children }) {
   }, []);
 
   return (
-    <categoriesContext.Provider value={{ categoriesMap }}>
+    <CategoriesContext.Provider value={{ categoriesMap }}>
       {children}
-    </categoriesContext.Provider>
+    </CategoriesContext.Provider>
   );
 }
 

@@ -24,6 +24,5 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'warn',
     'linebreak-style': ['error', 'unix'],
-    'no-restricted-syntax': ['error', 'SpreadElement'], // Allow the spread syntax
   },
 };
