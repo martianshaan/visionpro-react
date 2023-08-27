@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -15,9 +16,7 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user } = useAuthContext();
-  const { cart } = useCartContext();
-  // const { cart } = useProductContext();
-  // console.log(cart);
+  const { totalItem } = useCartContext();
   const navigate = useNavigate();
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
@@ -81,12 +80,12 @@ function Navbar() {
               onClick={() => navigate('/cart')}
             >
               <Bag size={26} />
-              {user && cart.length > 0 && (
+              {user && totalItem > 0 && (
                 <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
                    items-center justify-center text-xs font-bold border-3 border-white rounded-full
                    dark:border-gray-500 "
                 >
-                  {cart.length}
+                  {totalItem}
                 </div>
               )}
             </li>
