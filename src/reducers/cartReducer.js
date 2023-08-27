@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-fallthrough */
 /* eslint-disable no-else-return */
@@ -52,7 +53,9 @@ export const cartReducer = (state, action) => {
       };
 
     case 'CLEAR_CART':
-      return { ...state, cart: [] };
+      return {
+        ...state, totalItem: 0, cart: [], totalAmount: 0,
+      };
 
     case 'UPDATE_PRODUCT_QTY_IN_CART':
       return { ...state, cart: payload };
