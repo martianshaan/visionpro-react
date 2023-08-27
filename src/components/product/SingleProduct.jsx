@@ -1,5 +1,3 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Star } from '@phosphor-icons/react';
@@ -10,10 +8,6 @@ function SingleProduct({ product }) {
   const {
     image, name, newPrice, price, rating,
   } = product;
-
-  // console.log('newPrice', newPrice);
-
-  // const { addProductToCart } = useProductContext();
 
   const { addToCart } = useCartContext();
   // console.log('product', product);
@@ -64,12 +58,14 @@ function SingleProduct({ product }) {
         </section>
         <div className="w-full pt-2 border-t flex justify-between items-center">
           <button
+            type="button"
             className="border border-[--primary-text-color]  py-1.5 text-sm  rounded-full px-6 hover:bg-[--primary-text-color] hover:text-white transition hover:shadow-md disabled:cursor-not-allowed"
             onClick={() => addToCart(product)}
           >
             Add to Bag
           </button>
           <button
+            type="button"
             className="disabled:cursor-not-allowed"
           >
             <Heart className="text-xl hover:text-rose-600  transition" />
