@@ -2,8 +2,8 @@
 import { useContext } from 'react';
 import { AuthContext } from './authContext/AuthContext';
 import { ProductContext } from './productContext/ProductContext';
-import { categoriesContext } from './categoriesContext/CategoriesContext';
 import { CartContext } from './cartContext/cartContext';
+import { categoriesContext } from './categoriesContext/CategoriesContext';
 
 export { default as AuthContextProvider } from './authContext/AuthContext';
 
