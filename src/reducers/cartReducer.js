@@ -91,7 +91,7 @@ export const cartReducer = (state, action) => {
       // comibined both two
 
     case 'CART_TOTAL_ITEMS_AMOUNT':
-      if (state.cart.length === 0) {
+      if (state.cart?.length === 0) {
         return state; // Return the unmodified state since there are no items
       }
 
