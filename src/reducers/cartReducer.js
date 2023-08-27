@@ -47,6 +47,14 @@ export const cartReducer = (state, action) => {
 
     case 'REMOVE_PRODUCTS_FROM_CART':
       const updatedCart = state.cart.filter((currentItem) => currentItem.id !== action.payload);
+      if (state.cart.length === 1) {
+        return {
+          ...state,
+          cart: updatedCart,
+          totalItem: 0,
+          totalAmount: 0,
+        };
+      }
       return {
         ...state,
         cart: updatedCart,
