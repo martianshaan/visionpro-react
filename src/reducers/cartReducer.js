@@ -16,9 +16,9 @@
 
 export const INITIAL_STATE = {
   cart: [],
-  total_item: '',
-  total_amount: '',
-  shipping_fee: 50000,
+  totalItem: '',
+  totalAmount: '',
+  shippingFee: 200,
 };
 
 export const cartReducer = (state, action) => {
@@ -72,21 +72,35 @@ export const cartReducer = (state, action) => {
 
       return { ...state.cart, cart: updatedProduct };
 
-    case 'CART_TOTAL_AMOUNT':
-      const updatedTotalAmount = state.cart.reduce((accumulator, currentProduct) => {
-        const { newPrice, qty } = currentProduct;
-        accumulator += newPrice * qty;
-        return accumulator;
-      }, 0);
-      return { ...state, total_amount: updatedTotalAmount };
+      // case 'CART_TOTAL_AMOUNT':
+      //   const updatedTotalAmount = state.cart.reduce((accumulator, currentProduct) => {
+      //     const { newPrice, qty } = currentProduct;
+      //     accumulator += newPrice * qty;
+      //     return accumulator;
+      //   }, 0);
+      //   return { ...state, totalAmount: updatedTotalAmount };
 
-    case 'CART_TOTAL_ITEMS':
-      const updatedItemsInCart = state.cart.reduce((initialItems, currentProduct) => {
-        const { qty } = currentProduct;
-        initialItems += qty;
-        return initialItems;
-      }, 0);
-      return { ...state, total_item: updatedItemsInCart };
+      // case 'CART_TOTAL_ITEMS':
+      //   const updatedItemsInCart = state.cart.reduce((initialItems, currentProduct) => {
+      //     const { qty } = currentProduct;
+      //     initialItems += qty;
+      //     return initialItems;
+      //   }, 0);
+      //   return { ...state, totalItem: updatedItemsInCart };
+
+      // comibined both two
+    case 'CART_TOTAL_ITEMS_AMOUNT':
+      const { totalItem, totalAmount } = state.cart.reduce((accumulator, currentProduct) => {
+        const { newPrice, qty } = currentProduct;
+        accumulator.totalItem += qty;
+        accumulator.totalAmount += qty * newPrice;
+        return accumulator;
+      }, {
+        totalItem: 0,
+        totalAmount: 0,
+
+      });
+      return { ...state, totalItem, totalAmount };
 
     default:
       if (process.env.NODE_ENV === 'development') {
