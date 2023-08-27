@@ -1,10 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/prop-types */
 /* eslint-disable implicit-arrow-linebreak */
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, {
+  createContext, useReducer, useEffect, useMemo,
+} from 'react';
 import { toast } from 'react-hot-toast';
 import { cartReducer } from '../../reducers/cartReducer';
 import { useAuthContext } from '../index';
@@ -35,6 +39,7 @@ export const CartContext = createContext();
 
 function CartContextProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+  console.log('state', state);
 
   const { user } = useAuthContext();
 
@@ -94,17 +99,24 @@ function CartContextProvider({ children }) {
     });
   };
 
+  const isInCart = (productId) => state.cart.find((
+    item,
+  ) => item.id === productId);
+
+  const value = useMemo(() => ({
+    ...state,
+    cart: state.cart,
+    addToCart,
+    removeProductsFromCart,
+    clearCartHandler,
+    updateProductQtyHandler,
+    setDecrement,
+    isInCart,
+  }), [state, addToCart, removeProductsFromCart, clearCartHandler,
+    updateProductQtyHandler, setDecrement]);
+
   return (
-    <CartContext.Provider value={{
-      ...state,
-      cart: state.cart,
-      addToCart,
-      removeProductsFromCart,
-      clearCartHandler,
-      updateProductQtyHandler,
-      setDecrement,
-    }}
-    >
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );
