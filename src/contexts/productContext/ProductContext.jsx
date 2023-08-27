@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-constructed-context-values */
@@ -62,13 +63,13 @@ function ProductContextProvider({ children }) {
         ],
       });
     }
-
     dispatch({
       type: actionTypes.UPDATE_PRODUCTS,
       payload: state.allProducts.map((item) => (item.id === product.id
         ? { ...item, inCart: true } : item)),
     });
   };
+
   return (
     <ProductContext.Provider value={{
       allProducts: state.allProducts,

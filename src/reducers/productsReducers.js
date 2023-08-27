@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { actionTypes } from '../utils/actionTypes';
 
 export const initialState = {
