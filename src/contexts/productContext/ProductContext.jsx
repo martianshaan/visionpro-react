@@ -8,8 +8,6 @@ import React, {
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
 import { actionTypes } from '../../utils/actionTypes';
-// import { AuthContext } from '../authContext/AuthContext';
-// import { addCollectionAndDocuments } from '../../firebase';
 import { useAuthContext } from '../index';
 import { getProductsandDocuments } from '../../firebase';
 
@@ -19,7 +17,6 @@ function ProductContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [state, dispatch] = useReducer(productReducer, initialState);
-  // const useAuthContext = useContext(AuthContext);
   const { user } = useAuthContext();
   console.log(user);
 
