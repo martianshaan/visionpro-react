@@ -68,7 +68,7 @@ function ProductContextProvider({ children }) {
 
   return (
     <ProductContext.Provider value={{
-      allProducts: state.allProducts,
+     ...state,
       cart: state.cart,
       loading,
       addProductToCart,
