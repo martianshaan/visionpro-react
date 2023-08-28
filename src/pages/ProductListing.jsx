@@ -12,7 +12,7 @@ function ProductListing() {
     <div>
       {loading ? (
         <section>
-          <span>
+          <span>t
             <img src={loadingGif} width={200} alt="loadinggif" />
           </span>
         </section>
