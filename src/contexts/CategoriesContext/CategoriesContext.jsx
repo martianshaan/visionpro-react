@@ -19,7 +19,7 @@ function CategoriesContextProvider({ children }) {
   }, []);
 
   return (
-    <CategoriesContext.Provider value={{ categoriesMap }}>
+    <CategoriesContext.Provider value={{ categoriesMap: categoriesMap }}>
       {children}
     </CategoriesContext.Provider>
   );
