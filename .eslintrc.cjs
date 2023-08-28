@@ -23,11 +23,8 @@ module.exports = {
   settings: {
     react: { version: '18.2' },
     settings: {
-      'import/resolver': {
-        node: {
-          extensions: ['.js', '.jsx', '.json'], // Add any other relevant extensions
-        },
-      },
+      // This uses the default `vite.config.js` file and the Vite configuration is an object.
+      'import/resolver': 'vite',
     },
   },
   rules: {
