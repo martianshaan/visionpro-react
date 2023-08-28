@@ -1,32 +1,18 @@
-/* eslint-disable max-len */
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-console */
-/* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Filter } from 'lucide-react';
 import bannerHero from '../assets/bannerHero.jpg';
 import { SingleProduct } from '../components';
-import { useProductContext } from '../contexts';
+import { useProductContext } from '../contexts/contextIndex';
 import loadingGif from '../assets/loading.gif';
 
 function ProductListing() {
-  const { allProducts, loading, products } = useProductContext();
-  console.log(allProducts);
-  console.log('products', typeof products);
-  for (const id in products) {
-    if (products.hasOwnProperty(id)) {
-      console.log('product', products[id]);
-    }
-  }
-  // products.map((product) => console.log('product', product));
+  const { loading, products } = useProductContext();
   return (
     <div>
       {loading ? (
         <section>
-          <span>
+          <span>t
             <img src={loadingGif} width={200} alt="loadinggif" />
           </span>
         </section>
@@ -41,20 +27,21 @@ function ProductListing() {
               {/* <Filters /> */}
               <form htmlFor="sortby">
                 <label id="sortby">
-                  <select name="sortby" className="text-lg">
-                    <option value="" selected disabled>Sort By</option>
+                  <select defaultValue="filter" name="sortby" className="text-lg">
+                    <option value="" >Sort By</option>
                     <option value="low"> Low to high</option>
                     <option value="high"> High to Low </option>
                   </select>
                 </label>
               </form>
-              <button className="flex gap-2  px-2  py-1 rounded-md bg-white shadow-sm hover:bg-[--primary-text-color] items-center hover:text-white ">
+              <button type="button" className="flex gap-2  px-2  py-1 rounded-md bg-white shadow-sm hover:bg-[--primary-text-color] items-center hover:text-white ">
                 <Filter className="text-lg" />
                 <span className="text-sm">Filters</span>
               </button>
             </div>
           </section>
-          {/* <main className="grid grid-col-1  gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  ">
+          {/* <main className="grid grid-col-1  gap-6 sm:grid-cols-2
+           md:grid-cols-3 xl:grid-cols-4  ">
             {allProducts.map((product) => (
               <SingleProduct key={product.id} product={product} />
             ))}

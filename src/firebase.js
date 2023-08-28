@@ -126,11 +126,11 @@ listAll(myPicks)
 export const createUserDocumentFromAuth = async (userAuth, additionalData) => {
   const userDocRef = doc(db, 'users', userAuth.uid);
 
-  console.log(userDocRef);
+  // console.log(userDocRef);
 
   const usersnapshot = await getDoc(userDocRef);
-  console.log(usersnapshot);
-  console.log(usersnapshot.exists());
+  // console.log(usersnapshot);
+  // console.log(usersnapshot.exists());
 
   if (!usersnapshot.exists()) {
     const { displayName, email } = userAuth;

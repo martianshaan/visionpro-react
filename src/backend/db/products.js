@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable import/prefer-default-export */
 import sun1 from '../../assets/sunglasses/sun1.png';
 import sun2 from '../../assets/sunglasses/sun2.png';

@@ -1,21 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-shadow */
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable no-console */
-/* eslint-disable max-len */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
-import { useAuthContext } from '../contexts';
+import { useAuthContext } from '../contexts/contextIndex';
 import bannerHero from '../assets/bannerHero.jpg';
 import { Logo } from '../components';
 
@@ -100,7 +88,8 @@ shadow-md bg-white/[0.75] flex flex-col gap-6 max-w-lg ml-20  max-h-min my-6"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <span
+                <button
+                  type="button"
                   className="absolute right-2 top-3 cursor-pointer"
                   onClick={() => setShowPassword({
                     ...showPassword,
@@ -112,7 +101,7 @@ shadow-md bg-white/[0.75] flex flex-col gap-6 max-w-lg ml-20  max-h-min my-6"
                   ) : (
                     <AiFillEyeInvisible />
                   )}
-                </span>
+                </button>
               </label>
               <label className="flex flex-col relative">
                 <input
@@ -123,7 +112,8 @@ shadow-md bg-white/[0.75] flex flex-col gap-6 max-w-lg ml-20  max-h-min my-6"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                <span
+                <button
+                  type="button"
                   className="absolute right-2 top-3 cursor-pointer"
                   onClick={() => setShowPassword({
                     ...showPassword,
@@ -135,7 +125,7 @@ shadow-md bg-white/[0.75] flex flex-col gap-6 max-w-lg ml-20  max-h-min my-6"
                   ) : (
                     <AiFillEyeInvisible />
                   )}
-                </span>
+                </button>
                 <p
                   className={`pt-1 ${
                     password

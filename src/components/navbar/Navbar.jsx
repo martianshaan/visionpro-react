@@ -1,21 +1,23 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { React, useEffect, useState } from 'react';
 import { Bag, Bookmark, List } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { MdOutlineExplore } from 'react-icons/md';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
-import { useAuthContext } from '../../contexts';
+import { useAuthContext, useCartContext } from '../../contexts/contextIndex';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user } = useAuthContext();
-  // const { cart } = useProductContext();
-  // console.log(cart);
+  const { totalItem } = useCartContext();
+  const navigate = useNavigate();
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
       setColorChange(true);
@@ -60,8 +62,9 @@ function Navbar() {
         {user ? <h5>yes</h5> : <h5>no</h5>}
 
         <section className="flex items-center">
-          <Link to="/glasses" className="mx-2 px-3 py-1 shadow-sm rounded-md text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition">
+          <Link to="/glasses" className="flex gap-1 align mx-2 px-3 py-1 shadow-sm rounded-md text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition">
             <span className="xs:block">Explore</span>
+            <MdOutlineExplore className="xs:hidden" />
           </Link>
           <ul className="hidden md:flex justify-between text-2xl ps-1">
             <li
@@ -74,15 +77,17 @@ function Navbar() {
             </li>
             <li
               className="relative bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-800 cursor-pointer mx-2 transition shadow-sm"
-              onClick={() => { ''; }}
+              onClick={() => navigate('/cart')}
             >
               <Bag size={26} />
-              <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
-              items-center justify-center text-xs font-bold border-3 border-white rounded-full
-               dark:border-gray-500 "
-              >
-                20
-              </div>
+              {user && totalItem > 0 && (
+                <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
+                   items-center justify-center text-xs font-bold border-3 border-white rounded-full
+                   dark:border-gray-500 "
+                >
+                  {totalItem}
+                </div>
+              )}
             </li>
           </ul>
           <section className="md:hidden  cursor-pointer relative">

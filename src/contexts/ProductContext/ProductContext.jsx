@@ -8,9 +8,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
 import { actionTypes } from '../../utils/actionTypes';
-// import { AuthContext } from '../authContext/AuthContext';
-// import { addCollectionAndDocuments } from '../../firebase';
-import { useAuthContext } from '../index';
+import { useAuthContext } from '../contextIndex';
 import { getProductsandDocuments } from '../../firebase';
 
 export const ProductContext = createContext();
@@ -19,7 +17,6 @@ function ProductContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [state, dispatch] = useReducer(productReducer, initialState);
-  // const useAuthContext = useContext(AuthContext);
   const { user } = useAuthContext();
   console.log(user);
 
@@ -62,16 +59,16 @@ function ProductContextProvider({ children }) {
         ],
       });
     }
-
     dispatch({
       type: actionTypes.UPDATE_PRODUCTS,
       payload: state.allProducts.map((item) => (item.id === product.id
         ? { ...item, inCart: true } : item)),
     });
   };
+
   return (
     <ProductContext.Provider value={{
-      allProducts: state.allProducts,
+     ...state,
       cart: state.cart,
       loading,
       addProductToCart,
