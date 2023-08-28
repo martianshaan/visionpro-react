@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { Logo } from '../components';
-import { useAuthContext } from '../contexts/index';
+import { useAuthContext } from '../contexts/contextIndex';
 import bannerHero from '../assets/bannerHero.jpg';
 
 export default function Login() {

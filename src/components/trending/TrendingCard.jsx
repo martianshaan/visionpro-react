@@ -26,7 +26,7 @@ function TrendingCard({ product }) {
           <button
             type="button"
             className="p-3 custom-bg-gradient rounded-md
-          mx-2 mx-2 px-2 py-2 shadow-sm rounded-md text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition"
+          mx-2 px-2 py-2 shadow-sm  text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition"
           >
             <AiOutlinePlus className="text-white font-bold" />
           </button>

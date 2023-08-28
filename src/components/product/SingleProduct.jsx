@@ -5,7 +5,7 @@ import { Star } from '@phosphor-icons/react';
 import { Heart } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router';
-import { useAuthContext, useCartContext } from '../../contexts';
+import { useAuthContext, useCartContext } from '../../contexts/contextIndex';
 
 function SingleProduct({ product }) {
   const {

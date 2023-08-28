@@ -6,7 +6,7 @@
 import { Plus, SignOut } from '@phosphor-icons/react';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useAuthContext } from '../contexts';
+import { useAuthContext } from '../contexts/contextIndex';
 
 function AddressCard({ address, pincode }) {
   return (

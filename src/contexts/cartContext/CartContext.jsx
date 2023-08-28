@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { toast } from 'react-hot-toast';
 import { cartReducer } from '../../reducers/cartReducer';
-import { useAuthContext } from '../index';
+import { useAuthContext } from '../contextIndex';
 
 const getLocalCartData = () => {
   try {

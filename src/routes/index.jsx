@@ -8,7 +8,7 @@ import { authRoutes, contentRoutes, privateRoutes } from './PublicRoutes';
 import SharedLayout from './SharedLayout';
 import { Home } from '../pages';
 import RequiresAuth from './RequiresAuth';
-import { useAuthContext } from '../contexts';
+import { useAuthContext } from '../contexts/contextIndex';
 
 function Index() {
   const { user } = useAuthContext();

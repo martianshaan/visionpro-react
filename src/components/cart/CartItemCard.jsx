@@ -9,7 +9,7 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { BsTrash3 } from 'react-icons/bs';
 import { Heart } from '@phosphor-icons/react';
 import { toast } from 'react-hot-toast';
-import { useCartContext } from '../../contexts';
+import { useCartContext } from '../../contexts/contextIndex';
 
 function CartItemCard({ product }) {
   const { removeProductsFromCart, updateProductQtyHandler } = useCartContext();

@@ -9,7 +9,7 @@ import { MdOutlineExplore } from 'react-icons/md';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
-import { useAuthContext, useCartContext } from '../../contexts';
+import { useAuthContext, useCartContext } from '../../contexts/contextIndex';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);

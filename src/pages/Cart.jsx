@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { useNavigate } from 'react-router';
-import { useCartContext } from '../contexts';
+import { useCartContext } from '../contexts/contextIndex';
 import { CartItemCard, CartTotalCard } from '../components';
 
 function Cart() {

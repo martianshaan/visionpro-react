@@ -4,7 +4,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import PriceCard from './PriceCard';
-import { useCartContext } from '../../contexts';
+import { useCartContext } from '../../contexts/contextIndex';
 
 function CartTotalCard({ cart }) {
   const navigate = useNavigate();

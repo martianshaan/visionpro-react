@@ -8,7 +8,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
 import { actionTypes } from '../../utils/actionTypes';
-import { useAuthContext } from '../index';
+import { useAuthContext } from '../contextIndex';
 import { getProductsandDocuments } from '../../firebase';
 
 export const ProductContext = createContext();

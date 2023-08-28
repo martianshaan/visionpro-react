@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
-import { useAuthContext } from '../contexts';
+import { useAuthContext } from '../contexts/contextIndex';
 import bannerHero from '../assets/bannerHero.jpg';
 import { Logo } from '../components';
 

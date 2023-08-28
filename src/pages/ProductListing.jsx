@@ -3,7 +3,7 @@ import React from 'react';
 import { Filter } from 'lucide-react';
 import bannerHero from '../assets/bannerHero.jpg';
 import { SingleProduct } from '../components';
-import { useProductContext } from '../contexts';
+import { useProductContext } from '../contexts/contextIndex';
 import loadingGif from '../assets/loading.gif';
 
 function ProductListing() {
