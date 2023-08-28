@@ -1,9 +1,9 @@
 /* eslint-disable import/no-cycle */
 import { useContext } from 'react';
-import { AuthContext } from './AuthContext/AuthContext';
-import { ProductContext } from './ProductContext/ProductContext';
-import { CategoriesContext } from './CategoriesContext/CategoriesContext';
-import { CartContext } from './CartContext/CartContext';
+import { AuthContext } from './AuthContext/AuthContext.js';
+import { ProductContext } from './ProductContext/ProductContext.js';
+import { CategoriesContext } from './CategoriesContext/CategoriesContext.js';
+import { CartContext } from './CartContext/CartContext.js';
 
 export const useAuthContext = () => useContext(AuthContext);
 
