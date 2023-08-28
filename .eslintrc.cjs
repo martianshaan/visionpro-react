@@ -20,7 +20,16 @@ module.exports = {
     'react',
     'react-hooks',
   ],
-  settings: { react: { version: '18.2' } },
+  settings: {
+    react: { version: '18.2' },
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.json'], // Add any other relevant extensions
+        },
+      },
+    },
+  },
   rules: {
     'react-refresh/only-export-components': 'warn',
     'linebreak-style': ['error', 'unix'],
