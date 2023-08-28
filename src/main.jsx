@@ -6,7 +6,7 @@ import App from './App';
 import './index.css';
 import {
   AuthContextProvider, CartContextProvider, CategoriesContextProvider, ProductContextProvider,
-} from './contexts';
+} from './contexts/contextIndex';
 // import { makeServer } from './server';
 
 // if (process.env.NODE_ENV === 'development') {
