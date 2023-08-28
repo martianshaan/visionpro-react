@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { toast } from 'react-hot-toast';
 import { cartReducer } from '../../reducers/cartReducer';
+import { useAuthContext } from '../contextIndex';
 
 const getLocalCartData = () => {
   try {
@@ -29,8 +30,10 @@ const INITIAL_STATE = {
 export const CartContext = createContext();
 
 function CartContextProvider({ children }) {
-  
+
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+
+  const {user} = useAuthContext();
 
   useEffect(() => {
     dispatch({ type: 'CART_TOTAL_ITEMS_AMOUNT' });
@@ -86,9 +89,9 @@ function CartContextProvider({ children }) {
     });
   };
 
-  const isInCart = useMemo((productId) => state.cart.find((
-    item,
-  ) => item.id === productId), [state.cart]);
+  const isInCart = useMemo(() => (productId) => state.cart.find(
+    (item) => item.id === productId
+  ), [state.cart]);
 
 
   const value = useMemo(() => ({

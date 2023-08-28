@@ -38,7 +38,7 @@ function TrendingCard({ product }) {
 }
 
 TrendingCard.propTypes = {
-  product: PropTypes.string.isRequired,
+  product: PropTypes.object.isRequired,
 };
 
 export default TrendingCard;

@@ -27,8 +27,8 @@ function ProductListing() {
               {/* <Filters /> */}
               <form htmlFor="sortby">
                 <label id="sortby">
-                  <select name="sortby" className="text-lg">
-                    <option value="" selected disabled>Sort By</option>
+                  <select defaultValue="filter" name="sortby" className="text-lg">
+                    <option value="" >Sort By</option>
                     <option value="low"> Low to high</option>
                     <option value="high"> High to Low </option>
                   </select>
