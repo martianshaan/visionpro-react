@@ -10,12 +10,19 @@ module.exports = {
     'airbnb',
   ],
   overrides: [
+    {
+      files: ['contextIndex.js'],
+      rules: {
+        'import/no-unresolved': 'off',
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
   plugins: [
+    'import',
     'react-refresh',
     'react',
     'react-hooks',
@@ -30,5 +37,16 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'warn',
     'linebreak-style': ['error', 'unix'],
+    'import/no-unresolved': 'error',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
 };
