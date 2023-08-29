@@ -1,20 +1,23 @@
 /* eslint-disable react/no-array-index-key */
-/* esdivnt-disable arrow-spacing */
+/* essectionnt-disable arrow-spacing */
 import React, { useEffect, useState } from 'react';
 import { Heart, ShoppingBag, Star } from '@phosphor-icons/react';
-import glassCategory1 from '../assets/glassCategory1.png';
-import { useParams } from 'react-router';
-import { useProductContext } from '../contexts/contextIndex';
+import { useNavigate, useParams } from 'react-router';
+import { toast } from 'react-hot-toast';
+import { useAuthContext, useCartContext, useProductContext } from '../contexts/contextIndex';
 import loadingGif from '../assets/loading.gif';
 
 function ProductDetails() {
   const [product, setProduct] = useState([]);
-  const [loading,setLoading]= useState(false)
+  const [loading, setLoading] = useState(false)
   const params = useParams();
   const { productId } = params;
 
   const { getProductById, products } = useProductContext();
-  
+  const { user }= useAuthContext();
+  const { addToCart ,isInCart } = useCartContext();
+
+  const navigate= useNavigate();
   console.log('loading', loading);
 
   useEffect(() => {
@@ -24,17 +27,22 @@ function ProductDetails() {
       setProduct(foundproduct);
       setLoading(false);
     };
-  
+
     fetchProduct();
   }, [productId, products])
 
   // Handle case when product is not loaded yet
-  if(!product){
+  if (!product) {
     return null
   }
+  
+  const productIsInCart = isInCart(product.id);
 
-  const { image, name, newPrice, price, rating, category } = product;
-
+  const { image, name, newPrice, price, brand, rating , gender, category,weight } = product;
+  
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
   
   return (
     <main>
@@ -46,53 +54,73 @@ function ProductDetails() {
           </span>
         </section>
       ) : (
-        <section className="md:min-h-[80vh] grid grid-rows-1 gap-2 py-4 sm:grid-cols-2 sm:gap-10 justify-center items-center  mt-[72px]">
-          <figure className="p-1  bg-black/[0.075] rounded-md m-2">
-            <img src={image} alt="product" className="w-full p-20" />
-          </figure>
-          <main className="flex flex-col gap-2 bg-white rounded-md p-10 mx-2 drop-shadow-lg">
-            <span className="text-2xl">{name}</span>
-            <span className="text-gray-700">{product.description}</span>
-            <div className="flex gap-2 items-center">
-              {new Array(5).fill().map((_, index) => (
-                <Star size={36} color="#c4c43b" weight="fill" key={index} className="bg-yellow text-yellow-400 m-2" />
+        <section className="flex flex-col md:flex-row gap-2 py-4  md:gap-10 items-start md:mt-[72px] md:mx-3">
+           <figure className="h-1/2 md:w-1/2  w-full flex-shrink-0 p-10 bg-black/[0.075] 
+           justify-center items-center m-auto overflow-hidden drop-shadow-md 
+          rounded-md ml-3 ">
+          <img
+            src={image}
+            alt=""
+            className="w-full h-full object-cover object-center "
+          />
+        </figure>
+          <main className="w-full md:w-1/2 md:h-1/2 p-1 flex md:mt-0 flex-col flex-1 gap-2 mr-3 ">
+            <span className="text-4xl font-extrabold  ">{name}</span>
+            <span className="text-gray-700 text-sm  ">{product.description}</span>
+            <section className="flex gap-2 items-center">
+              {[1,2,3,4,5].map((starRating,index) => (
+                <Star size={36}  weight="fill" key={index} 
+                className={classNames(
+                  rating > starRating
+                    ? 'text-yellow-400'
+                    : 'text-gray-200',
+                  'h-5 w-5 flex-shrink-0'
+                )}
+              />
               ))}
-
               <span className="text-gray-900/[0.75]">
                 (
                 {rating}
                 ) Rating
               </span>
-            </div>
-            <div className="flex flex-col gap-3">
+            </section>
+            <section className="flex flex-col gap-3">
               <strong className="text-2xl">About Product</strong>
               <ul className="grid grid-col-2 gap-2 grid-rows-2">
-                <li className="gap-2">
+               <li className='flex gap-5'>
+               <li className="gap-2">
                   <span className="text-gray-400 text-sm">
                     Brand :
                   </span>
-                  Ray Ban
+                  {' '}
+                  {brand}
                 </li>
                 <li>
                   <span className="text-gray-400 text-sm">
                     Category :
                   </span>
+                  {' '}
                   {category}
                 </li>
-                <li>
+              </li>
+              <li className='flex gap-5'>
+              <li>
                   <span className="text-gray-400 text-sm">
                     Gender :
                   </span>
-                  Men
+                  {' '}
+                  {gender}
                 </li>
                 <li>
                   <span className="text-gray-400 text-sm">
                     Heavy :
                   </span>
-                  200g
+                  {' '}
+                  {weight}
                 </li>
+              </li>
               </ul>
-              <div className="flex gap-2 items-center content-center">
+              <section className="flex gap-2 items-center content-center">
                 <h3 className="text-xl">Price:</h3>
                 <strong className="text-xl text-orange-600">
                   ₹
@@ -103,21 +131,36 @@ function ProductDetails() {
                   ₹
                   {price}
                 </span>
-              </div>
+              </section>
 
-              <div className="flex gap-4 items-center content-center w-full py-2">
-                <button type="button" className="btn-rounded-secondary flex items-center  gap-2 md:text-sm lg:text-base">
+              <section className="flex gap-4 items-center content-center w-full py-2">
+                <button 
+                type="button" 
+                className="btn-rounded-secondary flex items-center font-medium gap-2 md:text-sm lg:text-base"
+                onClick={() => {
+                  if (!user) {
+                    navigate('/login', { state: { from: location.pathname } });
+                    toast('Please login to continue shopping', {
+                      icon: '⚠️',
+                    });
+                  } else if (!productIsInCart) {
+                    addToCart(product);
+                  } else {
+                    navigate('/cart');
+                  }
+                }}
+                >
                   <ShoppingBag size={20} />
                   {' '}
-                  Add to Bag
+                  {productIsInCart ? 'GO TO BAG' : 'ADD TO BAG'}
                 </button>
-                <button type="button" className="btn-rounded-primary bg-gray-800 flex items-center  gap-2 md:text-sm lg:text-base">
+                <button type="button" className="btn-rounded-primary font-medium bg-gray-800 flex items-center  gap-2 md:text-sm lg:text-base">
                   <Heart size={20} />
                   {' '}
-                  Wishlist
+                  WISHLIST
                 </button>
-              </div>
-            </div>
+              </section>
+            </section>
           </main>
         </section>
       )}
