@@ -5,15 +5,17 @@ import bannerHero from '../assets/bannerHero.jpg';
 import { SingleProduct } from '../components';
 import { useProductContext } from '../contexts/contextIndex';
 import loadingGif from '../assets/loading.gif';
+import { Link } from 'react-router-dom';
 
 function ProductListing() {
   const { loading, products } = useProductContext();
   return (
-    <div>
+    <main>
       {loading ? (
-        <section>
+        <section className='flex h-screen justify-center items-center ' >
           <span>t
             <img src={loadingGif} width={200} alt="loadinggif" />
+            <p >Loading... </p>
           </span>
         </section>
       ) : (
@@ -53,13 +55,15 @@ function ProductListing() {
           </main> */}
           <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {Object.entries(products).map(([id, product]) => (
-              <SingleProduct key={id} product={product} />
+              <Link to={'/glasses/'+ product.id}key={id} >
+              <SingleProduct product={product} />
+              </Link>
             ))}
           </main>
 
         </section>
       )}
-    </div>
+    </main>
 
   );
 }
