@@ -10,7 +10,6 @@ import { initialState, productReducer } from '../../reducers/productsReducers';
 import { actionTypes } from '../../utils/actionTypes';
 import { useAuthContext } from '../contextIndex';
 import { getProductsandDocuments } from '../../firebase';
-
 export const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
@@ -32,12 +31,25 @@ function ProductContextProvider({ children }) {
     const getCategoriesMap = async () => {
       setLoading(true);
       const categoryMap = await getProductsandDocuments();
-      console.log('products', categoryMap);
+      console.log('fetched products', categoryMap);
       setProducts(categoryMap);
+      console.log('setproducts',products);
       setLoading(false);
     };
     getCategoriesMap();
   }, []);
+
+    const getProductById = (productId) => {
+      //convert products object in array
+      const myproducts = Object.entries(products);
+    
+      // Find the inner array that matches the productId
+      const myproduct = myproducts.find((productArray) => productArray[1].id === productId);
+      console.log('myproduct', myproduct);
+      // Return the product array if found, or null if not found
+      return myproduct ? myproduct[1] : null; 
+    };
+
 
   const addProductToCart = (product) => {
     const foundInCart = state.cart.find((item) => item.id === product.id);
@@ -66,6 +78,10 @@ function ProductContextProvider({ children }) {
     });
   };
 
+ 
+  
+  
+  
   return (
     <ProductContext.Provider value={{
      ...state,
@@ -73,6 +89,7 @@ function ProductContextProvider({ children }) {
       loading,
       addProductToCart,
       products,
+      getProductById
     }}
     >
       {children}
