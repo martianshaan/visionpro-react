@@ -1,16 +1,14 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Star } from '@phosphor-icons/react';
+import { ShoppingBag, Star } from '@phosphor-icons/react';
 import { Heart } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router';
 import { useAuthContext, useCartContext } from '../../contexts/contextIndex';
 
 function SingleProduct({ product }) {
-  const {
-    image, name, newPrice, price, rating,
-  } = product;
+  const {  image, name, newPrice, price, rating,} = product;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,7 +64,9 @@ function SingleProduct({ product }) {
         <div className="w-full pt-2 border-t flex justify-between items-center">
           <button
             type="button"
-            className="border border-[--primary-text-color]  py-1.5 text-sm  rounded-full px-6 hover:bg-[--primary-text-color] hover:text-white transition hover:shadow-md disabled:cursor-not-allowed"
+            
+            className="border border-[--primary-text-color] flex gap-2  py-1.5 
+            items-end text-sm  rounded-full px-5 hover:bg-[--primary-text-color] hover:text-white transition hover:shadow-md disabled:cursor-not-allowed"
             onClick={() => {
               if (!user) {
                 navigate('/login', { state: { from: location.pathname } });
@@ -80,6 +80,7 @@ function SingleProduct({ product }) {
               }
             }}
           >
+            <ShoppingBag size={20}  className='mb-[1px]'/>
             {productIsInCart ? 'Go to Bag' : 'Add to Bag'}
           </button>
           <button

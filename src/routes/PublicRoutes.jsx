@@ -4,8 +4,8 @@ import Mockman from 'mockman-js';
 import Login from '../pages/Login';
 import Todo from './Todo';
 
-import {
-  ProductData, ProductListing, Signup, Checkout, Profile, Cart,
+import {ProductDetails ,
+ ProductListing, Signup, Checkout, Profile, Cart,
 } from '../pages';
 
 export const authRoutes = [{
@@ -24,8 +24,8 @@ export const contentRoutes = [{
   element: <ProductListing />,
 }, {
   id: 2,
-  path: '/productdetails',
-  element: <ProductData />,
+  path: '/glasses/:productId',
+  element: <ProductDetails />,
 },
 {
   id: 3,
