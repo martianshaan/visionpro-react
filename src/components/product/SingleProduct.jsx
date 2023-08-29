@@ -1,12 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { ShoppingBag, ShoppingBagOpen, Star } from '@phosphor-icons/react';
+import { ShoppingBag, Star } from '@phosphor-icons/react';
 import { Heart } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router';
 import { useAuthContext, useCartContext } from '../../contexts/contextIndex';
-import { MdOutlineRemoveShoppingCart, MdShoppingCartCheckout } from 'react-icons/md';
 
 function SingleProduct({ product }) {
   const {  image, name, newPrice, price, rating,} = product;
