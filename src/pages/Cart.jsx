@@ -11,7 +11,7 @@ function Cart() {
     <main>
       {cart.length === 0 ? (
         <section className="flex flex-col h-screen justify-center items-center gap-4 ">
-          <h1 className="font-medium text-lg">No Item in the cart</h1>
+          <h1 className="font-medium text-lg">No Item in the Bag !</h1>
           <button
             type="button"
             className="border bg-gray-900 font-medium text-white py-1.5  px-6  transition hover:bg-white hover:border-gray-800 hover:text-gray-800 rounded-full shadow-sm flex items-center gap-2 md:text-sm lg:text-base"
