@@ -48,6 +48,7 @@ function CartContextProvider({ children }) {
           ...product, qty: 1,
         },
       });
+      toast.success('Product added to Bag')
     } else {
       toast.error('login first ');
     }
