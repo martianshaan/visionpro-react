@@ -24,4 +24,4 @@ export { default as CategoriesContextProvider } from './CategoriesContext/Catego
 
 export { default as CartContextProvider } from './CartContext/CartContext';
 
-export {default as WishListContextProvider}from './WishlistContext/WishlistContext'
+export {default as WishlistContextProvider}from './WishListContext/WishlistContext.jsx'
