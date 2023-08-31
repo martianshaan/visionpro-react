@@ -12,6 +12,7 @@ import { toast } from 'react-hot-toast';
 import { useCartContext } from '../../contexts/contextIndex';
 
 function CartItemCard({ product }) {
+  const {name,image,newPrice,price,qty,quantity}= product
   const { removeProductsFromCart, updateProductQtyHandler } = useCartContext();
 
   const updateHandler = (type) => {
@@ -29,21 +30,20 @@ function CartItemCard({ product }) {
   };
 
   return (
-    <div>
       <main className="flex flex-row pt-3 pr-5 pl-3 pb-2 w-[550px] md:w-[550px] font-bold shadow-md bg-white rounded-lg transition-shadow duration-200  gap-3">
         <figure className="h-1/3 w-1/3 flex-shrink-0 justify-center items-center m-auto overflow-hidden drop-shadow-md  rounded-md  ">
           <img
-            src={product.image}
+            src={image}
             alt=""
             className="h-full w-full object-cover object-center"
           />
         </figure>
         <section className="flex   flex-col gap-0.5 mr-1 w-2/3 ">
           <section className="flex justify-between md:gap-10 lg:gap-20  items-center">
-            <span className=" text-base py-3 font-semibold">{product.name}</span>
+            <span className=" text-base py-3 font-semibold">{name}</span>
             <span className="text-base text-gray-600 line-through">
               ₹
-              {product.newPrice}
+              {price}
             </span>
           </section>
           {product.category === 'Vision' ? (
@@ -55,7 +55,7 @@ function CartItemCard({ product }) {
             <span className=" text-amber-600 text-base">
               ₹
               {' '}
-              {product.newPrice}
+              {newPrice}
             </span>
           </section>
           <hr className="w-full border border-dashed border-purple-haze" />
@@ -69,11 +69,11 @@ function CartItemCard({ product }) {
                 <AiOutlineMinus />
               </button>
               <span className="h-full w-10 bg-black/[0.075]   rounded-md flex items-center justify-center">
-                {product.qty}
+                {qty}
               </span>
               <button
                 className={`bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs
-                ${product.qty >= product.quantity ? 'opacity-50 cursor-not-allowed' : ''}`}
+                ${qty >= quantity ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={() => updateHandler('increment')}
               >
                 <AiOutlinePlus />
@@ -92,7 +92,6 @@ function CartItemCard({ product }) {
           </section>
         </section>
       </main>
-    </div>
   );
 }
 
