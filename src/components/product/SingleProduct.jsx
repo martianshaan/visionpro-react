@@ -1,11 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { ShoppingBag, Star } from '@phosphor-icons/react';
-import { Heart } from 'lucide-react';
+import { ShoppingBag, Star ,Heart } from '@phosphor-icons/react';
 import { toast } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router';
-import { useAuthContext, useCartContext } from '../../contexts/contextIndex';
+import { useAuthContext, useCartContext, useWishlistContext } from '../../contexts/contextIndex';
 
 function SingleProduct({ product }) {
   const {  image, name, newPrice, price, rating,} = product;
@@ -14,6 +13,9 @@ function SingleProduct({ product }) {
   const location = useLocation();
   const { user } = useAuthContext();
   const { addToCart, isInCart } = useCartContext();
+  const { addToWishlistHandler,isInWishlist } = useWishlistContext()
+
+  const productIsInWishlist= isInWishlist(product.id)
 
   const productIsInCart = isInCart(product.id);
   return (
@@ -85,9 +87,23 @@ function SingleProduct({ product }) {
           </button>
           <button
             type="button"
-            className="disabled:cursor-not-allowed"
+            className=" flex  gap-1 disabled:cursor-not-allowed"
+            onClick={()=>{
+              if(!user){
+                navigate('/login',{ state: { from: location.pathname } });
+                toast('Please login to continue shopping', {
+                  icon: '⚠️',
+                });
+              }else if(!productIsInWishlist){
+                addToWishlistHandler(product)
+              }else {
+                navigate('/wishlist')
+              }
+            }}
           >
-            <Heart className="text-xl hover:text-rose-600  transition" />
+            {productIsInWishlist ? (<Heart className="text-xl hover:text-rose-600  transition"  size={25} color="#e21818" weight="fill" />) : 
+            <Heart className="text-xl hover:text-rose-600  transition"  size={25} weight="light" />
+            }
           </button>
         </div>
       </main>
