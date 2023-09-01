@@ -71,7 +71,7 @@ function Navbar() {
               className="relative bg-gray-200 p-2 rounded-full
           hover:bg-yellow-800 hover:text-white cursor-pointer mx-2
           transition shadow-sm "
-              onClick={() => { }}
+              onClick={() => navigate('/wishlist')}
             >
               <Bookmark size={26} />
             </li>
