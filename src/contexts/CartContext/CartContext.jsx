@@ -98,6 +98,8 @@ function CartContextProvider({ children }) {
   const value = useMemo(() => ({
     ...state,
     cart: state.cart,
+    totalItem:state.totalItem,
+    totalAmount:state.totalAmount,
     addToCart,
     removeProductsFromCart,
     clearCartHandler,
