@@ -45,7 +45,7 @@ export const cartReducer = (state, action) => {
       }
 
     case 'REMOVE_PRODUCTS_FROM_CART':
-      const updatedCart = state.cart.filter((currentItem) => currentItem.id !== action.payload);
+      const updatedCart = state.cart.filter((currentItem) => currentItem.id !== payload);
       if (state.cart.length === 1) {
         /* to handle totalItem still remain for single product in cart
         this will set total Item and amount to zero for single item
