@@ -27,6 +27,19 @@ const WishlistContextProvider = ({children}) => {
     }
 };
 
+const removeProductFromWishlistHandler=(productId)=>{
+  dispatch({
+    type:'REMOVE_PRODUCT_FROM_WISHLIST',
+    payload: productId
+  })
+  toast.success('One product removed from Wishlist');
+}
+
+const clearWishlistHandler =()=>{
+  dispatch({
+    type:'CLEAR_WISHLIST'
+  })
+}
   const isInWishlist = useMemo(() => (productId) => state.wishlist.find(
     (item) => item.id === productId
   ), [state.wishlist]);
@@ -37,7 +50,11 @@ const WishlistContextProvider = ({children}) => {
       ...state,
     wishlist:state.wishlist,
     isInWishlist,
-    addToWishlistHandler}}>
+    addToWishlistHandler,
+    removeProductFromWishlistHandler,
+    clearWishlistHandler
+    
+    }}>
         {children}
     </WishlistContext.Provider>
   )
