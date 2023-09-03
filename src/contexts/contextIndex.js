@@ -6,6 +6,7 @@ import { CategoriesContext } from './CategoriesContext/CategoriesContext.jsx';
 import { CartContext } from './CartContext/CartContext.jsx';
 import { WishlistContext } from './WishListContext/WishlistContext.jsx';
 
+
 export const useAuthContext = () => useContext(AuthContext);
 
 export const useProductContext = () => useContext(ProductContext);
