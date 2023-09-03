@@ -4,7 +4,7 @@ import { AuthContext } from './AuthContext/AuthContext.jsx';
 import { ProductContext } from './ProductContext/ProductContext.jsx';
 import { CategoriesContext } from './CategoriesContext/CategoriesContext.jsx';
 import { CartContext } from './CartContext/CartContext.jsx';
-import { WishlistContext } from './WishListContext/WishlistContext.jsx';
+import { WishlistContext } from './WishlistContext/WishlistContext.jsx';
 
 
 export const useAuthContext = () => useContext(AuthContext);
@@ -25,4 +25,4 @@ export { default as CategoriesContextProvider } from './CategoriesContext/Catego
 
 export { default as CartContextProvider } from './CartContext/CartContext';
 
-export {default as WishlistContextProvider}from './WishListContext/WishlistContext.jsx'
+export {default as WishlistContextProvider}from './WishlistContext/WishlistContext.jsx'
