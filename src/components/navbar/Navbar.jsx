@@ -17,7 +17,9 @@ function Navbar() {
 
   const { user } = useAuthContext();
   const { totalItem } = useCartContext();
+
   const navigate = useNavigate();
+  
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
       setColorChange(true);
@@ -96,7 +98,7 @@ function Navbar() {
               className="text-lg"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             />
-            {isMenuOpen && <MenuDropdown navigate={() => { }} />}
+            {isMenuOpen && <MenuDropdown navigate={navigate} />}
           </section>
         </section>
       </div>
