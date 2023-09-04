@@ -1,13 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import Filters from '../components/filters/Filters';
 import { Filter } from 'lucide-react';
 import bannerHero from '../assets/bannerHero.jpg';
 import { SingleProduct } from '../components';
 import { useProductContext } from '../contexts/contextIndex';
 import loadingGif from '../assets/loading.gif';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 function ProductListing() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
   const { loading, products } = useProductContext();
   return (
     <main>
@@ -26,7 +29,6 @@ function ProductListing() {
           <section className="flex justify-between py-3">
             <h1 className="text-2xl font-bold">Glasses for You! </h1>
             <div className="flex items-center gap-2">
-              {/* <Filters /> */}
               <form htmlFor="sortby">
                 <label id="sortby">
                   <select defaultValue="filter" name="sortby" className="text-lg">
@@ -36,10 +38,18 @@ function ProductListing() {
                   </select>
                 </label>
               </form>
-              <button type="button" className="flex gap-2  px-2  py-1 rounded-md bg-white shadow-sm hover:bg-[--primary-text-color] items-center hover:text-white ">
+              <button 
+              type="button" 
+              className="flex gap-2  px-2  py-1 rounded-md bg-white shadow-sm hover:bg-[--primary-text-color] 
+              items-center hover:text-white "
+              onClick={()=>{setIsFilterOpen(!isFilterOpen); console.log('clicked');}}
+              >
                 <Filter className="text-lg" />
                 <span className="text-sm">Filters</span>
               </button>
+              {isFilterOpen && (
+                 <Filters isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} /> 
+              )}
             </div>
           </section>
           {/* <main className="grid grid-col-1  gap-6 sm:grid-cols-2
