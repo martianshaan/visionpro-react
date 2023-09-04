@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
-import { actionTypes } from '../../utils/actionTypes';
+import { actionTypes, filterTypes } from '../../utils/actionTypes';
 import { useAuthContext } from '../contextIndex';
 import { getProductsandDocuments } from '../../firebase';
 export const ProductContext = createContext();
@@ -78,7 +78,12 @@ function ProductContextProvider({ children }) {
     });
   };
 
- 
+ const handleApplyFilters=(filterType,filterValue)=>{
+  dispatch({
+    type: filterTypes.filterType,
+    payload:{filterType,filterValue}
+  })
+ }
   
   
   
@@ -86,10 +91,12 @@ function ProductContextProvider({ children }) {
     <ProductContext.Provider value={{
      ...state,
       cart: state.cart,
+      filters:state.filters,
       loading,
       addProductToCart,
       products,
-      getProductById
+      getProductById,
+      handleApplyFilters
     }}
     >
       {children}
