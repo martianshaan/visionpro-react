@@ -7,6 +7,7 @@ import Todo from './Todo';
 import {ProductDetails ,
  ProductListing, Signup, Checkout, Profile, Cart,
 } from '../pages';
+import Wishlist from '../pages/Wishlist';
 
 export const authRoutes = [{
   id: 1,
@@ -34,10 +35,15 @@ export const contentRoutes = [{
 },
 {
   id: 4,
+  path: '/wishlist',
+  element: <Wishlist />,
+},
+{
+  id: 5,
   path: '/mockman',
   element: <Mockman />,
 }, {
-  id: 5,
+  id: 6,
   path: '/todo',
   element: <Todo />,
 }];

@@ -9,7 +9,7 @@ import { MdOutlineExplore } from 'react-icons/md';
 import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
-import { useAuthContext, useCartContext } from '../../contexts/contextIndex';
+import { useAuthContext, useCartContext, useWishlistContext } from '../../contexts/contextIndex';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
@@ -17,7 +17,11 @@ function Navbar() {
 
   const { user } = useAuthContext();
   const { totalItem } = useCartContext();
+  const { wishlist }= useWishlistContext()
+
+
   const navigate = useNavigate();
+
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
       setColorChange(true);
@@ -32,16 +36,17 @@ function Navbar() {
       window.removeEventListener('scroll', () => { });
     };
   }, []);
+
+  let totalWishlistedItems= wishlist.length;
   return (
     /* py-3 max-w-screen mb-3 fixed left-0 right-0
     px-[4%] md:px-[10%] bg-[--theme-color]  */
     /* removed fixed from css */
-    <nav className={`flex flex-col 
-    sm:flex-row py-3.5 px-[4%] fixed max-w-screen top-0 left-0 right-0 md:px-[10%] bg-[--theme-color]
+    <nav className={`flex flex-col sm:flex-row py-3.5 px-[4%] fixed max-w-screen top-0 left-0 right-0 md:px-[10%] bg-[--theme-color]
     ${colorChange ? 'shadow-sm  drop-shadow-sm' : ''} 
-    z-10 transition delay-75 ease-in-out`}
+     transition delay-75 ease-in-out  z-20`}
     >
-      <div className="flex justify-between w-full items-center md:gap-3 ">
+      <body className="flex justify-between w-full items-center md:gap-3  ">
         <section className="relative flex items-center gap-3 ">
           <Link to="/profile">
             <img
@@ -71,9 +76,17 @@ function Navbar() {
               className="relative bg-gray-200 p-2 rounded-full
           hover:bg-yellow-800 hover:text-white cursor-pointer mx-2
           transition shadow-sm "
-              onClick={() => { }}
+              onClick={() => navigate('/wishlist')}
             >
               <Bookmark size={26} />
+              {user && totalWishlistedItems > 0 && (
+                <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
+                   items-center justify-center text-xs font-bold border-3 border-white rounded-full
+                   dark:border-gray-500 "
+                >
+                  {totalWishlistedItems}
+                </div>
+              )}
             </li>
             <li
               className="relative bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-800 cursor-pointer mx-2 transition shadow-sm"
@@ -96,10 +109,10 @@ function Navbar() {
               className="text-lg"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             />
-            {isMenuOpen && <MenuDropdown navigate={() => { }} />}
+            {isMenuOpen && <MenuDropdown navigate={navigate} />}
           </section>
         </section>
-      </div>
+      </body>
       <section className="mt-4 sm:hidden relative">
         search
       </section>
