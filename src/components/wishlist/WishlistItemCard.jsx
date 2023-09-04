@@ -1,5 +1,5 @@
 import React from 'react';
-import { X } from '@phosphor-icons/react';
+import { ShoppingBag, X } from '@phosphor-icons/react';
 import { useCartContext, useWishlistContext } from '../../contexts/contextIndex';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router';
@@ -35,10 +35,10 @@ const WishlistItemCard = ({ product }) => {
     }
 
     return (
-        <main className='flex flex-col xs:flex-row sm:flex-col bg-white/[0.75] rounded-lg  shadow-sm shadow-amber-50 border-1   border-gray-200 gap-2 
-        justify-center align-middle items-center overflow-hidden cursor-pointer transition-shadow   hover:scale-[1.05] hover:shadow-md'>
+        <main className='flex flex-col xs:flex-row sm:flex-col bg-white/[0.75] rounded-lg  shadow-sm shadow-amber-50 border-2   border-gray-200 gap-2 
+        overflow-hidden cursor-pointer transition-shadow   hover:scale-[1.05] hover:shadow-md'>
             <figure
-                className=" relative flex items-center justify-center p-10 xs:p-5 sm:p-10 bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
+                className=" relative flex items-center justify-center p-30 xs:p-4 sm:p-3 bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
                 onClick={() => {
                     navigate(`/glasses/${id}`);
                 }}
@@ -46,7 +46,7 @@ const WishlistItemCard = ({ product }) => {
                 <img
                     src={image}
                     alt=""
-                    className="w-full object-cover xs:object-contain sm:object-cover h-28"
+                    className="w-full object-contain xs:object-contain sm:object-cover h-28"
                 />
                 <button
                     type='button'
@@ -57,9 +57,9 @@ const WishlistItemCard = ({ product }) => {
                 </button>
             </figure>
             <section className='w-full flex flex-col justify-center items-center'>
-                <section className='flex w-full justify-between gap-10  py-1 px-2 align-middle'>
-                    <span className='text-gray-900 text-base '>{name}</span>
-                    <span className='flex justify-center items-center gap-2 '>
+                <section className='flex flex-wrap flex-col sm:flex-row w-full justify-start  sm:justify-between gap-1 sm:gap-10    py-1 px-2 align-middle'>
+                    <span className='text-gray-900 text-sm '>{name}</span>
+                    <span className='flex flex-wrap justify-start   sm:justify-center items-center gap-2 '>
                         <span className=" text-amber-600 text-base">
                             ₹
                             {' '}
@@ -72,12 +72,13 @@ const WishlistItemCard = ({ product }) => {
                     </span>
                 </section>
                 <hr className="w-full border border-purple-haze" />
-                <section className="flex gap-3 py-2 mb-1 justify-between ">
+                <section className="flex gap-3 py-1 mb-1 justify-between ">
                     <button
                         type='button'
-                        className="btn-rounded-secondary flex align-middle justify-center gap-2 text-sm mt-2 w-full"
+                        className="btn-rounded-secondary flex align-end justify-center gap-2 text-sm mt-1  w-full items-end"
                         onClick={() => moveToBagHandler()}
                     >
+                        <ShoppingBag   size={20} className='mb-[1px]' />
                         Move to Bag
                     </button>
                 </section>
