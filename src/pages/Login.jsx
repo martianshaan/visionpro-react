@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { Logo } from '../components';
 import { useAuthContext } from '../contexts/contextIndex';
 import bannerHero from '../assets/bannerHero.jpg';
@@ -19,7 +19,10 @@ export default function Login() {
   const [loggingIn, setLoggingIn] = useState(false);
 
   const { loginHandler } = useAuthContext();
+
   const navigate = useNavigate();
+  const location = useLocation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoggingIn(true);
@@ -37,7 +40,7 @@ export default function Login() {
       Logged in Successfully !!`, {
         icon: '👋',
       });
-      navigate('/');
+      navigate(location?.state?.from?.pathname ??'/');
     } catch (err) {
       toast.error(err?.message ? err?.message : 'Login failed. Please check your credentials.');
     } finally {

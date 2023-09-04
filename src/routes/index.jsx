@@ -19,7 +19,7 @@ function Index() {
         user ? (
           <Navigate
             to={location?.state?.from?.pathname ?? '/'}
-            replace
+            replace={true}
           />
         ) : (<Outlet />)
       }

@@ -6,6 +6,7 @@ import { useAuthContext } from '../contexts/contextIndex';
 function RequiresAuth() {
   const { user } = useAuthContext();
   const location = useLocation();
+  //state is used to remember users last location before logout
   return user ? (<Outlet />) : (<Navigate to="/login" state={{ from: location }} replace />);
 }
 
