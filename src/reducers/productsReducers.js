@@ -1,7 +1,15 @@
-import { actionTypes } from '../utils/actionTypes';
+import { actionTypes, filterTypes } from '../utils/actionTypes';
 
 export const initialState = {
   allProducts: [],
+  filters: {
+    gender: "",
+    categories: [],
+    priceRange: "",
+    rating: "",
+    sortBy: "",
+    searchText: "",
+  },
 };
 
 export const productReducer = (state, action) => {
@@ -21,9 +29,17 @@ export const productReducer = (state, action) => {
       return {
         ...state,
         cart: action.payload,
-      };
+    };
+
     case actionTypes.ADD_PRODUCT_TO_CART:
       return { ...state, cart: action.payload };
+    
+    case filterTypes.FILTERS:
+      return {...state,
+        filters:{...state.filters,
+          [action.payload.filterType]:action.payload.filterValue
+        }}
+
     default:
       return state;
   }
