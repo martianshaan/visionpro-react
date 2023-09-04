@@ -40,15 +40,17 @@ function ProductListing() {
               </form>
               <button 
               type="button" 
-              className="flex gap-2  px-2  py-1 rounded-md bg-white shadow-sm hover:bg-[--primary-text-color] 
-              items-center hover:text-white "
+              className={`flex py-1 px-2 rounded-md shadow-md items-center  
+              gap-1 hover:bg-[--primary-text-color] hover:text-white hover:shadow-lg ${
+                isFilterOpen ? "bg-[--primary-text-color] text-white" : ""
+              }`}
               onClick={()=>{setIsFilterOpen(!isFilterOpen); console.log('clicked');}}
               >
                 <Filter className="text-lg" />
                 <span className="text-sm">Filters</span>
               </button>
               {isFilterOpen && (
-                 <Filters isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} /> 
+                 <Filters setIsFilterOpen={setIsFilterOpen} /> 
               )}
             </div>
           </section>

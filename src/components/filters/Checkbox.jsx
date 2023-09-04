@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 function Checkbox({ data: { name, value }, index }) {
   const inputId = `checkbox-${index}`;
+  //apply classname cahnges for checkbox see project
   return (
     <form>
       <label
