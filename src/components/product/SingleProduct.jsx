@@ -1,29 +1,28 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { ShoppingBag, Star ,Heart } from '@phosphor-icons/react';
+import { ShoppingBag, Star, Heart } from '@phosphor-icons/react';
 import { toast } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router';
 import { useAuthContext, useCartContext, useWishlistContext } from '../../contexts/contextIndex';
 
 function SingleProduct({ product }) {
-  const {  image, name, newPrice, price, rating,} = product;
+  const { image, name, newPrice, price, rating, } = product;
 
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuthContext();
   const { addToCart, isInCart } = useCartContext();
-  const { addToWishlistHandler,isInWishlist } = useWishlistContext()
+  const { addToWishlistHandler, isInWishlist } = useWishlistContext()
 
-  const productIsInWishlist= isInWishlist(product.id)
+  const productIsInWishlist = isInWishlist(product.id)
 
   const productIsInCart = isInCart(product.id);
   return (
     <section
-      className="flex flex-col xs:flex-row sm:flex-col  bg-white/[0.5] rounded-lg shadow-md border-2 border-black/[0.05] overflow-hidden
-    cursor-pointer
-    transition-transform
-    hover:scale-[1.02] hover:shadow-lg y ease-in-out delay-75"
+      className='flex flex-col xs:flex-row sm:flex-col  bg-white/[0.5] rounded-lg shadow-md border-2
+       border-black/[0.05] overflow-hidden cursor-pointer transition-transform hover:scale-[1.02] 
+       hover:shadow-lg y ease-in-out delay-75'
     >
       <figure
         className="flex items-center justify-center p-10 xs:p-5 sm:p-10 bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
@@ -66,7 +65,7 @@ function SingleProduct({ product }) {
         <div className="w-full pt-2 border-t flex justify-between items-center">
           <button
             type="button"
-            
+
             className="border border-[--primary-text-color] flex gap-2  py-1.5 
             items-end text-sm  rounded-full px-5 hover:bg-[--primary-text-color] hover:text-white transition hover:shadow-md disabled:cursor-not-allowed"
             onClick={() => {
@@ -82,27 +81,27 @@ function SingleProduct({ product }) {
               }
             }}
           >
-            <ShoppingBag size={20}  className='mb-[1px]'/>
+            <ShoppingBag size={20} className='mb-[1px]' />
             {productIsInCart ? 'Go to Bag' : 'Add to Bag'}
           </button>
           <button
             type="button"
             className=" flex  gap-1 disabled:cursor-not-allowed"
-            onClick={()=>{
-              if(!user){
-                navigate('/login',{ state: { from: location.pathname } });
+            onClick={() => {
+              if (!user) {
+                navigate('/login', { state: { from: location.pathname } });
                 toast('Please login to continue shopping', {
                   icon: '⚠️',
                 });
-              }else if(!productIsInWishlist){
+              } else if (!productIsInWishlist) {
                 addToWishlistHandler(product)
-              }else {
+              } else {
                 navigate('/wishlist')
               }
             }}
           >
-            {productIsInWishlist ? (<Heart className="text-xl hover:text-rose-600  transition"  size={25} color="#e21818" weight="fill" />) : 
-            <Heart className="text-xl hover:text-rose-600  transition"  size={25} weight="light" />
+            {productIsInWishlist ? (<Heart className="text-xl hover:text-rose-600  transition" size={25} color="#e21818" weight="fill" />) :
+              <Heart className="text-xl hover:text-rose-600  transition" size={25} weight="light" />
             }
           </button>
         </div>
