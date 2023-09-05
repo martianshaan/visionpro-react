@@ -8,11 +8,14 @@ import { useProductContext } from '../contexts/contextIndex';
 import loadingGif from '../assets/loading.gif';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useFilter } from '../hooks/useFilter';
 
 function ProductListing() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const { loading, allProducts} = useProductContext();
   console.log('allproducts',allProducts);
+
+  const productsList = useFilter();
   return (
     <main>
       {loading ? (
@@ -73,13 +76,20 @@ function ProductListing() {
               </Link>
             ))}
           </main> */}
-          <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-            {allProducts.map((product) => (
+          {productsList.length > 0  ? (
+            <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+            {productsList.map((product) => (
               <Link to={'/glasses/'+ product.id} key={product.id} >
               <SingleProduct product={product} />
               </Link>
             ))}
           </main>
+          ):(
+            <p className='flex justify-center items-center text-xl '>
+                   No products!
+            </p>
+          )}
+          
 
         </section>
       )}
