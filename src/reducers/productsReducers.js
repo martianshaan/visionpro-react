@@ -3,9 +3,10 @@ import { actionTypes, filterTypes } from '../utils/actionTypes';
 export const initialState = {
   allProducts: [],
   filters: {
-    gender: "",
+    gender: "all",
     categories: [],
     priceRange: "",
+    maxRange:0,
     rating: "",
     sortBy: "",
     searchText: "",
@@ -15,10 +16,17 @@ export const initialState = {
 export const productReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.INITIALIZE_PRODUCTS:
+      const maxValue = action.payload.reduce(
+        (acc, { price }) => (acc > price ? acc : price),
+        0
+      );
       return {
         ...state,
         allProducts: action.payload,
+        maxRange: maxValue,
+        filters: { ...state.filters, priceRange: maxValue },
       };
+
     case actionTypes.UPDATE_PRODUCTS:
       return {
         ...state,
@@ -29,16 +37,34 @@ export const productReducer = (state, action) => {
       return {
         ...state,
         cart: action.payload,
-    };
+      };
 
     case actionTypes.ADD_PRODUCT_TO_CART:
       return { ...state, cart: action.payload };
-    
+
     case filterTypes.FILTERS:
-      return {...state,
-        filters:{...state.filters,
-          [action.payload.filterType]:action.payload.filterValue
-        }}
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [action.payload.filterType]: action.payload.filterValue
+        }
+      };
+
+    case filterTypes.CLEAR_FILTER:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+
+          gender: "all",
+          categories: [],
+          priceRange: state.maxRange,
+          rating: "",
+          sortBy: "",
+          searchText: "",
+        },
+      };
 
     default:
       return state;
