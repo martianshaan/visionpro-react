@@ -1,32 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useProductContext } from '../../contexts/contextIndex';
 
-function Checkbox({ data: { name, value }, index }) {
-  const inputId = `checkbox-${index}`;
-  //apply classname changes for checkbox see project
+const Checkbox = ({ data }) => {
+  const {
+    handleApplyFilters,
+    filters: { categories },
+  } = useProductContext();
+  const checkboxHandler = (e) => {
+    let catArr = categories;
+
+    if (e.target.checked) {
+      catArr.push(e.target.value);
+    } else {
+      catArr = catArr.filter((cat) => cat !== e.target.value);
+    }
+
+    handleApplyFilters(e.target.name, catArr);
+  };
   return (
-    <form>
-      <label
-        htmlFor={inputId}
-        className={`p-2 rounded-md  shadow-sm text-center  cursor-pointer my-2 ${
-          index
-            ? 'bg-black/[0.1] hover:bg-[--primary-text-color] hover:text-white'
-            : 'bg-[--primary-text-color] text-white '
-        }`}
-      >
-        {name}
-        <input id={inputId} type="checkbox" className="my-2" hidden name="category" value={value} />
-      </label>
-    </form>
+    <label className="capitalize cursor-pointer flex  gap-1">
+      <input
+        className="accent-[--primary-text-color] me-2 cursor-pointer"
+        type="checkbox"
+        name="categories"
+        checked={categories.includes(data)}
+        value={data}
+        onChange={checkboxHandler}
+      />
+      {data}
+    </label>
   );
-}
-
-Checkbox.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  }).isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 export default Checkbox;

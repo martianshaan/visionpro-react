@@ -16,8 +16,6 @@ function ProductContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [allProducts,setAllProducts]= useState([]);
   const [state, dispatch] = useReducer(productReducer, initialState);
-  const { user } = useAuthContext();
-  console.log(user);
 
   // useEffect(() => {
   //   addCollectionAndDocuments('products', products);
@@ -42,7 +40,7 @@ function ProductContextProvider({ children }) {
 
     const getProductById = (productId) => {
       //convert products object in array
-      const myproducts = Object.entries(products);
+      const myproducts = Object.entries(allProducts);
     
       // Find the inner array that matches the productId
       const myproduct = myproducts.find((productArray) => productArray[1].id === productId);
@@ -86,13 +84,7 @@ function ProductContextProvider({ children }) {
   })
  };
 
- const applyFilters = (filterType, filterValue) => {
-  dispatch({
-    type: filterTypes.FILTERS,
-    payload: { filterType, filterValue },
-  });
-};
-const clearFilters = () => {
+const handleClearFilters = () => {
   dispatch({
     type: filterTypes.CLEAR_FILTER,
   });
@@ -111,8 +103,7 @@ const clearFilters = () => {
       getProductById,
       handleApplyFilters,
       allProducts,
-      applyFilters,
-      clearFilters
+      handleClearFilters
     }}
     >
       {children}

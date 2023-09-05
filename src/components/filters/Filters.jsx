@@ -5,14 +5,15 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import InputRadioForGender from './InputRadioForGender'
 import InputRange from './InputRange';
 import InputRadio from './InputRadio';
-import { checkboxCategories,ratings,gendersList } from '../../utils/constants';
+import { checkboxCategories, ratings, gendersList } from '../../utils/constants';
+import Checkbox from './Checkbox';
 
 function FilterHeading({ text }) {
   return <h2 className="text-xl mb-3 ml-1">{text}</h2>;
 }
 
 
-function Filters({setIsFilterOpen }) {
+function Filters({ setIsFilterOpen }) {
   return (
     <aside className="screen filtersContainer fixed left-0 top-0  mt-[72px] flex flex-col p-3 gap-3 overflow-auto">
       <section className="flex justify-between items-center">
@@ -29,7 +30,7 @@ function Filters({setIsFilterOpen }) {
         <FilterHeading text="Gender" />
         <div className="grid grid-rows-2 gap-4  grid-cols-2 ">
           {gendersList.map((data, index) => (
-           <InputRadioForGender key={index} data={data} />
+            <InputRadioForGender key={index} data={data} />
           ))}
         </div>
       </section>
@@ -41,16 +42,14 @@ function Filters({setIsFilterOpen }) {
 
       <section className="py-3">
         <FilterHeading text="Categories" />
-        {checkboxCategories.map((item) => (
-          <div className="flex flex-row items-center ">
-            <input type="checkbox" id="label" name="category" value="checkbox" className="mr-2" />
-            <label htmlFor="label">
-              {item}
-            </label>
 
-          </div>
+        <section className="flex flex-col items-start ml-2">
+          {checkboxCategories.map((data, index) => (
+            <Checkbox data={data} key={index} />
+          ))}
+        </section>
 
-        ))}
+
       </section>
 
       <section className="py-3 flex flex-col gap-2 mr-2">
