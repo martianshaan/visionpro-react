@@ -84,7 +84,19 @@ function ProductContextProvider({ children }) {
     type: filterTypes.filterType,
     payload:{filterType,filterValue}
   })
- }
+ };
+
+ const applyFilters = (filterType, filterValue) => {
+  dispatch({
+    type: filterTypes.FILTERS,
+    payload: { filterType, filterValue },
+  });
+};
+const clearFilters = () => {
+  dispatch({
+    type: filterTypes.CLEAR_FILTER,
+  });
+};
   
   
   
@@ -93,11 +105,14 @@ function ProductContextProvider({ children }) {
      ...state,
       cart: state.cart,
       filters:state.filters,
+      maxRange:state.maxRange,
       loading,
       addProductToCart,
       getProductById,
       handleApplyFilters,
-      allProducts
+      allProducts,
+      applyFilters,
+      clearFilters
     }}
     >
       {children}
