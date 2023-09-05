@@ -1,9 +1,13 @@
 import React from 'react'
+import { useProductContext } from '../../contexts/contextIndex';
 
 const InputRadioForGender = ({data}) => {
+  const {filters:{gender}}=useProductContext();
+
   return (
-    <label className={`rouned-md p-2 shadow-sm text-center capitalize cursor-pointer
-      ${gender === data ?"bg-[--primart-text-color] text-white":"bg-black/0.5 hover:text-white hover:bg-[--primary-text-color]"}
+    <label className={`border border-black/[0.1] rounded-sm p-2 shadow-sm text-center capitalize cursor-pointer
+    ${ gender === data ? 'bg-[--primary-text-color] text-white ': 'bg-black/[0.1] hover:bg-[--primary-text-color] hover:text-white'
+}
     `}>
         {data}
         <input 
@@ -11,7 +15,7 @@ const InputRadioForGender = ({data}) => {
         name="gender"
         value={data}
         className='invisible'
-        selected={gender===data}
+        selected={data===gender}
         onChange={()=>{}}
         />
     </label>
