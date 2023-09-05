@@ -14,8 +14,7 @@ export const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [allProducts,setAllProducts]= useState([])
+  const [allProducts,setAllProducts]= useState([]);
   const [state, dispatch] = useReducer(productReducer, initialState);
   const { user } = useAuthContext();
   console.log(user);
@@ -32,11 +31,10 @@ function ProductContextProvider({ children }) {
     const getCategoriesMap = async () => {
       setLoading(true);
       const categoryMap = await getProductsandDocuments();
-      console.log('fetched products', categoryMap);
-      setProducts(categoryMap);
-      console.log('setproducts',products);
+
       let arrayData= Object.values(categoryMap)
-      setAllProducts(arrayData)
+      setAllProducts(arrayData);
+
       setLoading(false);
     };
     getCategoriesMap();
@@ -97,7 +95,6 @@ function ProductContextProvider({ children }) {
       filters:state.filters,
       loading,
       addProductToCart,
-      products,
       getProductById,
       handleApplyFilters,
       allProducts

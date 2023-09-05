@@ -11,8 +11,8 @@ import { useState } from 'react';
 
 function ProductListing() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const { loading, products } = useProductContext();
-  // console.log('allproducts',allProducts);
+  const { loading, allProducts} = useProductContext();
+  console.log('allproducts',allProducts);
   return (
     <main>
       {loading ? (
@@ -66,20 +66,20 @@ function ProductListing() {
               <SingleProduct key={id} product={products.id} />
             ))}
           </main> */}
-          <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          {/* <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {Object.entries(products).map(([id, product]) => (
-              <Link to={'/glasses/'+ product.id}key={id} >
+              <Link to={'/glasses/'+ product.id} key={id} >
               <SingleProduct product={product} />
               </Link>
             ))}
-          </main>
-          {/* <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          </main> */}
+          <main className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {allProducts.map((product) => (
               <Link to={'/glasses/'+ product.id} key={product.id} >
               <SingleProduct product={product} />
               </Link>
             ))}
-          </main> */}
+          </main>
 
         </section>
       )}
