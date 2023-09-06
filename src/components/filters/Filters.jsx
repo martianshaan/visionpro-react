@@ -7,6 +7,7 @@ import InputRange from './InputRange';
 import InputRadio from './InputRadio';
 import { checkboxCategories, ratings, gendersList } from '../../utils/constants';
 import Checkbox from './Checkbox';
+import { useProductContext } from '../../contexts/contextIndex';
 
 function FilterHeading({ text }) {
   return <h2 className="text-xl mb-3 ml-1">{text}</h2>;
@@ -14,6 +15,7 @@ function FilterHeading({ text }) {
 
 
 function Filters({ setIsFilterOpen }) {
+  const { handleClearFilters } = useProductContext();
   return (
     <aside className="screen filtersContainer fixed left-0 top-0  mt-[72px] flex flex-col p-3 gap-3 overflow-auto">
       <section className="flex justify-between items-center">
@@ -23,9 +25,12 @@ function Filters({ setIsFilterOpen }) {
           onClick={() => setIsFilterOpen((prevIsFilterOpen) => !prevIsFilterOpen)}
         />
       </section>
-      <h5 className="text-sm text-gray-600 underline cursor-pointer">
-        clear
-      </h5>
+      <button
+      type='button' 
+      className="text-lg text-gray-600 cursor-pointer items-end"
+      onClick={handleClearFilters}>
+        Clear Filters
+      </button>
       <section className="py-4">
         <FilterHeading text="Gender" />
         <div className="grid grid-rows-2 gap-4  grid-cols-2 ">
