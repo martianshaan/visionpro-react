@@ -2,11 +2,11 @@ import { actionTypes, filterTypes } from '../utils/actionTypes';
 
 export const initialState = {
   allProducts: [],
+  maxRange:0,
   filters: {
     gender: "all",
     categories: [],
     selectedPriceRange: null,
-    maxRange:0,
     rating: "",
     sortBy: "",
     searchText: "",
@@ -24,7 +24,7 @@ export const productReducer = (state, action) => {
         ...state,
         allProducts: action.payload,
         maxRange: maxValue,
-        filters: { ...state.filters, priceRange: maxValue },
+        filters: { ...state.filters, selectedPriceRange: maxValue },
       };
 
     case actionTypes.UPDATE_PRODUCTS:
@@ -59,7 +59,7 @@ export const productReducer = (state, action) => {
 
           gender: "all",
           categories: [],
-          priceRange: state.maxRange,
+          selectedPriceRange: state.maxRange,
           rating: "",
           sortBy: "",
           searchText: "",
