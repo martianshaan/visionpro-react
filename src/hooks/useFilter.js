@@ -5,15 +5,15 @@ import { filterByCheckbox, filterByGender, filterByPriceRange, filterByRating, f
 
 const useFilter = () => {
   const { allProducts, filters } = useProductContext();
-  const { gender, categories, priceRange, rating, sortBy, searchText } = filters;
+  const { selectedPriceRange , categories } = filters;
 
 
-  let filteredData = filterBySearch(searchText, allProducts);
-  filteredData = filterByGender(gender,filteredData);
-  filteredData = filterByCheckbox(categories,filteredData);
-  filteredData =filterByPriceRange(priceRange,filteredData);
-  filteredData=filterByRating(rating,filteredData);
-  filteredData=sortByPrice(sortBy,filteredData)
+  // let filteredData = filterBySearch(searchText, allProducts);
+  // filteredData = filterByGender(gender,filteredData);
+  let filteredData =filterByPriceRange(selectedPriceRange,allProducts);
+      filteredData = filterByCheckbox(categories,filteredData);
+  // filteredData=filterByRating(rating,filteredData);
+  // filteredData=sortByPrice(sortBy,filteredData)
 
   return filteredData
 }

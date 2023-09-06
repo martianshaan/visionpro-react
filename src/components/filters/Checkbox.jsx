@@ -2,20 +2,19 @@ import React from 'react';
 import { useProductContext } from '../../contexts/contextIndex';
 
 const Checkbox = ({ data }) => {
-  const {
-    handleApplyFilters,
-    filters: { categories },
-  } = useProductContext();
+  
+  const { handleApplyFilters,filters: { categories }} = useProductContext();
+
   const checkboxHandler = (e) => {
-    let catArr = categories;
+    let categoryArray = categories;
 
     if (e.target.checked) {
-      catArr.push(e.target.value);
+      categoryArray.push(e.target.value);
     } else {
-      catArr = catArr.filter((cat) => cat !== e.target.value);
+      categoryArray = categoryArray.filter((cat) => cat !== e.target.value);
     }
 
-    handleApplyFilters(e.target.name, catArr);
+    handleApplyFilters(e.target.name, categoryArray);
   };
   return (
     <label className="capitalize cursor-pointer flex  gap-1">
