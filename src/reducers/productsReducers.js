@@ -2,10 +2,11 @@ import { actionTypes, filterTypes } from '../utils/actionTypes';
 
 export const initialState = {
   allProducts: [],
+  selectedPriceRange: null,
   filters: {
     gender: "all",
     categories: [],
-    priceRange: "",
+    selectedPriceRange: null,
     maxRange:0,
     rating: "",
     sortBy: "",
@@ -65,6 +66,7 @@ export const productReducer = (state, action) => {
           searchText: "",
         },
       };
+
 
     default:
       return state;

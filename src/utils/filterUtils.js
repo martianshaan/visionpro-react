@@ -11,9 +11,14 @@ export const filterByGender=(selectedGender,data)=>{
 }
 
 
-export const filterByPriceRange=(selectedPriceRange,data)=>{
-    return selectedPriceRange ? 
-    data.filter(({newPrice})=> newPrice <= selectedPriceRange) : data;
+export const filterByPriceRange=(selectedPriceRange,allProducts)=>{
+    // return selectedPriceRange ? 
+    // data.filter(({newPrice})=> newPrice <= selectedPriceRange) : data;
+    if (!selectedPriceRange) {
+        return allProducts;
+      }
+  
+      return allProducts.filter(({newPrice})=> newPrice <= selectedPriceRange) ;
 };
 
 //selectedCategories is an array
@@ -24,7 +29,7 @@ export const filterByCheckbox =(selectedCategories,data)=>{
 
 //added if else condtn
 export const filterByRating=(selectedRating,data)=>{
-    return selectedRating ?  data.filter(({rating}) => rating >= selectedRating):data
+    return data.filter(({rating}) => rating >= selectedRating)
 }
 
 export const sortByPrice=(type,data)=>{
