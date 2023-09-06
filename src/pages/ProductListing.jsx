@@ -9,6 +9,7 @@ import loadingGif from '../assets/loading.gif';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useFilter } from '../hooks/useFilter';
+import SortBy from '../components/filters/SortBy';
 
 function ProductListing() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -34,15 +35,7 @@ function ProductListing() {
           <section className="flex justify-between py-3">
             <h1 className="text-2xl font-bold">Glasses for You! </h1>
             <div className="flex items-center gap-2">
-              <form htmlFor="sortby">
-                <label id="sortby">
-                  <select defaultValue="filter" name="sortby" className="text-lg">
-                    <option value="" >Sort By</option>
-                    <option value="low"> Low to high</option>
-                    <option value="high"> High to Low </option>
-                  </select>
-                </label>
-              </form>
+              <SortBy />
               <button
                 type="button"
                 className={`flex py-1 px-2 rounded-md shadow-md items-center  
