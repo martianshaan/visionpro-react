@@ -30,7 +30,7 @@ function Filters({ setIsFilterOpen }) {
         <FilterHeading text="Gender" />
         <div className="grid grid-rows-2 gap-4  grid-cols-2 ">
           {gendersList.map((data, index) => (
-            <InputRadioForGender key={index} data={data} />
+            <InputRadioForGender key={index}  data={data} />
           ))}
         </div>
       </section>
