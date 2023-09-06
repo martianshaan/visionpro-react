@@ -29,7 +29,8 @@ export const filterByCheckbox =(selectedCategories,data)=>{
 
 //added if else condtn
 export const filterByRating=(selectedRating,data)=>{
-    return data.filter(({rating}) => rating >= selectedRating)
+    return data.filter(({rating}) => 
+    rating >= selectedRating)
 }
 
 export const sortByPrice=(type,data)=>{

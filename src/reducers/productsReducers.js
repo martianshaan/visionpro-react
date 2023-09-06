@@ -2,7 +2,6 @@ import { actionTypes, filterTypes } from '../utils/actionTypes';
 
 export const initialState = {
   allProducts: [],
-  selectedPriceRange: null,
   filters: {
     gender: "all",
     categories: [],
