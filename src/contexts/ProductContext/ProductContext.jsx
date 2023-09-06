@@ -77,19 +77,19 @@ function ProductContextProvider({ children }) {
     });
   };
 
- const handleApplyFilters=(filterType,filterValue)=>{
+const handleApplyFilters=(filterType,filterValue)=>{
   dispatch({
-    type: filterTypes.filterType,
+    type: filterTypes.FILTERS,
     payload:{filterType,filterValue}
   })
- };
+};
 
 const handleClearFilters = () => {
   dispatch({
     type: filterTypes.CLEAR_FILTER,
   });
 };
-  
+
   
   
   return (
@@ -103,7 +103,7 @@ const handleClearFilters = () => {
       getProductById,
       handleApplyFilters,
       allProducts,
-      handleClearFilters
+      handleClearFilters,
     }}
     >
       {children}
