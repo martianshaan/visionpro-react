@@ -7,17 +7,15 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
-import { actionTypes } from '../../utils/actionTypes';
+import { actionTypes, filterTypes } from '../../utils/actionTypes';
 import { useAuthContext } from '../contextIndex';
 import { getProductsandDocuments } from '../../firebase';
 export const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [allProducts,setAllProducts]= useState([]);
   const [state, dispatch] = useReducer(productReducer, initialState);
-  const { user } = useAuthContext();
-  console.log(user);
 
   // useEffect(() => {
   //   addCollectionAndDocuments('products', products);
@@ -31,9 +29,10 @@ function ProductContextProvider({ children }) {
     const getCategoriesMap = async () => {
       setLoading(true);
       const categoryMap = await getProductsandDocuments();
-      console.log('fetched products', categoryMap);
-      setProducts(categoryMap);
-      console.log('setproducts',products);
+
+      let arrayData= Object.values(categoryMap)
+      setAllProducts(arrayData);
+
       setLoading(false);
     };
     getCategoriesMap();
@@ -41,7 +40,7 @@ function ProductContextProvider({ children }) {
 
     const getProductById = (productId) => {
       //convert products object in array
-      const myproducts = Object.entries(products);
+      const myproducts = Object.entries(allProducts);
     
       // Find the inner array that matches the productId
       const myproduct = myproducts.find((productArray) => productArray[1].id === productId);
@@ -78,18 +77,33 @@ function ProductContextProvider({ children }) {
     });
   };
 
- 
-  
+const handleApplyFilters=(filterType,filterValue)=>{
+  dispatch({
+    type: filterTypes.FILTERS,
+    payload:{filterType,filterValue}
+  })
+};
+
+const handleClearFilters = () => {
+  dispatch({
+    type: filterTypes.CLEAR_FILTER,
+  });
+};
+
   
   
   return (
     <ProductContext.Provider value={{
      ...state,
       cart: state.cart,
+      filters:state.filters,
+      maxRange:state.maxRange,
       loading,
       addProductToCart,
-      products,
-      getProductById
+      getProductById,
+      handleApplyFilters,
+      allProducts,
+      handleClearFilters,
     }}
     >
       {children}
