@@ -18,7 +18,7 @@ function Navbar() {
 
   const { user } = useAuthContext();
   const { totalItem } = useCartContext();
-  const { wishlist }= useWishlistContext()
+  const { wishlist } = useWishlistContext()
 
 
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ function Navbar() {
     };
   }, []);
 
-  let totalWishlistedItems= wishlist.length;
+  let totalWishlistedItems = wishlist.length;
   return (
     /* py-3 max-w-screen mb-3 fixed left-0 right-0
     px-[4%] md:px-[10%] bg-[--theme-color]  */
@@ -62,9 +62,9 @@ function Navbar() {
           </Link>
 
         </section>
-        <section className=" sm:block sm:w-1/3 sm:mx-2 mt- relative">
-         <Search />
-      </section>
+        <section className=" hidden sm:block sm:w-1/3 sm:mx-2  relative">
+          <Search />
+        </section>
         {user ? <h5>yes</h5> : <h5>no</h5>}
 
         <section className="flex items-center">
@@ -114,6 +114,9 @@ function Navbar() {
           </section>
         </section>
       </body>
+      <section className=" sm:hidden mt-3 w-full">
+        <Search />
+      </section>
     </nav>
 
   );
