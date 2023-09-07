@@ -10,6 +10,7 @@ import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
 import { useAuthContext, useCartContext, useWishlistContext } from '../../contexts/contextIndex';
+import Search from '../filters/Search';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
@@ -61,9 +62,9 @@ function Navbar() {
           </Link>
 
         </section>
-        <div className="hidden sm:block sm:w-1/3 relative sm:mx-2">
-          Search
-        </div>
+        <section className=" sm:block sm:w-1/3 sm:mx-2 mt- relative">
+         <Search />
+      </section>
         {user ? <h5>yes</h5> : <h5>no</h5>}
 
         <section className="flex items-center">
@@ -113,9 +114,6 @@ function Navbar() {
           </section>
         </section>
       </body>
-      <section className="mt-4 sm:hidden relative">
-        search
-      </section>
     </nav>
 
   );
