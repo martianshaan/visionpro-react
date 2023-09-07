@@ -71,7 +71,7 @@ const Search = () => {
         />
       </form>
       {searchText && showList && (
-        <ul className="absolute bg-gray-200 w-full max-h-72 overflow-y-scroll rounded-b-lg -z-20 p-2">
+        <ul className="absolute bg-gray-200 w-11/12 sm:w-full max-h-72 overflow-y-scroll rounded-b-lg -z-20 p-2">
           {searching ? (
             <section className="flex items-center justify-center h-1/6 w-1/6 mx-auto">
               <img src={LoaderYellow} alt="Searching..." />
