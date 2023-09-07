@@ -70,6 +70,27 @@ const Search = () => {
           className="w-full py-2 px-3 bg-transparent focus:outline-none"
         />
       </form>
+      {searchText && showList && (
+        <ul className="absolute bg-gray-50 w-full max-h-72 overflow-y-scroll rounded-b-lg -z-20 p-2">
+          {searching ? (
+            <section className="flex items-center justify-center h-1/6 w-1/6 mx-auto">
+              <img src={LoaderYellow} alt="Searching..." />
+            </section>
+          ) : (
+            filteredProducts.length ? (
+              filteredProducts.map((product) => (
+                <li key={product.id} onClick={() => navigate('/glasses/' + product.id)} className="cursor-pointer">
+                  <SearchItemCard product={product} />
+                </li>
+              ))
+            ) : (
+              <li className="h-10 flex items-center justify-center">
+                No glasses match the searched text "{searchText}"
+              </li>
+            )
+          )}
+        </ul>
+      )}
     </main>
   );
 };
