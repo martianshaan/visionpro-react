@@ -37,6 +37,7 @@ const Search = () => {
   }, [location]);
 
   useEffect(() => {
+    setSearching(true);
     const timeoutId = setTimeout(() => {
       setFilteredProducts(filterBySearch(searchText, allProducts));
       setSearching(false);
@@ -54,24 +55,23 @@ const Search = () => {
     <main>
       <form
         onSubmit={handleSearchSubmit}
-        className={`flex items-center justify-end bg-black/[0.075] px-3 ${
-          searchText && showList
+        className={`flex items-center justify-end bg-black/[0.075] px-3 ${searchText && showList
             ? "rounded-t-md"
             : "rounded-full"
-        } text-sm transition`}
+          } text-sm transition`}
       >
         <MagnifyingGlass size={16} className="text-black" weight="light" />
         <input
           type="search"
           name="searchText"
-          placeholder="Search for your favorite glasses and more"
+          placeholder="Search for your favourite glasses and more"
           value={searchText}
           onChange={handleChange}
           className="w-full py-2 px-3 bg-transparent focus:outline-none"
         />
       </form>
       {searchText && showList && (
-        <ul className="absolute bg-gray-50 w-full max-h-72 overflow-y-scroll rounded-b-lg -z-20 p-2">
+        <ul className="absolute bg-gray-200 w-full max-h-72 overflow-y-scroll rounded-b-lg -z-20 p-2">
           {searching ? (
             <section className="flex items-center justify-center h-1/6 w-1/6 mx-auto">
               <img src={LoaderYellow} alt="Searching..." />
