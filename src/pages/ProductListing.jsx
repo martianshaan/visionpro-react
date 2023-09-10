@@ -5,11 +5,12 @@ import { Filter } from 'lucide-react';
 import bannerHero from '../assets/bannerHero.jpg';
 import { SingleProduct } from '../components';
 import { useProductContext } from '../contexts/contextIndex';
-import loadingGif from '../assets/loading.gif';
+import LoaderYellow from '../assets/LoaderYellow.svg'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useFilter } from '../hooks/useFilter';
 import SortBy from '../components/filters/SortBy';
+
 
 function ProductListing() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -22,9 +23,8 @@ function ProductListing() {
     <main>
       {loading ? (
         <section className='flex h-screen justify-center items-center ' >
-          <span>t
-            <img src={loadingGif} width={200} alt="loadinggif" />
-            <p >Loading... </p>
+          <span>
+            <img src={LoaderYellow} width={200} alt="loadinggif" />
           </span>
         </section>
       ) : (
@@ -61,7 +61,7 @@ function ProductListing() {
             </main>
           ) : (
             <p className='flex justify-center items-center text-xl '>
-              No products!
+              No products match the your criteria !
             </p>
           )}
 

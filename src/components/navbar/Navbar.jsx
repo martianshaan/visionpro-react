@@ -10,6 +10,7 @@ import defaultUser from '../../assets/defaultUser.png';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
 import { useAuthContext, useCartContext, useWishlistContext } from '../../contexts/contextIndex';
+import Search from '../filters/Search';
 
 function Navbar() {
   const [colorChange, setColorChange] = useState(true);
@@ -17,7 +18,7 @@ function Navbar() {
 
   const { user } = useAuthContext();
   const { totalItem } = useCartContext();
-  const { wishlist }= useWishlistContext()
+  const { wishlist } = useWishlistContext()
 
 
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function Navbar() {
     };
   }, []);
 
-  let totalWishlistedItems= wishlist.length;
+  let totalWishlistedItems = wishlist.length;
   return (
     /* py-3 max-w-screen mb-3 fixed left-0 right-0
     px-[4%] md:px-[10%] bg-[--theme-color]  */
@@ -61,9 +62,9 @@ function Navbar() {
           </Link>
 
         </section>
-        <div className="hidden sm:block sm:w-1/3 relative sm:mx-2">
-          Search
-        </div>
+        <section className=" hidden sm:block sm:w-1/3 sm:mx-2  relative">
+          <Search />
+        </section>
         {user ? <h5>yes</h5> : <h5>no</h5>}
 
         <section className="flex items-center">
@@ -113,8 +114,8 @@ function Navbar() {
           </section>
         </section>
       </body>
-      <section className="mt-4 sm:hidden relative">
-        search
+      <section className=" sm:hidden mt-3 w-full">
+        <Search />
       </section>
     </nav>
 
