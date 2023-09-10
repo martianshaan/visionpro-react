@@ -6,13 +6,13 @@ import { AiOutlinePlus } from 'react-icons/ai';
 function TrendingCard({ product }) {
   return (
     <section className="flex flex-col p-4 rounded-xl bg-black/[.06] cursor-pointer gap-3">
-      <div className="flex justify-center items-center w-full h-full">
+      <figure className="flex justify-center items-center w-full h-full ap-3 xs:flex-wrap xs:justify-center sm:flex-nowrap sm:justify-between">
         <img
           src={product.img}
           alt={product.name}
-          className="w-2/3 h-100 py-2"
+          className=" w-1/2 h-100 py-2  xs:w-2/3 xs:h-16 sm:w-2/3 sm:h-100  object-cove"
         />
-      </div>
+      </figure>
       <div className="flex justify-between">
         <div>
           <h1 className="text-2xl font-bol">{product.name}</h1>
