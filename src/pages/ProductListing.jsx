@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import Filters from '../components/filters/Filters';
-import { Filter } from 'lucide-react';
+import { SlidersHorizontal } from '@phosphor-icons/react'
 import bannerHero from '../assets/bannerHero.jpg';
 import { SingleProduct } from '../components';
 import { useProductContext } from '../contexts/contextIndex';
@@ -13,9 +13,8 @@ import SortBy from '../components/filters/SortBy';
 
 
 function ProductListing() {
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const { loading, allProducts, filters } = useProductContext();
-  const [filterCount,setFilterCount]= useState(0)
+  const { loading, allProducts, filters , isFilterOpen, setIsFilterOpen} = useProductContext();
+  const [filterCount, setFilterCount] = useState(0)
   console.log('filters', filters);
   console.log('allproducts', allProducts);
 
@@ -36,7 +35,7 @@ function ProductListing() {
         count++;
       }
 
-      if (filters.selectedPriceRange !== null) {
+      if (filters.selectedPriceRange !== 4999 && filters.selectedPriceRange !== null) {
         count++;
       }
 
@@ -83,11 +82,11 @@ function ProductListing() {
               <button
                 type="button"
                 className={`flex py-1 px-2 rounded-md shadow-md items-center  
-              gap-1 hover:bg-[--primary-text-color] hover:text-white hover:shadow-lg ${isFilterOpen ? "bg-[--primary-text-color] text-white" : ""
+              gap-1.5 hover:bg-[--primary-text-color] hover:text-white hover:shadow-lg ${isFilterOpen ? "bg-[--primary-text-color] text-white" : ""
                   }`}
                 onClick={() => { setIsFilterOpen(!isFilterOpen); console.log('clicked'); }}
               >
-                <Filter className="text-lg" />
+                <SlidersHorizontal  className='text-lg' />
                 <span className="text-sm">Filters</span>
               </button>
               {isFilterOpen && (
