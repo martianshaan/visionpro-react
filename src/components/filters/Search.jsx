@@ -58,7 +58,7 @@ const Search = () => {
         className={`flex items-center justify-end bg-black/[0.075] px-3 ${searchText && showList
             ? "rounded-t-md"
             : "rounded-full"
-          } text-sm transition`}
+          } text-xs transition`}
       >
         <MagnifyingGlass size={16} className="text-black" weight="light" />
         <input
