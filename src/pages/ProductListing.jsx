@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Filters from '../components/filters/Filters';
 import { Filter } from 'lucide-react';
 import bannerHero from '../assets/bannerHero.jpg';
@@ -14,11 +14,52 @@ import SortBy from '../components/filters/SortBy';
 
 function ProductListing() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const { loading, allProducts} = useProductContext();
+  const { loading, allProducts, filters } = useProductContext();
+  const [filterCount,setFilterCount]= useState(0)
+  console.log('filters', filters);
   console.log('allproducts', allProducts);
 
+
+
   const productsList = useFilter();
-  
+
+  useEffect(() => {
+    function calculateFilterCount(filters) {
+      let count = 0;
+
+      // Check each filter criterion and increment count if not in its initial state.
+      if (filters.gender !== "all") {
+        count++;
+      }
+
+      if (filters.categories.length > 0) {
+        count++;
+      }
+
+      if (filters.selectedPriceRange !== null) {
+        count++;
+      }
+
+      if (filters.rating !== "") {
+        count++;
+      }
+
+      if (filters.sortBy !== "") {
+        count++;
+      }
+
+      if (filters.searchText !== "") {
+        count++;
+      }
+
+      return count;
+    }
+
+    const appliedFilterCount = calculateFilterCount(filters);
+    setFilterCount(appliedFilterCount);
+  }, [filters])
+
+
   return (
     <main>
       {loading ? (
@@ -34,6 +75,9 @@ function ProductListing() {
           </header>
           <section className="flex justify-between py-3">
             <h1 className="text-2xl font-bold">Glasses for You! </h1>
+            {filterCount > 0 && (
+              <span className="filter-count">{filterCount} Filters Applied</span>
+            )}
             <div className="flex items-center gap-2">
               <SortBy />
               <button
