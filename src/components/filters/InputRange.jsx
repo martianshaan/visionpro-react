@@ -15,7 +15,7 @@ function InputRange() {
           id="range"
           name="selectedPriceRange"
           min="100"
-          max="3000"
+          max="4999"
           step='1'
           className="w-full accent-[--primary-text-color] cursor-pointer"
           value ={selectedPriceRange || ''}
