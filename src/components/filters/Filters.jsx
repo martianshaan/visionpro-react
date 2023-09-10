@@ -17,7 +17,7 @@ function FilterHeading({ text }) {
 function Filters({ setIsFilterOpen }) {
   const { handleClearFilters } = useProductContext();
   return (
-    <aside className="screen filtersContainer fixed left-0 top-0  mt-[72px] flex flex-col p-3 gap-3 overflow-auto">
+    <aside className='filtersContainer fixed left-0 top-0 mt-[72px] flex flex-col p-3 gap-3 overflow-y-scroll max-h-[calc(100vh-72px)]' >
       <section className="flex justify-between items-center">
         <p className="text-3xl text-gray-800 "> Filter Products</p>
         <AiFillCloseCircle
