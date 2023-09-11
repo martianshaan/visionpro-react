@@ -11,7 +11,7 @@ const CategoryList = () => {
             <h1 className="mt-5 mb-2 text-3xl text-center text-black underline break-words md:text-4xl">
                 Categories
             </h1>
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-12 p-4  m-auto ">
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-10 p-4  m-auto mx-3 ">
                 {categories.length > 0 ? (
                    categories.map((category) => (
                         <CategoryCard category={category} key={category._id} />
