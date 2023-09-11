@@ -19,11 +19,11 @@ const CategoryCard = ({ category }) => {
     }
     return (
         <main
-            className='flex justify-center items-center gap-11  rounded-xl bg-black/[0.5] cursor-pointer '
+            className='flex justify-center items-center gap-11  rounded-xl bg-black/[0.5] cursor-pointer hover:scale-110 transition  ease-in duration-300'
             onClick={handleClick}
         >
-            <img src={categoryImg} alt="" className="rounded-xl object-fill justify-center opacity-70 " />
-            <h1 className="text-base xs:text-base sm:text-3xl underline capitalize font-extrabold text-white  absolute inline-flex text-center">
+            <img src={categoryImg} alt="" className="justify-center object-fill rounded-xl opacity-70  " />
+            <h1 className="absolute inline-flex text-base font-extrabold text-center text-white underline capitalize xs:text-base sm:text-3xl">
                 {categoryName.toUpperCase()}
             </h1>
         </main>
