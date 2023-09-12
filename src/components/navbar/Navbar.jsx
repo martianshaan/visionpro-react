@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { React, useEffect, useState } from 'react';
-import { Bag, Bookmark, List } from '@phosphor-icons/react';
+import { Bag, Heart, List } from '@phosphor-icons/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineExplore } from 'react-icons/md';
 import defaultUser from '../../assets/defaultUser.png';
@@ -74,10 +74,10 @@ function Navbar() {
           </Link>
           <ul className="justify-between hidden text-2xl md:flex ps-1">
             <li
-              className="relative p-2 mx-2 transition bg-gray-200 rounded-full shadow-sm cursor-pointer hover:bg-yellow-800 hover:text-white "
+              className="relative p-2 mx-2 transition bg-slate-300 rounded-full shadow-sm cursor-pointer hover:bg-yellow-800 hover:text-white "
               onClick={() => navigate('/wishlist')}
             >
-              <Bookmark size={26} />
+           <Heart size={26} weight="light" />
               {user && totalWishlistedItems > 0 && (
                 <div className="absolute inline-flex items-center justify-center w-5 h-5 p-2 text-xs font-bold text-white bg-red-600 border-white rounded-full -top-1 -right-2 border-3 dark:border-gray-500 "
                 >
