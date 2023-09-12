@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import Filters from '../components/filters/Filters';
 import { SlidersHorizontal } from '@phosphor-icons/react'
 import bannerHero from '../assets/bannerHero.jpg';
+import BannerGlassico from '../assets/BannerGlassico.png'
+
 import { SingleProduct } from '../components';
 import { useProductContext } from '../contexts/contextIndex';
 import LoaderYellow from '../assets/LoaderYellow.svg'
@@ -68,9 +70,9 @@ function ProductListing() {
           </span>
         </section>
       ) : (
-        <section className="mt-[72px] mx-2">
+        <section className="mt-[112px] md:mt-[72px] mx-2">
           <header className="mb-3">
-            <img src={bannerHero} alt="bannerHero" className="rounded-md h-full" />
+            <img src={BannerGlassico} alt="bannerHero" className="rounded-md h-full" />
           </header>
           <section className="flex justify-between py-3">
             <h1 className="text-2xl font-bold">Glasses for You! </h1>
