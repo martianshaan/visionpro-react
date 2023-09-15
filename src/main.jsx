@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import {
-  AuthContextProvider, CartContextProvider, CategoriesContextProvider, ProductContextProvider, WishlistContextProvider,
+  AuthContextProvider, CartContextProvider, CategoriesContextProvider, PopularProductContextProvider, ProductContextProvider, WishlistContextProvider,
 } from './contexts/contextIndex';
 // import { makeServer } from './server';
 
@@ -20,9 +20,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <CategoriesContextProvider>
           <CartContextProvider>
             <WishlistContextProvider>
+              <PopularProductContextProvider>
               <BrowserRouter>
                 <App />
               </BrowserRouter>
+              </PopularProductContextProvider>
             </WishlistContextProvider>
           </CartContextProvider>
         </CategoriesContextProvider>

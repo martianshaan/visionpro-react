@@ -101,6 +101,23 @@ export const getProductsandDocuments = async () => {
 
   return categoryMap;
 };
+
+export const getPopularProducts = async () => {
+  const collectionRef = collection(db, 'popularProducts');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+
+  const categoryMap = {};
+
+  querySnapshot.forEach((docSnapshot) => {
+    const categoryData = docSnapshot.data();
+    const { id } = categoryData;
+    categoryMap[id] = categoryData; // Store the entire category data in the map
+  });
+
+  return categoryMap;
+};
 /*
 download iamges url from storage
 const storage = getStorage();
