@@ -8,7 +8,6 @@ import React, {
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
 import { actionTypes, filterTypes } from '../../utils/actionTypes';
-import { useAuthContext } from '../contextIndex';
 import { getProductsandDocuments } from '../../firebase';
 export const ProductContext = createContext();
 
@@ -18,7 +17,7 @@ function ProductContextProvider({ children }) {
   const [state, dispatch] = useReducer(productReducer, initialState);
 
   // useEffect(() => {
-  //   addCollectionAndDocuments('products', products);
+  //   addCollectionAndDocuments('popularProducts', popularProducts);
   // }, []);
   // const productContextvalues = useMemo(
   //   () => ({ allProducts: state.allProducts, loading }),
@@ -36,11 +35,11 @@ function ProductContextProvider({ children }) {
         type: 'INITIALIZE_PRODUCTS',
         payload: arrayData
       })
-
       setLoading(false);
     };
     getCategoriesMap();
   }, []);
+
 
   const getProductById = (productId) => {
     //convert products object in array

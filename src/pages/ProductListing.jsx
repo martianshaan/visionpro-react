@@ -72,7 +72,7 @@ function ProductListing() {
       ) : (
         <section className="mt-[112px] md:mt-[72px] mx-2">
           <header className="mb-3">
-            <img src={BannerGlassico} alt="bannerHero" className="rounded-md h-full" />
+            <img src='https://static1.lenskart.com/media/desktop/img/Nov22/Updated%20brand%20banner%20jj%20.jpg' alt="bannerHero" className="rounded-md h-full " />
           </header>
           <section className="flex justify-between py-3">
             <h1 className="text-2xl font-bold">Glasses for You! </h1>

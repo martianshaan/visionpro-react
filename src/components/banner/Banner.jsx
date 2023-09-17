@@ -18,12 +18,13 @@ function Banner({ catRef }) {
         <h1 className="hidden md:block w-full py-3   md:text-2xl  md:top-[485px] left-[127px] md:left-[110px] ">
           Let's Elevate Your Frame Game
         </h1>
-        <p className=" hidden md:block md:py-3  justify-center items-start text-[7px]  text-amber-200 font-semibold md:text-3xl text-grey-300 absolute top-[255px] md:top-[485px] left-[127px] md:left-[110px]">
+        <p className=" hidden md:block md:py-3  justify-center items-start text-[7px]  text-amber-200 font-semibold md:text-3xl text-grey-300 
+        absolute top-[255px] md:top-[540px] left-[127px] md:left-[170px]">
           Experience the ultimate sun protection with our stylish sunglasses.
           <br />
           Elevate your sunny days with our trendy eyewear collection.
         </p>
-        <section className="flex items-center absolute top-[225px] md:top-[450px] left-[145px] md:left-[510px] text-white ">
+        <section className="flex items-center absolute top-[225px] md:top-[500px] left-[145px] md:left-[560px] text-white ">
           <button type="button" className="flex items-center p-3" onClick={() => { catRef.current.scrollIntoView({ behavior: 'smooth' }); }}>
             <span className="mx-2 text-xs md:text-base">
               Explore More
@@ -32,13 +33,13 @@ function Banner({ catRef }) {
           </button>
         </section>
       </section>
-      <section className="absolute top-[282px] md:top-[440px] left-[160px] md:left-[497px] ">
-        <button type="submit" className="font-medium text-white bg-orange-800 rounded-md bg-gradient-to-b from-orange-400 md:rounded-2xl px-1 py-1 md:px-7 md:py-3 md:font-extrabold hover:bg-orange-600 text-sm md:text-lg "
+      <section className="absolute top-[282px] md:top-[495px] left-[160px] md:left-[550px] ">
+        <button type="submit" className="font-medium text-center text-white bg-orange-800 rounded-md bg-gradient-to-b from-orange-400 md:rounded-2xl px-1 py-1 md:px-7 md:py-3 md:font-extrabold hover:bg-orange-600 text-sm md:text-lg "
           onClick={() => navigate('/glasses')}>
           Open Catalog
         </button>
       </section>
-      <section className='absolute  hidden md:block top-[355px] md:top-[630px] left-[0px] md:left-[55px] '>
+      <section className='absolute  hidden md:block top-[355px] md:top-[703px] left-[0px] md:left-[100px] '>
         <section className='flex w-full justify-center items-center gap-12 align-middle custom-blue-background px-2 py-1 md:px-9 md:py-4 rounded-t-3xl'>
           <section className='flex flex-col gap-3 items-center flex-wrap'>
             <Truck weight='light' className='text-xl md:text-4xl' color="#FFFFFF" />
