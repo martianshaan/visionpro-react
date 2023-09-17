@@ -1,44 +1,66 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { useNavigate } from 'react-router';
+import { useAuthContext, useCartContext,  } from '../../contexts/contextIndex';
+import {toast} from 'react-hot-toast';
 
 function TrendingCard({ product }) {
+  const { user } = useAuthContext();
+  const {addToCart, isInCart }= useCartContext();
+  const navigate = useNavigate();
+  
+  const productIsInCart = isInCart(product.id);
   return (
-    <section className="flex flex-col p-4 rounded-xl bg-black/[.06] cursor-pointer gap-3">
-      <div className="flex justify-center items-center w-full h-full">
+    <section className="flex flex-col gap-2 px-4 py-1 rounded-xl bg-black/[.06] cursor-pointer "
+    >
+
+      <figure className="flex justify-center items-start w-full h-full py-1">
         <img
-          src={product.img}
+          src={product.image}
           alt={product.name}
-          className="w-2/3 h-100 py-2"
+          className="w-32 h-20 md:w-11/12 md:h-24 object-cover py-2 hover:scale-115 transition"
+          onClick={() => navigate('/glasses/' + product.id)}
         />
-      </div>
-      <div className="flex justify-between">
-        <div>
-          <h1 className="text-2xl font-bol">{product.name}</h1>
-          <p className="text-gray-600 text-sm">{product.category}</p>
-        </div>
-        <div className="flex items-start">
-          <h1 className="mx-1 text-2xl font-sans font-bold">
-            ₹
-            {product.price}
+      </figure>
+      <section className="flex items-start justify-between gap-3  xs:flex-wrap xs:justify-center sm:flex-nowrap sm:justify-between">
+        <article>
+          <h1 className="text-base font-semibold sm:text-xl">{product.name}</h1>
+          <p className="text-sm text-gray-600 ">{product.category}</p>
+        </article>
+        <article className="flex flex-col  md:flex-row items-center md:item-start">
+          <h1 className="mx-1 font-sans text-xl font-semibold ">
+            ₹ 
+            {product.newPrice}
           </h1>
           <button
             type="button"
-            className="p-3 custom-bg-gradient rounded-md
-          mx-2 px-2 py-2 shadow-sm  text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition"
+            className=" px-2 py-1 md:p-3 md:py-2 mx-2 mt-1 text-sm text-white transition bg-orange-800 rounded-md shadow-sm bg-gradient-to-b from-orange-400 hover:bg-orange-900"
+            onClick={() => {
+              if (!user) {
+                navigate('/login', { state: { from: location.pathname } });
+                toast('Please login to continue shopping', {
+                  icon: '⚠️',
+                });
+              } else if (productIsInCart) {
+                toast('Please  Already added in Bag', {
+                  icon: '⚠️',
+                });
+              }else if (!productIsInCart) {
+                addToCart(product);
+              } else {
+                navigate('/cart');
+              }
+            }}
           >
-            <AiOutlinePlus className="text-white font-bold" />
+            <AiOutlinePlus className="text-sm font-bold text-white" />
           </button>
-        </div>
-      </div>
+        </article>
+      </section>
 
     </section>
   );
 }
 
-TrendingCard.propTypes = {
-  product: PropTypes.object.isRequired,
-};
-
 export default TrendingCard;
+

@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Filters from '../components/filters/Filters';
-import { Filter } from 'lucide-react';
+import { SlidersHorizontal } from '@phosphor-icons/react'
 import bannerHero from '../assets/bannerHero.jpg';
+import BannerGlassico from '../assets/BannerGlassico.png'
+
 import { SingleProduct } from '../components';
 import { useProductContext } from '../contexts/contextIndex';
 import LoaderYellow from '../assets/LoaderYellow.svg'
@@ -13,12 +15,52 @@ import SortBy from '../components/filters/SortBy';
 
 
 function ProductListing() {
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const { loading, allProducts} = useProductContext();
+  const { loading, allProducts, filters , isFilterOpen, setIsFilterOpen} = useProductContext();
+  const [filterCount, setFilterCount] = useState(0)
+  console.log('filters', filters);
   console.log('allproducts', allProducts);
 
+
+
   const productsList = useFilter();
-  
+
+  useEffect(() => {
+    function calculateFilterCount(filters) {
+      let count = 0;
+
+      // Check each filter criterion and increment count if not in its initial state.
+      if (filters.gender !== "all") {
+        count++;
+      }
+
+      if (filters.categories.length > 0) {
+        count++;
+      }
+
+      if (filters.selectedPriceRange !== 4999 && filters.selectedPriceRange !== null) {
+        count++;
+      }
+
+      if (filters.rating !== "") {
+        count++;
+      }
+
+      if (filters.sortBy !== "") {
+        count++;
+      }
+
+      if (filters.searchText !== "") {
+        count++;
+      }
+
+      return count;
+    }
+
+    const appliedFilterCount = calculateFilterCount(filters);
+    setFilterCount(appliedFilterCount);
+  }, [filters])
+
+
   return (
     <main>
       {loading ? (
@@ -28,22 +70,25 @@ function ProductListing() {
           </span>
         </section>
       ) : (
-        <section className="mt-[72px] mx-2">
+        <section className="mt-[112px] md:mt-[72px] mx-2">
           <header className="mb-3">
-            <img src={bannerHero} alt="bannerHero" className="rounded-md h-full" />
+            <img src='https://static1.lenskart.com/media/desktop/img/Nov22/Updated%20brand%20banner%20jj%20.jpg' alt="bannerHero" className="rounded-md h-full " />
           </header>
           <section className="flex justify-between py-3">
             <h1 className="text-2xl font-bold">Glasses for You! </h1>
+            {filterCount > 0 && (
+              <span className="filter-count">{filterCount} Filters Applied</span>
+            )}
             <div className="flex items-center gap-2">
               <SortBy />
               <button
                 type="button"
                 className={`flex py-1 px-2 rounded-md shadow-md items-center  
-              gap-1 hover:bg-[--primary-text-color] hover:text-white hover:shadow-lg ${isFilterOpen ? "bg-[--primary-text-color] text-white" : ""
+              gap-1.5 hover:bg-[--primary-text-color] hover:text-white hover:shadow-lg ${isFilterOpen ? "bg-[--primary-text-color] text-white" : ""
                   }`}
                 onClick={() => { setIsFilterOpen(!isFilterOpen); console.log('clicked'); }}
               >
-                <Filter className="text-lg" />
+                <SlidersHorizontal  className='text-lg' />
                 <span className="text-sm">Filters</span>
               </button>
               {isFilterOpen && (

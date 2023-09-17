@@ -1,11 +1,12 @@
 import React from 'react';
-import { Banner, Trending } from '../components/index';
+import { Banner, CategoryList, Trending } from '../components/index';
 
 function Home() {
   return (
     <>
       <Banner />
       <Trending />
+      <CategoryList />
     </>
   );
 }

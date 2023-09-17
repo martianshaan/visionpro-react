@@ -13,6 +13,7 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.0.10",
     "axios": "^1.4.0",
+    "cal-sans": "^1.0.1",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.9",

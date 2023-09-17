@@ -43,7 +43,16 @@ body {
     rgba(148, 62, 14, 1) 100%
   );
 }
+.button-bg-gradient {
+  background: linear-gradient(to bottom, #ea6e09, rgba(234, 110, 8, 0));
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 .btn-primary {
   @apply py-2 px-4 bg-gray-900 text-sm text-gray-100 rounded-lg hover:bg-gray-800;
+}
+
+.custom-blue-background{
+  background: rgb(24,31,34);
 }
 

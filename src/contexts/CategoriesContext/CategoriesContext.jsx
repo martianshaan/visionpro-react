@@ -8,18 +8,19 @@ import { getCategoriesAndDocuments } from '../../firebase';
 export const CategoriesContext = createContext();
 
 function CategoriesContextProvider({ children }) {
-  const [categoriesMap, setCategoriesMap] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments();
-      setCategoriesMap(categoryMap);
+      const categoriesData = Object.values(categoryMap)
+      setCategories(categoriesData);
     };
     getCategoriesMap();
   }, []);
 
   return (
-    <CategoriesContext.Provider value={{ categoriesMap: categoriesMap }}>
+    <CategoriesContext.Provider value={{ categories: categories }}>
       {children}
     </CategoriesContext.Provider>
   );

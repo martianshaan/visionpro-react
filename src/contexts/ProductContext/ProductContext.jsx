@@ -8,17 +8,16 @@ import React, {
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
 import { actionTypes, filterTypes } from '../../utils/actionTypes';
-import { useAuthContext } from '../contextIndex';
 import { getProductsandDocuments } from '../../firebase';
 export const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
-  const [allProducts,setAllProducts]= useState([]);
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [state, dispatch] = useReducer(productReducer, initialState);
 
   // useEffect(() => {
-  //   addCollectionAndDocuments('products', products);
+  //   addCollectionAndDocuments('popularProducts', popularProducts);
   // }, []);
   // const productContextvalues = useMemo(
   //   () => ({ allProducts: state.allProducts, loading }),
@@ -30,24 +29,28 @@ function ProductContextProvider({ children }) {
       setLoading(true);
       const categoryMap = await getProductsandDocuments();
 
-      let arrayData= Object.values(categoryMap)
-      setAllProducts(arrayData);
-
+      let arrayData = Object.values(categoryMap)
+      // setAllProducts(arrayData);
+      dispatch({
+        type: 'INITIALIZE_PRODUCTS',
+        payload: arrayData
+      })
       setLoading(false);
     };
     getCategoriesMap();
   }, []);
 
-    const getProductById = (productId) => {
-      //convert products object in array
-      const myproducts = Object.entries(allProducts);
-    
-      // Find the inner array that matches the productId
-      const myproduct = myproducts.find((productArray) => productArray[1].id === productId);
-      console.log('myproduct', myproduct);
-      // Return the product array if found, or null if not found
-      return myproduct ? myproduct[1] : null; 
-    };
+
+  const getProductById = (productId) => {
+    //convert products object in array
+    const myproducts = Object.entries(state.allProducts);
+
+    // Find the inner array that matches the productId
+    const myproduct = myproducts.find((productArray) => productArray[1].id === productId);
+    console.log('myproduct', myproduct);
+    // Return the product array if found, or null if not found
+    return myproduct ? myproduct[1] : null;
+  };
 
 
   const addProductToCart = (product) => {
@@ -77,33 +80,35 @@ function ProductContextProvider({ children }) {
     });
   };
 
-const handleApplyFilters=(filterType,filterValue)=>{
-  dispatch({
-    type: filterTypes.FILTERS,
-    payload:{filterType,filterValue}
-  })
-};
+  const handleApplyFilters = (filterType, filterValue) => {
+    dispatch({
+      type: filterTypes.FILTERS,
+      payload: { filterType, filterValue }
+    })
+  };
 
-const handleClearFilters = () => {
-  dispatch({
-    type: filterTypes.CLEAR_FILTER,
-  });
-};
+  const handleClearFilters = () => {
+    dispatch({
+      type: filterTypes.CLEAR_FILTER,
+    });
+  };
 
-  
-  
+
+
   return (
     <ProductContext.Provider value={{
-     ...state,
+      ...state,
+      allProducts: state.allProducts,
       cart: state.cart,
-      filters:state.filters,
-      maxRange:state.maxRange,
+      filters: state.filters,
+      maxRange: state.maxRange,
       loading,
       addProductToCart,
       getProductById,
       handleApplyFilters,
-      allProducts,
       handleClearFilters,
+      isFilterOpen, 
+      setIsFilterOpen
     }}
     >
       {children}

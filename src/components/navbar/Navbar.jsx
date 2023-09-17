@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { React, useEffect, useState } from 'react';
-import { Bag, Bookmark, List } from '@phosphor-icons/react';
+import { Bag, Heart, List } from '@phosphor-icons/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineExplore } from 'react-icons/md';
 import defaultUser from '../../assets/defaultUser.png';
@@ -43,15 +43,15 @@ function Navbar() {
     /* py-3 max-w-screen mb-3 fixed left-0 right-0
     px-[4%] md:px-[10%] bg-[--theme-color]  */
     /* removed fixed from css */
-    <nav className={`flex flex-col sm:flex-row py-3.5 px-[4%] fixed max-w-screen top-0 left-0 right-0 md:px-[10%] bg-[--theme-color]
+    <main className={`flex flex-col sm:flex-row py-3.5 px-[4%] fixed max-w-screen top-0 left-0 right-0 md:px-[10%] bg-[--theme-color]
     ${colorChange ? 'shadow-sm  drop-shadow-sm' : ''} 
      transition delay-75 ease-in-out  z-20`}
     >
-      <body className="flex justify-between w-full items-center md:gap-3  ">
+      <section className="flex items-center justify-between w-full md:gap-3 ">
         <section className="relative flex items-center gap-3 ">
           <Link to="/profile">
             <img
-              className="rounded-full-border-2 bg-yellow-300 me-3 hover:bg-yellow-800 cursor-pointer"
+              className="bg-yellow-300 cursor-pointer rounded-full-border-2 me-3 hover:bg-yellow-800"
               src={defaultUser}
               alt="userProfileImage"
               width={40}
@@ -62,49 +62,43 @@ function Navbar() {
           </Link>
 
         </section>
-        <section className=" hidden sm:block sm:w-1/3 sm:mx-2  relative">
+        <section className="relative hidden sm:block sm:w-1/3 sm:mx-2">
           <Search />
         </section>
         {user ? <h5>yes</h5> : <h5>no</h5>}
 
         <section className="flex items-center">
-          <Link to="/glasses" className="flex gap-1 align mx-2 px-3 py-1 shadow-sm rounded-md text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition">
+          <Link to="/glasses" className="flex gap-1 px-3 py-1 mx-2 text-sm text-white transition bg-yellow-700 rounded-md shadow-sm align hover:bg-yellow-800">
             <span className="xs:block">Explore</span>
             <MdOutlineExplore className="xs:hidden" />
           </Link>
-          <ul className="hidden md:flex justify-between text-2xl ps-1">
+          <ul className="justify-between hidden text-2xl md:flex ps-1">
             <li
-              className="relative bg-gray-200 p-2 rounded-full
-          hover:bg-yellow-800 hover:text-white cursor-pointer mx-2
-          transition shadow-sm "
+              className="relative p-2 mx-2 transition bg-slate-300 rounded-full shadow-sm cursor-pointer hover:bg-yellow-800 hover:text-white "
               onClick={() => navigate('/wishlist')}
             >
-              <Bookmark size={26} />
+           <Heart size={26} weight="light" />
               {user && totalWishlistedItems > 0 && (
-                <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
-                   items-center justify-center text-xs font-bold border-3 border-white rounded-full
-                   dark:border-gray-500 "
+                <div className="absolute inline-flex items-center justify-center w-5 h-5 p-2 text-xs font-bold text-white bg-red-600 border-white rounded-full -top-1 -right-2 border-3 dark:border-gray-500 "
                 >
                   {totalWishlistedItems}
                 </div>
               )}
             </li>
             <li
-              className="relative bg-yellow-500 text-white p-2 rounded-full hover:bg-yellow-800 cursor-pointer mx-2 transition shadow-sm"
+              className="relative p-2 mx-2 text-white transition  custom-bg-button-gradient rounded-full shadow-sm cursor-pointer hover:bg-yellow-800"
               onClick={() => navigate('/cart')}
             >
               <Bag size={26} />
               {user && totalItem > 0 && (
-                <div className="absolute inline-flex -top-1 -right-2 w-5 h-5 p-2  bg-red-600 text-white
-                   items-center justify-center text-xs font-bold border-3 border-white rounded-full
-                   dark:border-gray-500 "
+                <div className="absolute inline-flex items-center justify-center w-5 h-5 p-2 text-xs font-bold text-white bg-red-600 border-white rounded-full -top-1 -right-2 border-3 dark:border-gray-500 "
                 >
                   {totalItem}
                 </div>
               )}
             </li>
           </ul>
-          <section className="md:hidden  cursor-pointer relative">
+          <section className="relative cursor-pointer md:hidden">
             <List
               size={32}
               className="text-lg"
@@ -113,11 +107,11 @@ function Navbar() {
             {isMenuOpen && <MenuDropdown navigate={navigate} />}
           </section>
         </section>
-      </body>
-      <section className=" sm:hidden mt-3 w-full">
+      </section>
+      <section className="w-full mt-3 sm:hidden">
         <Search />
       </section>
-    </nav>
+    </main>
 
   );
 }
