@@ -19,7 +19,7 @@ function TrendingCard({ product }) {
         <img
           src={product.image}
           alt={product.name}
-          className="w-32 h-20 md:w-11/12 md:h-24 object-cover py-2"
+          className="w-32 h-20 md:w-11/12 md:h-24 object-cover py-2 hover:scale-115 transition"
           onClick={() => navigate('/glasses/' + product.id)}
         />
       </figure>
