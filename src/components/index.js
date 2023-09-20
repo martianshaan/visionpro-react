@@ -7,3 +7,5 @@ export { default as Filters } from './filters/Filters';
 export { default as Logo } from './navbar/Logo';
 export { default as CartItemCard } from './cart/CartItemCard';
 export { default as CartTotalCard } from './cart/CartTotalCard';
+export { default as AddressCard } from './address/AddressCard';
+export { default as AddressForm } from './address/AddressForm';
