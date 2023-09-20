@@ -3,24 +3,29 @@ import { useProductContext } from "../../contexts/contextIndex";
 
 let idRandom = Math.random() * 100;
 
-const AddressForm = ({ setShowAddressForm }) => {
-    const { handleAddAddress, setCurrentAddress } = useProductContext();
-
-    const [newAddress, setNewAddress] = useState({
-        id: idRandom,
-        fullName: "",
-        mobileNumber: "",
-        flatNumber: "",
-        area: "",
-        city: "",
-        pincode: "",
-    });
+const AddressForm = ({ setShowAddressForm, editAddress, setEditAddress }) => {
+    const { handleAddAddress, setCurrentAddress, handleUpdateAddress } = useProductContext();
+    console.log('editaddress', editAddress);
+    const [newAddress, setNewAddress] = useState(
+        editAddress ? editAddress : {
+            id: idRandom,
+            fullName: "",
+            mobileNumber: "",
+            flatNumber: "",
+            area: "",
+            city: "",
+            pincode: "",
+        });
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(newAddress);
-        handleAddAddress(newAddress);
-        setCurrentAddress(newAddress);
+        if (editAddress) {
+            handleUpdateAddress(newAddress.id, newAddress)
+        } else {
+            console.log(newAddress);
+            handleAddAddress(newAddress);
+            setCurrentAddress(newAddress);
+        }
         setShowAddressForm(false);
     }
     return (
@@ -29,20 +34,20 @@ const AddressForm = ({ setShowAddressForm }) => {
                 <section className="flex flex-wrap -mx-3 mb-6 gap-2">
                     <section className="w-full px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
-                            First Name
+                            Full Name
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200
-                         text-gray-700 border border-red-500 rounded-md py-3 px-4 mb-1 
+                         text-gray-700 border rounded-md py-3 px-4 mb-1 
                          leading-tight focus:outline-none focus:bg-white"
                             id="grid-first-name"
                             type="text"
-                            placeholder="Jane Musk"
+                            placeholder=""
                             name="fullName"
                             value={newAddress.fullName}
                             onChange={(e) => setNewAddress({ ...newAddress, fullName: e.target.value })}
                         />
-                        <p className="text-red-500 text-xs italic">Please fill out this field.</p>
+                        {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
                     </section>
                     <section className="w-full  px-3">
                         <label className="block uppercase tracking-wide text-gray-700 focus:border text-xs font-bold mb-2" htmlFor="grid-mobile">
@@ -113,22 +118,27 @@ const AddressForm = ({ setShowAddressForm }) => {
                         />
                     </section>
                 </section>
-                <button type="button" className="btn-secondary w-full font-semibold "
-                    onClick={() => {
-                        setShowAddressForm(false);
-                        setNewAddress({
-                            id:'ddd9955s55s',
-                            fullName: "Jethalal Gada",
-                            mobileNumber: "123456789",
-                            flatNumber: "09",
-                            area: "Gokuldham",
-                            city: "Mumbai",
-                            pincode: "400063",
-                        })
-                    }}
-                >
-                    Fill Dummy Values
-                </button>
+                {!editAddress && (
+                    <button type="button" className="btn-secondary w-full font-semibold "
+                        onClick={() => {
+                            setShowAddressForm(false);
+                            setNewAddress({
+                                id: 'ddd9955s55s',
+                                fullName: "Jethalal Gada",
+                                mobileNumber: "123456789",
+                                flatNumber: "09",
+                                area: "Gokuldham",
+                                city: "Mumbai",
+                                pincode: "400063",
+                            })
+                            if (editAddress) {
+                                setEditAddress(null);
+                            }
+                        }}
+                    >
+                        Fill Dummy Values
+                    </button>
+                )}
                 <section className="flex  mt-2 gap-2">
                     <button
                         type="button"
@@ -143,6 +153,9 @@ const AddressForm = ({ setShowAddressForm }) => {
                                 city: "",
                                 pincode: "",
                             })
+                            if (editAddress) {
+                                setEditAddress(null);
+                            }
                         }}
                     >
                         Cancel

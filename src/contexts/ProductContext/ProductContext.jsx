@@ -94,35 +94,37 @@ function ProductContextProvider({ children }) {
     });
   };
 
-  const handleAddAddress =(newAddress)=>{
+  const handleAddAddress = (newAddress) => {
     dispatch({
       type: addressTypes.ADD_ADDRESS,
-      payload: [...state.addressList,newAddress]
+      payload: [...state.addressList, newAddress]
     })
   };
 
-  const handleUpdateAddress=(addressId,updatedAdress)=>{
+  const handleUpdateAddress = (addressId, updatedAdress) => {
+    const currentaddressList = state.addressList;
+
+    const updatedAddressList = currentaddressList.map((item) => {
+      item.id === addressId ? updatedAdress : item
+    });
+
     dispatch({
-      type:addressTypes.UPDATE_ADDRESS,
-      payload:state.addressList.map((item)=>{
-        item.id === addressId ? updatedAdress:item
-      })
+      type: addressTypes.UPDATE_ADDRESS,
+      payload: updatedAddressList
     })
-    if(currentAddress.id === addressId){
+    if (currentAddress.id === addressId) {
       setCurrentAddress(updatedAdress)
     }
   };
 
-  const handleDeleteAddress=(addressId)=>{
+  const handleDeleteAddress = (addressId) => {
     dispatch({
-      type:addressTypes.DELETE_ADDRESS,
-      payload:state.addressList.filter((item)=>{
-        item.id!==addressId
-      })
+      type: addressTypes.DELETE_ADDRESS,
+      payload: addressId
     })
-    if(currentAddress.id===addressId){
-      setCurrentAddress({})
-    }
+    // if(currentAddress.id===addressId){
+    //   setCurrentAddress({})
+    // }
   }
 
 
@@ -133,7 +135,7 @@ function ProductContextProvider({ children }) {
       cart: state.cart,
       filters: state.filters,
       maxRange: state.maxRange,
-      addressList:state.addressList,
+      addressList: state.addressList,
       loading,
       addProductToCart,
       getProductById,
@@ -142,7 +144,7 @@ function ProductContextProvider({ children }) {
       isFilterOpen,
       setIsFilterOpen,
       currentAddress,
-      setCurrentAddress ,
+      setCurrentAddress,
       handleAddAddress,
       handleUpdateAddress,
       handleDeleteAddress
