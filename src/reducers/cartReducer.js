@@ -86,39 +86,41 @@ export const cartReducer = (state, action) => {
 
       return { ...state.cart, cart: updatedProduct };
 
-      // case 'CART_TOTAL_AMOUNT':
-      //   const updatedTotalAmount = state.cart.reduce((accumulator, currentProduct) => {
-      //     const { newPrice, qty } = currentProduct;
-      //     accumulator += newPrice * qty;
-      //     return accumulator;
-      //   }, 0);
-      //   return { ...state, totalAmount: updatedTotalAmount };
+    // case 'CART_TOTAL_AMOUNT':
+    //   const updatedTotalAmount = state.cart.reduce((accumulator, currentProduct) => {
+    //     const { newPrice, qty } = currentProduct;
+    //     accumulator += newPrice * qty;
+    //     return accumulator;
+    //   }, 0);
+    //   return { ...state, totalAmount: updatedTotalAmount };
 
-      // case 'CART_TOTAL_ITEMS':
-      //   const updatedItemsInCart = state.cart.reduce((initialItems, currentProduct) => {
-      //     const { qty } = currentProduct;
-      //     initialItems += qty;
-      //     return initialItems;
-      //   }, 0);
-      //   return { ...state, totalItem: updatedItemsInCart };
+    // case 'CART_TOTAL_ITEMS':
+    //   const updatedItemsInCart = state.cart.reduce((initialItems, currentProduct) => {
+    //     const { qty } = currentProduct;
+    //     initialItems += qty;
+    //     return initialItems;
+    //   }, 0);
+    //   return { ...state, totalItem: updatedItemsInCart };
 
-      // comibined both two
+    // comibined both two
 
     case 'CART_TOTAL_ITEMS_AMOUNT':
       if (state.cart?.length === 0) {
         return state; // Return the unmodified state since there are no items
       }
 
-      const { totalItem, totalAmount } = state.cart.reduce((accumulator, currentProduct) => {
-        const { newPrice, qty } = currentProduct;
+      const { totalItem, totalAmount, totalAmountWithoutDiscount } = state.cart.reduce((accumulator, currentProduct) => {
+        const { newPrice, qty, price } = currentProduct;
         accumulator.totalItem += qty;
         accumulator.totalAmount += qty * newPrice;
+        accumulator.totalAmountWithoutDiscount += qty * price
         return accumulator;
       }, {
         totalItem: 0,
         totalAmount: 0,
+        totalAmountWithoutDiscount: 0
       });
-      return { ...state, totalItem, totalAmount };
+      return { ...state, totalItem, totalAmount, totalAmountWithoutDiscount };
 
     default:
       if (process.env.NODE_ENV === 'development') {

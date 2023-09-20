@@ -24,6 +24,7 @@ const INITIAL_STATE = {
   cart: getLocalCartData() || [],
   totalItem: '',
   totalAmount: '',
+  totalAmountWithoutDiscount:'',
   shippingFee: 200,
 };
 
