@@ -4,7 +4,7 @@ import { useProductContext } from "../../contexts/contextIndex";
 let idRandom = Math.random() * 100;
 
 const AddressForm = ({ setShowAddressForm }) => {
-    const { addAddress, setCurrentAddress } = useProductContext();
+    const { handleAddAddress, setCurrentAddress } = useProductContext();
 
     const [newAddress, setNewAddress] = useState({
         id: idRandom,
@@ -19,6 +19,7 @@ const AddressForm = ({ setShowAddressForm }) => {
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(newAddress);
+        handleAddAddress(newAddress);
         setCurrentAddress(newAddress);
         setShowAddressForm(false);
     }
@@ -116,6 +117,7 @@ const AddressForm = ({ setShowAddressForm }) => {
                     onClick={() => {
                         setShowAddressForm(false);
                         setNewAddress({
+                            id:'ddd9955s55s',
                             fullName: "Jethalal Gada",
                             mobileNumber: "123456789",
                             flatNumber: "09",

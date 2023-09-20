@@ -1,8 +1,8 @@
-import { actionTypes, filterTypes } from '../utils/actionTypes';
+import { actionTypes, filterTypes, addressTypes } from '../utils/actionTypes';
 
 export const initialState = {
   allProducts: [],
-  maxRange:0,
+  maxRange: 0,
   filters: {
     gender: "all",
     categories: [],
@@ -11,6 +11,15 @@ export const initialState = {
     sortBy: "",
     searchText: "",
   },
+  adressList: [{
+    id: 'jcns9895ssb',
+    fullName: "Jethalal Gada",
+    mobileNumber: "123456789",
+    flatNumber: "09",
+    area: "Gokuldham",
+    city: "Mumbai",
+    pincode: "400063",
+  }]
 };
 
 export const productReducer = (state, action) => {
@@ -65,6 +74,12 @@ export const productReducer = (state, action) => {
           searchText: "",
         },
       };
+    case addressTypes.ADD_ADDRESS:
+      return { ...state, addressList: action.payload };
+    case addressTypes.UPDATE_ADDRESS:
+      return { ...state, addressList: action.payload };
+    case addressTypes.DELETE_ADDRESS:
+      return { ...state, addressList: action.payload };
 
 
     default:
