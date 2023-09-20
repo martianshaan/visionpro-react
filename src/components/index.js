@@ -9,3 +9,4 @@ export { default as CartItemCard } from './cart/CartItemCard';
 export { default as CartTotalCard } from './cart/CartTotalCard';
 export { default as AddressCard } from './address/AddressCard';
 export { default as AddressForm } from './address/AddressForm';
+export { default as Footer } from './Footer/Footer';

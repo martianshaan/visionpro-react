@@ -1,5 +1,5 @@
 import React from 'react';
-import { Banner, CategoryList, Trending } from '../components/index';
+import { Banner, CategoryList, Footer, Trending } from '../components/index';
 
 function Home() {
   return (
@@ -7,6 +7,7 @@ function Home() {
       <Banner />
       <Trending />
       <CategoryList />
+      <Footer />
     </>
   );
 }
