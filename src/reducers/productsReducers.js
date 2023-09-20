@@ -11,7 +11,7 @@ export const initialState = {
     sortBy: "",
     searchText: "",
   },
-  adressList: [{
+  addressList: [{
     id: 'jcns9895ssb',
     fullName: "Jethalal Gada",
     mobileNumber: "123456789",
