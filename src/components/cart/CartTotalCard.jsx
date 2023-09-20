@@ -42,7 +42,11 @@ function CartTotalCard({ cart }) {
       </section>
 
       <section className="w-full mt-1 flex flex-col gap-3 items-center justify-center">
-        <button type="button" className="border w-full bg-gray-900 font-medium text-white py-1.5  px-6  transition hover:bg-white hover:border-gray-800 hover:text-gray-800 rounded-full shadow-sm flex items-center justify-center gap-2 md:text-sm lg:text-base">
+        <button
+          type="button"
+          className="border w-full bg-gray-900 font-medium text-white py-1.5  px-6  transition hover:bg-white hover:border-gray-800 hover:text-gray-800 rounded-full shadow-sm flex items-center justify-center gap-2 md:text-sm lg:text-base"
+          onClick={() => navigate('/checkout')}
+        >
           Proceed to Checkout
           {' '}
           {' >'}
