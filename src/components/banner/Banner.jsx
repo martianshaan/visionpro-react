@@ -7,7 +7,7 @@ import HomePhotoMobile from '../../assets/HomePhotoMobile.png'
 import { Truck, CurrencyInr, SealCheck } from '@phosphor-icons/react';
 
 
-function Banner({ catRef }) {
+function Banner({ catRef  }) {
   const navigate = useNavigate();
   return (
     <main className="relative flex items-center justify-between bg-[--theme-color] ">
@@ -25,7 +25,8 @@ function Banner({ catRef }) {
           Elevate your sunny days with our trendy eyewear collection.
         </p>
         <section className="flex items-center absolute top-[225px] md:top-[500px] left-[145px] md:left-[560px] text-white ">
-          <button type="button" className="flex items-center p-3" onClick={() => { catRef.current.scrollIntoView({ behavior: 'smooth' }); }}>
+          <button type="button" className="flex items-center p-3" 
+          onClick={() => { catRef.current.scrollIntoView({ behavior: 'smooth' }); }}>
             <span className="mx-2 text-xs md:text-base">
               Explore More
             </span>
