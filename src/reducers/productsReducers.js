@@ -12,7 +12,7 @@ export const initialState = {
     searchText: "",
   },
   addressList: [{
-    id: 'jcns9895ssb',
+    id: '889',
     fullName: "Jethalal Gada",
     mobileNumber: "123456789",
     flatNumber: "09",
@@ -76,12 +76,16 @@ export const productReducer = (state, action) => {
       };
     case addressTypes.ADD_ADDRESS:
       return { ...state, addressList: action.payload };
+
     case addressTypes.UPDATE_ADDRESS:
       return { ...state, addressList: action.payload };
-    case addressTypes.DELETE_ADDRESS:
-      return { ...state, addressList: action.payload };
 
-
+      case addressTypes.DELETE_ADDRESS:
+        const updatedAddressList = state.addressList.filter((item) => {
+          return item.id !== action.payload });
+        console.log('updatedAddressList', updatedAddressList);
+        return { ...state, addressList: updatedAddressList };
+      
     default:
       return state;
   }
