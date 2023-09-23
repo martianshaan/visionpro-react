@@ -1,23 +1,12 @@
 import React from "react";
-import glassCategory1 from '../../assets/glassCategory1.png';
 import { useCartContext } from "../../contexts/contextIndex";
-import CartItemCard from "../cart/CartItemCard";
 import PriceDetailsCard from "./PriceDetailsCard";
-// const product = {
-//     id: 1,
-//     name: 'Classic Aviator',
-//     price: 4999.99,
-//     category: 'sunglasses',
-//     rating: 4.5,
-//     image: glassCategory1,
-//     description:
-//         'These classic aviator sunglasses are perfect for any occasion.',
-// };
+
 
 function ProductCard({ product }) {
     const { name, price, newPrice, image, qty } = product;
     return (
-        <main className="flex flex-col border border-gray-100 p-2 bg-white/[0.8] rounded-sm  shadow-md flex-wrap w-full gap-1">
+        <main className="flex flex-col border border-gray-100 px-4 py-2  bg-white/[0.8] rounded-sm  shadow-md flex-wrap w-full gap-1">
             <section className="flex  flex-row justify-center items-center gap-4 md:gap-20">
                 <section className="flex flex-wrap w-full gap-4">
                     <figure className="bg-black/[0.075] h-16 w-16 rounded-md flex items-center p-2">
@@ -45,7 +34,7 @@ function ProductCard({ product }) {
 
     );
 }
-const SummaryCard = () => {
+const SummaryCard = ({ setShowModal }) => {
     const { cart, totalAmount, shippingFee, } = useCartContext();
     console.log('summartcart', cart);
     return (
@@ -58,17 +47,12 @@ const SummaryCard = () => {
             </section>
             <hr className="w-full border border-dashed border-purple-haze" />
             <PriceDetailsCard />
-            <hr className="w-full border border-dashed border-purple-haze" />
-            <section className="flex justify-between items-center">
-                <p className=" text-gray-800 font-bold">Total Payable</p>
-                <p className="text-2xl">
-                    ₹
-                    {' '}
-                    {shippingFee + totalAmount}
-                </p>
-            </section>
             <section className="w-full py-2   flex gap-4 items-center">
-                <button type="submit" className="btn-rounded-secondary rounded-full flex items-center gap-2 md:text-sm lg:text-base">
+                <button
+                    type="submit"
+                    className="btn-rounded-secondary rounded-full flex items-center gap-2 md:text-sm lg:text-base"
+                    onClick={() => setShowModal(true)}
+                >
                     Place Order
                 </button>
             </section>

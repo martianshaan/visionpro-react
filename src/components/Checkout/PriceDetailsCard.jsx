@@ -19,7 +19,7 @@ const PriceDetailsCard = () => {
         },
     ];
     return (
-        <section className="flex flex-col justify-start gap-3">
+        <section className="flex flex-col justify-start gap-3 ">
             {summaryData.map((item) => (
                 <section className="flex justify-between items-center">
                     <p className=" text-gray-600">{item.label}</p>
@@ -28,8 +28,15 @@ const PriceDetailsCard = () => {
                     </p>
                 </section>
             ))}
-
-
+            <hr className="w-full border border-dashed border-gray-300" />
+            <section className="flex justify-between items-center mb-1">
+                <p className=" text-gray-800 font-bold">Total Payable</p>
+                <p className="text-2xl">
+                    ₹
+                    {' '}
+                    {shippingFee + totalAmount}
+                </p>
+            </section>
         </section>
     )
 }

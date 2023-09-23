@@ -43,8 +43,8 @@ const Address = ({ isEdit }) => {
             ) : (
                 <button
                     type="button"
-                    className="flex items-center text-center gap-3 text-lg bg-gray-900
-                         text-white px-3 py-2 rounded-md"
+                    className="flex items-center text-center gap-3 text-lg bg-gray-800
+                         text-white px-3 py-2 rounded-full  hover:bg-gray-900"
                     onClick={() => {
                         setShowAddressForm(!showAddressForm)
                     }}
