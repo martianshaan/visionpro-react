@@ -3,47 +3,17 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Plus, SignOut } from '@phosphor-icons/react';
 import React, { useState } from 'react';
+import { SignOut } from '@phosphor-icons/react';
 import { toast } from 'react-hot-toast';
 import { useAuthContext } from '../contexts/contextIndex';
+import Address from '../components/address/Address';
 
-function AddressCard({ address, pincode }) {
-  return (
-    <section className="flex flex-col bg-gray-50 items-center gap-2 shadow-sm p-4 rounded-sm m-2">
-      <p>
-        {address}
-        Mobile:
-        {pincode}
-      </p>
-      <section className="flex gap-2">
-        <button type="submit" className="text-amber-500 text-bold">Edit</button>
-        <button type="submit" className="text=red-500 font-bold">Delete</button>
-      </section>
-    </section>
-
-  );
-}
 
 function Profile() {
   const userDetails = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;
   const [selectedItem, setSelectedItem] = useState('profile');
-  const [addNewAddress, setAddNewAddress] = useState(false);
-  const [addressData, setAddressData] = useState([{
-    address: '26 Ramyanagari Vimanagar Pune 411053',
-    pincode: 411053,
-    mobile: 9955447788,
-  }]);
-
-  const [newAddress, setNewAddress] = useState({
-    flat: 'aaaa54665464',
-    area: 'ccc y556567788',
-    town: 'aaa y698590809',
-    pincode: '123345',
-  });
-
   const [loggingOut, setLoggingOut] = useState(false);
-
   const { logoutHandler, user } = useAuthContext();
 
   const handleLogout = () => {
@@ -55,120 +25,6 @@ function Profile() {
     }, 1000);
   };
 
-  function AddressForm() {
-    return (
-      <form className="w-full max-w-lg">
-        <div className="flex flex-wrap -mx-3 mb-6 gap-2">
-          <div className="w-full px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
-              Full Name
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded-md py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
-              id="grid-first-name"
-              type="text"
-              placeholder="Jane Musk"
-            />
-            <p className="text-red-500 text-xs italic">Please fill out this field.</p>
-          </div>
-          <div className="w-full  px-3">
-            <label className="block uppercase tracking-wide text-gray-700 focus:border- text-xs font-bold mb-2" htmlFor="grid-last-name">
-              Mobile Number
-            </label>
-            <input
-              className="appearance-none  w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
-              id="grid-last-name"
-              type="text"
-              placeholder=""
-            />
-          </div>
-          <div className="w-full  px-3">
-            <label className="block uppercase tracking-wide text-gray-700 focus:border- text-xs font-bold mb-2" htmlFor="grid-house-number">
-              House Number
-            </label>
-            <input
-              className="appearance-none  w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
-              id="grid-house-number"
-              type="text"
-              placeholder=""
-            />
-          </div>
-          <div className="w-full  px-3">
-            <label className="block uppercase tracking-wide text-gray-700 focus:border- text-xs font-bold mb-2" htmlFor="grid-locality">
-              Locality
-            </label>
-            <input
-              className="appearance-none  w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
-              id="grid-locality"
-              type="text"
-              placeholder=""
-            />
-          </div>
-          <div className="w-full  px-3">
-            <label className="block uppercase tracking-wide text-gray-700 focus:border- text-xs font-bold mb-2" htmlFor="grid-city">
-              City/District
-            </label>
-            <input
-              className="appearance-none  w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
-              id="grid-city"
-              type="text"
-              placeholder=""
-            />
-          </div>
-          <div className="w-full  px-3">
-            <label className="block uppercase tracking-wide text-gray-700 focus:border- text-xs font-bold mb-2" htmlFor="grid-state">
-              State
-            </label>
-            <input
-              className="appearance-none  w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
-              id="grid-state"
-              type="text"
-              placeholder=""
-            />
-          </div>
-          <div className="w-full  px-3">
-            <label className="block uppercase tracking-wide text-gray-700 focus:border- text-xs font-bold mb-2" htmlFor="grid-pincode">
-              Pincode
-            </label>
-            <input
-              className="appearance-none  w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
-              id="grid-pincode"
-              type="text"
-              placeholder=""
-            />
-          </div>
-        </div>
-        <button type="button" className="btn-secondary w-full font-semibold ">
-          Fill Dummy Values
-        </button>
-        <div className="flex  mt-2 gap-2">
-          <button
-            type="button"
-            className="btn-rounded-secondary  font-semibold  gap-2 md:text-sm lg:text-base  w-2/3 "
-            onClick={() => { setAddNewAddress(false); }}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="bg-gray-900 text-white py-1.5 items-center px-6 border rounded-full font-semibold gap-2 md:text-sm lg:text-base w-2/3 hover:bg-white hover:text-gray-800 hover:border-black"
-            onClick={() => {
-              setNewAddress('');
-              setAddressData([
-                ...addressData,
-                {
-                  address: `${newAddress.area},${newAddress.flat},${newAddress.town}`,
-                  pincode: newAddress.pincode,
-                },
-              ]);
-            }}
-          >
-            Save
-          </button>
-        </div>
-      </form>
-    );
-  }
 
   return (
     <main className=" flex flex-col gap-10 items-center  md:min-h-[90vh] justify-center p-1.5">
@@ -178,7 +34,7 @@ function Profile() {
             className={`flex-1 p-4 text-xl
             md:text-xl lg:text-2xl shadow-sm  transition-colors
             ${selectedItem === 'profile' ? 'bg-[--primary-text-color] text-white' : 'bg-gray-100'
-             }`}
+              }`}
             type="button"
             onClick={() => {
               setSelectedItem('profile');
@@ -199,22 +55,22 @@ function Profile() {
             onClick={() => setSelectedItem('address')}
             className={`flex-1 text-2xl   md:text-xl lg:text-2xl p-4 shadow-sm transition-colors
             ${selectedItem === 'address'
-              ? 'bg-[--primary-text-color] text-white'
-              : 'bg-gray-100'
-            }`}
+                ? 'bg-[--primary-text-color] text-white'
+                : 'bg-gray-100'
+              }`}
           >
             Address
           </button>
         </section>
         {selectedItem === 'profile' ? (
-          <aside className="flex flex-col items-center w-full text-center p-1  gap-2 mt-3 text-lg ">
+          <aside className="flex flex-col bg-white/[0.7] border-solid border-2 border-gray-200  rounded-md p-5 w-full   shadow-sm items-center text-center   gap-2 mt-3 text-lg ">
             <p>
               <span className="text-gray-900">
                 UserName:
                 {' '}
                 {user.displayName}
               </span>
-              {userDetails ? `${userDetails?.firstName} ${userDetails?.lasName}`
+              {userDetails ? `${userDetails?.firstName} ${userDetails?.lastName}`
                 : ''}
             </p>
             <p>
@@ -242,25 +98,8 @@ function Profile() {
             </button>
           </aside>
         ) : (
-          <aside className="mt-3">
-            {addNewAddress ? (
-              <AddressForm />
-            ) : (
-              <button
-                type="button"
-                className="flex items-center text-center gap-3 text-lg bg-gray-900
-               text-white px-3 py-2 rounded-md"
-                onClick={() => {
-                  setAddNewAddress(!addNewAddress);
-                }}
-              >
-                <Plus size={25} />
-                <p>Add New Address</p>
-              </button>
-            )}
-            {addressData.map((data) => (
-              <AddressCard address={data.address} pincode={data.pincode} />
-            ))}
+          <aside className="mt-1">
+           <Address isEdit />
           </aside>
         )}
       </section>
