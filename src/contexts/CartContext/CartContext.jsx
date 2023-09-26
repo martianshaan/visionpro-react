@@ -24,8 +24,9 @@ const INITIAL_STATE = {
   cart: getLocalCartData() || [],
   totalItem: '',
   totalAmount: '',
-  totalAmountWithoutDiscount:'',
+  totalAmountWithoutDiscount: '',
   shippingFee: 200,
+  orders: []
 };
 
 export const CartContext = createContext();
@@ -34,7 +35,7 @@ function CartContextProvider({ children }) {
 
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
     dispatch({ type: 'CART_TOTAL_ITEMS_AMOUNT' });
@@ -95,19 +96,31 @@ function CartContextProvider({ children }) {
     (item) => item.id === productId
   ), [state.cart]);
 
+  const orderHandler = () => {
+    dispatch({
+      type: 'SUCCESSFUL_ORDER',
+    })
+  }
 
   const value = useMemo(() => ({
     ...state,
     cart: state.cart,
-    totalItem:state.totalItem,
-    totalAmount:state.totalAmount,
+    totalItem: state.totalItem,
+    totalAmount: state.totalAmount,
+    orders: state.orders,
     addToCart,
     removeProductsFromCart,
     clearCartHandler,
     updateProductQtyHandler,
     setDecrement,
     isInCart,
-  }), [state, addToCart, updateProductQtyHandler, isInCart]);
+    orderHandler
+  }), [state, addToCart, updateProductQtyHandler, isInCart, removeProductsFromCart,
+    clearCartHandler,
+    updateProductQtyHandler,
+    setDecrement,
+    isInCart,
+    orderHandler]);
 
   return (
     <CartContext.Provider value={value}>

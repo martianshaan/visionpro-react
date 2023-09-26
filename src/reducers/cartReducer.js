@@ -122,6 +122,21 @@ export const cartReducer = (state, action) => {
       });
       return { ...state, totalItem, totalAmount, totalAmountWithoutDiscount };
 
+    //case 'SUCCESSFUL_ORDER':
+    //   const ordersArray = state.cart.map((product) => (
+    //     state.orders.push(product)));
+    // return {...state,orders:ordersArray}    ;
+
+    case 'SUCCESSFUL_ORDER':
+      console.log('Before:', state.cart, state.orders);
+      const updatedOrders = [...state.orders, ...state.cart];
+      console.log('After:', updatedOrders);
+      return {
+        ...state,
+        orders: updatedOrders,
+        cart: [], // Clear the cart after placing the order
+    };
+
     default:
       if (process.env.NODE_ENV === 'development') {
         // Throw an error in development mode

@@ -168,3 +168,15 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData) => {
 
   return userDocRef;
 };
+
+
+export const addOrderToFirestore = async (orderData) => {
+  try {
+    const orderRef = await addDoc(collection(db, 'orders'), orderData); 
+    console.log('Order placed successfully with ID:', orderRef.id);
+    return orderRef.id; 
+  } catch (error) {
+    console.error('Error placing order:', error);
+    throw error; 
+  }
+};
