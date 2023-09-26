@@ -10,7 +10,7 @@ const Orders = () => {
       navigate("/");
     } else {
       setTimeout(() => {
-        navigate("/products");
+        navigate("/glasses");
       }, 3000);
     }
   }, []);

@@ -3,7 +3,7 @@ import { useCartContext } from "../../contexts/contextIndex";
 import PriceDetailsCard from "./PriceDetailsCard";
 
 
-function ProductCard({ product }) {
+export function ProductCard({ product }) {
     const { name, price, newPrice, image, qty } = product;
     return (
         <main className="flex flex-col border border-gray-100 px-4 py-2  bg-white/[0.8] rounded-sm  shadow-md flex-wrap w-full gap-1">
@@ -35,7 +35,7 @@ function ProductCard({ product }) {
     );
 }
 const SummaryCard = ({ setShowModal }) => {
-    const { cart, totalAmount, shippingFee, } = useCartContext();
+    const { cart} = useCartContext();
     console.log('summartcart', cart);
     return (
         <main className="  flex flex-col rounded-md shadow-sm bg-white/[0.7] gap-5  py-3 md:py-7 px-5 md:px-7 lg:px-12w-full h-min">
