@@ -16,6 +16,7 @@ function ProductContextProvider({ children }) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [state, dispatch] = useReducer(productReducer, initialState);
   const [currentAddress, setCurrentAddress] = useState(state.addressList[0]);
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false)
 
   // useEffect(() => {
   //   addCollectionAndDocuments('popularProducts', popularProducts);
@@ -142,8 +143,10 @@ function ProductContextProvider({ children }) {
       handleApplyFilters,
       handleClearFilters,
       isFilterOpen,
-      setIsFilterOpen,
+      isOrderPlaced,
       currentAddress,
+      setIsOrderPlaced,
+      setIsFilterOpen,
       setCurrentAddress,
       handleAddAddress,
       handleUpdateAddress,
