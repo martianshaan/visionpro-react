@@ -86,7 +86,7 @@ function Navbar() {
               )}
             </li>
             <li
-              className="relative p-2 mx-2 text-white transition  custom-bg-button-gradient rounded-full shadow-sm cursor-pointer hover:bg-yellow-800"
+              className="relative p-2 mx-2 text-white transition  custom-bg-button-gradient rounded-full shadow-sm cursor-pointer hover:bg-amber-700"
               onClick={() => navigate('/cart')}
             >
               <Bag size={26} />
