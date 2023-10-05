@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { BsArrowDownRightCircle } from 'react-icons/bs';
 import sunbunlogon from '../../assets/sunbunlogon.png'
-import HomePhotoBroadLong2 from '../../assets/HomePhotoBroadLong2.png'
+import BannerImage from '../../assets/BannerImage.png'
 import HomePhotoMobile from '../../assets/HomePhotoMobile.png'
 import { Truck, CurrencyInr, SealCheck } from '@phosphor-icons/react';
 
@@ -13,7 +13,7 @@ function Banner({ catRef }) {
   return (
     <main className="relative flex items-center justify-between bg-[--theme-color] ">
       <section className='absolute text-center inset-0 flex flex-col justify-top items-start p-4 mt-[80px] md:mt-[50px] gap-3'>
-        <h1 className="font-blackOps mt-6 logoFont italic tracking-[0.3em] hidden md:block w-full py-3 text-3xl font-semibold sm:text-7xl lg:text-8l ">
+        <h1 className=" font-nicoMoji mt-1 text-gray-950  logoFont italic tracking-[0.3em] hidden md:block w-full py-3 text-3xl font-semibold sm:text-7xl lg:text-8xl ">
           SUNBUN
         </h1>
         
@@ -66,7 +66,7 @@ function Banner({ catRef }) {
         <img src={HomePhoto} alt="bannerImg" className=" object-cover h-sreen  w-screen  " />
       </section> */}
       <section className='left-0 right-0 items-center justify-center hidden text-center sm:block '>
-        <img src={HomePhotoBroadLong2} alt="bannerImg" className=" object-cover h-sreen  w-screen " />
+        <img src={BannerImage} alt="bannerImg" className=" object-cover h-sreen  w-screen " />
       </section>
       <section className='left-0 right-0 flex items-center justify-center text-center mt-[92px]'>
         <img src={HomePhotoMobile} alt="bannerImg" className="object-cover w-screen h-sreen sm:hidden" />
