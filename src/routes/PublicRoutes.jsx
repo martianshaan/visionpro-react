@@ -30,16 +30,11 @@ export const contentRoutes = [{
   element: <ProductDetails />,
 },
 {
-  id: 4,
-  path: '/myorders',
-  element: <OrdersHistory />,
-},
-{
-  id: 4,
+  id: 3,
   path: '/mockman',
   element: <Mockman />,
 }, {
-  id: 5,
+  id: 4,
   path: '/todo',
   element: <Todo />,
 }];
@@ -67,4 +62,9 @@ export const privateRoutes = [{
   id: 5,
   path: '/orders',
   element: <Orders />
-}];
+},
+{
+  id: 6,
+  path: '/myorders',
+  element: <OrdersHistory />,
+},];

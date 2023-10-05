@@ -3,7 +3,7 @@ import { useCartContext } from "../contexts/contextIndex";
 import { Fragment } from "react";
 
 
-const OrderProductCard = ({ product }) => {
+export const OrderProductCard = ({ product }) => {
     const { name, image, newPrice, description } = product
     return (
         <section className="flex flex-col gap-3">
@@ -35,8 +35,8 @@ const OrderProductCard = ({ product }) => {
 };
 
 const OrdersHistory = () => {
-    const { orders } = useCartContext();
-    console.log('orders', orders);
+    const { state,orders } = useCartContext();
+    console.log('state', state);
 
     // if (!orders) {
     //     return;

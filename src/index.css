@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Monoton&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,6 +37,12 @@ body {
 .font-monoton {
   font-family: "Monoton", cursive;
 }
+.font-bungee{
+  font-family: 'Bungee Shade', cursive;
+}
+.font-blackOps{
+  font-family: 'Black Ops One', cursive;
+}
 
 .custom-bg-gradient {
   background: linear-gradient(
@@ -56,3 +64,49 @@ body {
   background: rgb(24,31,34);
 }
 
+@font-face {
+  font-family: "Quantum";   /*Can be any text*/
+  src: local("Quantum"),
+    url("./font/Quantum.otf") format("truetype");
+}
+@font-face {
+  font-family: "Laira";   /*Can be any text*/
+  src: local("Laira"),
+    url("./font/LairaItalic.otf") format("truetype");
+}
+.font-Quantum{
+  font-family: "Quantum";
+}
+.font-Laira{
+  font-family: "Laira";
+}
+
+.logoFonlt{
+  background: -webkit-linear-gradient( rgba(254, 72, 43, 0.99), rgb(247, 183, 51));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0.5px 0.5px 2px rgba(246, 105, 66, 0.4);
+}
+
+
+
+.bgOrange:hover{
+  background-color: #ff4d30;
+  box-shadow: 0 10px 15px rgba(255,83,48,.35);
+}
+
+.book-content__box{
+    align-self: self-end;
+    background-color: #ff4d30;
+    border: none;
+    box-shadow: 0 10px 15px rgba(255,83,48,.35);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    height: -moz-fit-content;
+    height: -webkit-fit-content;
+    height: fit-content;
+    padding: 0.5rem;
+    transition: all .3s;
+}

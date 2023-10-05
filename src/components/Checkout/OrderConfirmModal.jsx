@@ -6,30 +6,16 @@ import LoaderYellow from '../../assets/LoaderYellow.svg';
 import { useNavigate } from "react-router";
 import { useAuthContext, useCartContext } from "../../contexts/contextIndex";
 import { addOrderToFirestore } from '../../firebase';
+import toast from "react-hot-toast";
 
 const OrderConfirmModal = ({ showModal, setShowModal }) => {
   const [disableBtn, setDisableBtn] = useState(false);
   const { user } = useAuthContext();
-  console.log('userObj', { user });
-  console.log('user', user);
-  const { totalAmount, shippingFee, clearCartHandler, orderHandler, orders } = useCartContext();
+  const { totalAmount, shippingFee, orderHandler, orders } = useCartContext();
   const navigate = useNavigate();
 
   let totalPriceOfCartProducts = totalAmount + shippingFee;
   console.log('orders', orders);
-
-  // const placeOrder = async (orderData) => {
-  //   try {
-  //     const orderId = await addOrderToFirestore(orderData);
-  //     // Clear the cart
-  //     clearCartHandler()
-
-  //     // Optionally, you can handle success and error cases
-  //     console.log('Order placed successfully with ID:', orderId);
-  //   } catch (error) {
-  //     console.error('Error placing order:', error);
-  //   }
-  // };
 
   const paymentHandler = () => {
     setDisableBtn(true);
@@ -75,11 +61,12 @@ const OrderConfirmModal = ({ showModal, setShowModal }) => {
       image: sunbunLogo,
       handler: function (response) {
         orderHandler();
-        console.log('myorders',orders);
         navigate("/orders", {
           state: "orderSuccess",
         });
         alert(response.razorpay_payment_id)
+        toast.success(`${orders.length} product added`)
+        console.log('afterupdate', orders);
       },
       prefill: {
         name: user ? user.displayName : "Test",

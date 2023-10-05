@@ -2,20 +2,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { BsArrowDownRightCircle } from 'react-icons/bs';
+import sunbunlogon from '../../assets/sunbunlogon.png'
 import HomePhotoBroadLong2 from '../../assets/HomePhotoBroadLong2.png'
 import HomePhotoMobile from '../../assets/HomePhotoMobile.png'
 import { Truck, CurrencyInr, SealCheck } from '@phosphor-icons/react';
 
 
-function Banner({ catRef  }) {
+function Banner({ catRef }) {
   const navigate = useNavigate();
   return (
     <main className="relative flex items-center justify-between bg-[--theme-color] ">
       <section className='absolute text-center inset-0 flex flex-col justify-top items-start p-4 mt-[80px] md:mt-[50px] gap-3'>
-        <h1 className="hidden md:block w-full py-3 text-3xl font-semibold sm:text-7xl lg:text-8l ">
+        <h1 className="font-blackOps mt-6 logoFont italic tracking-[0.3em] hidden md:block w-full py-3 text-3xl font-semibold sm:text-7xl lg:text-8l ">
           SUNBUN
         </h1>
-        <h1 className="hidden md:block w-full py-3   md:text-2xl  md:top-[485px] left-[127px] md:left-[110px] ">
+        
+        <h1 className="hidden md:block w-full py-3 -mt-6 text-gray-700 italic tracking-wider  md:text-2xl  md:top-[485px] left-[127px] md:left-[110px] ">
           Let's Elevate Your Frame Game
         </h1>
         <p className=" hidden md:block md:py-3  justify-center items-start text-[7px]  text-amber-200 font-semibold md:text-3xl text-grey-300 
@@ -25,8 +27,8 @@ function Banner({ catRef  }) {
           Elevate your sunny days with our trendy eyewear collection.
         </p>
         <section className="flex items-center absolute top-[225px] md:top-[500px] left-[145px] md:left-[560px] text-white ">
-          <button type="button" className="flex items-center p-3" 
-          onClick={() => { catRef.current.scrollIntoView({ behavior: 'smooth' }); }}>
+          <button type="button" className="flex items-center p-3"
+            onClick={() => { catRef.current.scrollIntoView({ behavior: 'smooth' }); }}>
             <span className="mx-2 text-xs md:text-base">
               Explore More
             </span>
@@ -55,7 +57,7 @@ function Banner({ catRef  }) {
             <p className="text-white text-xs md:text-base">High Quality Lenses Included </p>
           </section>
           <section className='flex flex-col gap-3 items-center '>
-            <CurrencyInr weight='light'  color="#FFFFFF" className='text-xl md:text-4xl border-2 border-white rounded-full p-1' />
+            <CurrencyInr weight='light' color="#FFFFFF" className='text-xl md:text-4xl border-2 border-white rounded-full p-1' />
             <p className="text-white text-xs md:text-base">Free Safe & Secure Checkout</p>
           </section>
         </section>
