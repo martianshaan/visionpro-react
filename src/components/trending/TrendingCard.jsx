@@ -14,12 +14,12 @@ function TrendingCard({ product }) {
   return (
     <section className="flex flex-col gap-2 px-4 py-1 rounded-xl bg-black/[.06] cursor-pointer "
     >
-
-      <figure className="flex justify-center items-start w-full h-full py-1">
+      
+      <figure className="flex justify-center items-center ">
         <img
           src={product.image}
           alt={product.name}
-          className="w-32 h-20 md:w-11/12 md:h-24 object-cover py-2 hover:scale-115 transition"
+          className="w-32 h-20 md:w-screen md:h-32 object-cover py-3 hover:scale-115 transition"
           onClick={() => navigate('/glasses/' + product.id)}
         />
       </figure>

@@ -6,7 +6,7 @@ import { React, useEffect, useState } from 'react';
 import { Bag, Heart, List } from '@phosphor-icons/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineExplore } from 'react-icons/md';
-import defaultUser from '../../assets/defaultUser.png';
+import AvatarProfile from '../../assets/AvatarProfile.webp';
 import MenuDropdown from './MenuDropdown';
 import Logo from './Logo';
 import { useAuthContext, useCartContext, useWishlistContext } from '../../contexts/contextIndex';
@@ -43,7 +43,7 @@ function Navbar() {
     /* py-3 max-w-screen mb-3 fixed left-0 right-0
     px-[4%] md:px-[10%] bg-[--theme-color]  */
     /* removed fixed from css */
-    <main className={`flex flex-col sm:flex-row py-3.5 px-[4%] fixed max-w-screen top-0 left-0 right-0 md:px-[10%] bg-[--theme-color]
+    <main className={`flex flex-col justify-center items-center sm:flex-row py-2 px-[4%] fixed max-w-screen top-0 left-0 right-0 md:px-[10%] bg-[--theme-color]
     ${colorChange ? 'shadow-sm  drop-shadow-sm' : ''} 
      transition delay-75 ease-in-out  z-20`}
     >
@@ -51,10 +51,10 @@ function Navbar() {
         <section className="relative flex items-center gap-3 ">
           <Link to="/profile">
             <img
-              className="bg-yellow-300 cursor-pointer rounded-full-border-2 me-3 hover:bg-yellow-800"
-              src={defaultUser}
+              className="bg-orange-500 rounded-full pt-[0.2rem]  cursor-pointer border  me-3 hover:bg-yellow-800"
+              src={AvatarProfile}
               alt="userProfileImage"
-              width={40}
+              width={50}
             />
           </Link>
           <Link to="/">
@@ -65,16 +65,16 @@ function Navbar() {
         <section className="relative hidden sm:block sm:w-1/3 sm:mx-2">
           <Search />
         </section>
-        {user ? <h5>yes</h5> : <h5>no</h5>}
+        {/* {user ? <h5>yes</h5> : <h5>no</h5>} */}
 
         <section className="flex items-center">
-          <Link to="/glasses" className="flex gap-1 px-3 py-1 mx-2 text-sm text-white transition bg-yellow-700 rounded-md shadow-sm align hover:bg-yellow-800">
+          <Link to="/glasses" className="flex book-content__box gap-1 px-3 py-1 mx-2 text-sm text-white transition rounded-md shadow-sm align hover:bg-orange-700">
             <span className="xs:block">Explore</span>
             <MdOutlineExplore className="xs:hidden" />
           </Link>
           <ul className="justify-between hidden text-2xl md:flex ps-1">
             <li
-              className="relative p-2 mx-2 transition bg-slate-300 rounded-full shadow-sm cursor-pointer hover:bg-yellow-800 hover:text-white "
+              className="relative p-2 mx-2 transition  bg-black/[0.075] rounded-full shadow-xl shadow-orange-200 cursor-pointer hover: bgOrange hover:text-white "
               onClick={() => navigate('/wishlist')}
             >
            <Heart size={26} weight="light" />
@@ -86,7 +86,7 @@ function Navbar() {
               )}
             </li>
             <li
-              className="relative p-2 mx-2 text-white transition  custom-bg-button-gradient rounded-full shadow-sm cursor-pointer hover:bg-yellow-800"
+              className="relative p-2 book-content__box mx-2 text-white transition   rounded-full shadow-sm cursor-pointer hover:bg-orange-700"
               onClick={() => navigate('/cart')}
             >
               <Bag size={26} />

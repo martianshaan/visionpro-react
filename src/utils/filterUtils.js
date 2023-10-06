@@ -1,6 +1,10 @@
 export const filterByGender=(selectedGender,data)=>{
+    if (!selectedGender) {
+        return data
+    }
+    
     const lowerSelectedGender = selectedGender.toLowerCase();
-    if(!selectedGender || selectedGender.toLowerCase() === 'all'){
+    if(lowerSelectedGender === 'all'){
         return data
     } else {
       return data.filter(

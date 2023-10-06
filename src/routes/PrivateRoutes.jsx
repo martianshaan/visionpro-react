@@ -1,5 +1,6 @@
 import React from 'react';
-import { Checkout, Profile } from '../pages';
+import { Checkout, Orders, Profile } from '../pages';
+
 
 const privateRoutes = [{
   path: '/checkout',
@@ -7,6 +8,9 @@ const privateRoutes = [{
 }, {
   path: '/profile',
   element: <Profile />,
+},{
+  path:'/orders',
+  element: <Orders />
 }];
 
 export default { privateRoutes };

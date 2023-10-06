@@ -4,8 +4,9 @@ import Mockman from 'mockman-js';
 import Login from '../pages/Login';
 import Todo from './Todo';
 
-import {ProductDetails ,
- ProductListing, Signup, Checkout, Profile, Cart,
+import {
+  ProductDetails,
+  ProductListing, Signup, Checkout, Profile, Cart, Orders, OrdersHistory
 } from '../pages';
 import Wishlist from '../pages/Wishlist';
 
@@ -30,6 +31,25 @@ export const contentRoutes = [{
 },
 {
   id: 3,
+  path: '/mockman',
+  element: <Mockman />,
+}, {
+  id: 4,
+  path: '/todo',
+  element: <Todo />,
+}];
+
+export const privateRoutes = [{
+  id: 1,
+  path: '/checkout',
+  element: <Checkout />,
+}, {
+  id: 2,
+  path: '/profile',
+  element: <Profile />,
+},
+{
+  id: 3,
   path: '/cart',
   element: <Cart />,
 },
@@ -40,18 +60,11 @@ export const contentRoutes = [{
 },
 {
   id: 5,
-  path: '/mockman',
-  element: <Mockman />,
-}, {
+  path: '/orders',
+  element: <Orders />
+},
+{
   id: 6,
-  path: '/todo',
-  element: <Todo />,
-}];
-
-export const privateRoutes = [{
-  path: '/checkout',
-  element: <Checkout />,
-}, {
-  path: '/profile',
-  element: <Profile />,
-}];
+  path: '/myorders',
+  element: <OrdersHistory />,
+},];

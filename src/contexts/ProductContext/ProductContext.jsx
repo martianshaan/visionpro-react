@@ -7,14 +7,16 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { initialState, productReducer } from '../../reducers/productsReducers';
-import { actionTypes, filterTypes } from '../../utils/actionTypes';
+import { actionTypes, addressTypes, filterTypes } from '../../utils/actionTypes';
 import { getProductsandDocuments } from '../../firebase';
 export const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [state, dispatch] = useReducer(productReducer, initialState);
+  const [currentAddress, setCurrentAddress] = useState(state.addressList[0]);
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false)
 
   // useEffect(() => {
   //   addCollectionAndDocuments('popularProducts', popularProducts);
@@ -93,6 +95,38 @@ function ProductContextProvider({ children }) {
     });
   };
 
+  const handleAddAddress = (newAddress) => {
+    dispatch({
+      type: addressTypes.ADD_ADDRESS,
+      payload: [...state.addressList, newAddress]
+    })
+  };
+
+  const handleUpdateAddress = (addressId, updatedAdress) => {
+    const currentaddressList = state.addressList;
+
+    const updatedAddressList = currentaddressList.map((item) => {
+      item.id === addressId ? updatedAdress : item
+    });
+
+    dispatch({
+      type: addressTypes.UPDATE_ADDRESS,
+      payload: updatedAddressList
+    })
+    if (currentAddress.id === addressId) {
+      setCurrentAddress(updatedAdress)
+    }
+  };
+
+  const handleDeleteAddress = (addressId) => {
+    dispatch({
+      type: addressTypes.DELETE_ADDRESS,
+      payload: addressId
+    })
+    // if(currentAddress.id===addressId){
+    //   setCurrentAddress({})
+    // }
+  }
 
 
   return (
@@ -102,13 +136,21 @@ function ProductContextProvider({ children }) {
       cart: state.cart,
       filters: state.filters,
       maxRange: state.maxRange,
+      addressList: state.addressList,
       loading,
       addProductToCart,
       getProductById,
       handleApplyFilters,
       handleClearFilters,
-      isFilterOpen, 
-      setIsFilterOpen
+      isFilterOpen,
+      isOrderPlaced,
+      currentAddress,
+      setIsOrderPlaced,
+      setIsFilterOpen,
+      setCurrentAddress,
+      handleAddAddress,
+      handleUpdateAddress,
+      handleDeleteAddress
     }}
     >
       {children}
