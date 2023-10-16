@@ -25,7 +25,7 @@ function Banner({ catRef }) {
           <br />
           Elevate your sunny days with our trendy eyewear collection.
         </p>
-        <section className="flex items-center absolute top-[212px] md:top-[500px] left-[127px] md:left-[560px] text-white ">
+        <section className="flex items-center absolute top-[222px] md:top-[500px] left-[140px] md:left-[560px] text-white ">
           <button type="button" className="flex items-center p-3"
             onClick={() => { catRef.current.scrollIntoView({ behavior: 'smooth' }); }}>
             <span className="mx-2 text-xs md:text-base">
@@ -35,7 +35,7 @@ function Banner({ catRef }) {
           </button>
         </section>
       </section>
-      <section className="absolute top-[272px] md:top-[495px] left-[144px] md:left-[550px] ">
+      <section className="absolute top-[282px] md:top-[495px] left-[157px] md:left-[550px] ">
         <button type="submit" className="font-medium text-center text-white bg-orange-800 rounded-md bg-gradient-to-b from-orange-400 md:rounded-2xl px-1 py-1 md:px-7 md:py-3 md:font-extrabold hover:bg-orange-600 text-sm md:text-lg "
           onClick={() => navigate('/glasses')}>
           Open Catalog
