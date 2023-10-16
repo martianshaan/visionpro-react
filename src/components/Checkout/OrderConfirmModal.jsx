@@ -18,12 +18,6 @@ const OrderConfirmModal = ({ showModal, setShowModal }) => {
 
   let totalPriceOfCartProducts = totalAmount + shippingFee;
   let userCart = JSON.parse(localStorage.getItem('userCart'));
-  console.log('orders', orders);
-  console.log('userCart', userCart);
-
-  let payment = totalPriceOfCartProducts * 100;
-
-
 
   const newOrder = {
     id: Math.random() * 10000,
@@ -82,10 +76,7 @@ const OrderConfirmModal = ({ showModal, setShowModal }) => {
         navigate("/orders", {
           state: "orderSuccess",
         });
-        alert(response.razorpay_payment_id)
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature)
-        toast.success(`${orders.length} product added`)
+        toast.success(`${cart.length} product successfully Ordered`)
       },
       prefill: {
         name: user ? user.displayName : "Test",
