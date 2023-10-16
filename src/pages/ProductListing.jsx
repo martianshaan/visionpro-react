@@ -2,9 +2,6 @@
 import React, { useEffect } from 'react';
 import Filters from '../components/filters/Filters';
 import { SlidersHorizontal } from '@phosphor-icons/react'
-import bannerHero from '../assets/bannerHero.jpg';
-import BannerGlassico from '../assets/BannerGlassico.png'
-
 import { SingleProduct } from '../components';
 import { useProductContext } from '../contexts/contextIndex';
 import LoaderYellow from '../assets/LoaderYellow.svg'
@@ -15,7 +12,7 @@ import SortBy from '../components/filters/SortBy';
 
 
 function ProductListing() {
-  const { loading, allProducts, filters , isFilterOpen, setIsFilterOpen} = useProductContext();
+  const { loading, allProducts, filters, isFilterOpen, setIsFilterOpen } = useProductContext();
   const [filterCount, setFilterCount] = useState(0)
   console.log('filters', filters);
   console.log('allproducts', allProducts);
@@ -71,9 +68,15 @@ function ProductListing() {
         </section>
       ) : (
         <section className="mt-[112px] md:mt-[72px] mx-2">
-          <header className="mb-3">
-            <img src='https://static1.lenskart.com/media/desktop/img/Nov22/Updated%20brand%20banner%20jj%20.jpg' alt="bannerHero" className="rounded-md h-full " />
+          <header className="hidden md:block mb-3">
+            <img src='https://firebasestorage.googleapis.com/v0/b/visionpro-auth.appspot.com/o/products%2Fsunbun%20brand%20banner.webp?alt=media&token=db1bc144-ec19-4ad5-aeb6-255ab0b599ea&_gl=1*1k9x6kp*_ga*MzE3MTgyMTguMTY5MzMwMjkxMw..*_ga_CW55HF8NVT*MTY5NzQ0ODMwNi4yMC4xLjE2OTc0NTA4NzcuNTAuMC4w' alt="bannerHero" className="rounded-md h-full " />
           </header>
+          <header className="sm:hidden rounded-md mb-3">
+            <img src="https://firebasestorage.googleapis.com/v0/b/visionpro-auth.appspot.com/o/products%2FmobileBanner.gif?alt=media&token=f3915f80-3a5c-46b6-8c6e-234f9ee12ae6&_gl=1*spnqqv*_ga*MzE3MTgyMTguMTY5MzMwMjkxMw..*_ga_CW55HF8NVT*MTY5NzQ1NDA2Ni4yMS4xLjE2OTc0NTQwNzguNDguMC4w" alt="" />
+          </header>
+
+
+
           <section className="flex justify-between py-3">
             <h1 className="text-2xl font-bold">Glasses for You! </h1>
             {filterCount > 0 && (
@@ -88,7 +91,7 @@ function ProductListing() {
                   }`}
                 onClick={() => { setIsFilterOpen(!isFilterOpen); console.log('clicked'); }}
               >
-                <SlidersHorizontal  className='text-lg' />
+                <SlidersHorizontal className='text-lg' />
                 <span className="text-sm">Filters</span>
               </button>
               {isFilterOpen && (
