@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router';
 import { Logo } from '../components';
 import { useAuthContext } from '../contexts/contextIndex';
-import bannerHero from '../assets/bannerHero.jpg';
+import SignBanner from '../assets/SignBanner.jpg'
 
 export default function Login() {
   const [loginData, setLoginData] = useState({
@@ -53,7 +53,7 @@ export default function Login() {
   return (
     <main className="grid  grid-rows-1 lg:grid-cols-2 w-full  m-auto justify-center h-screen">
       <section className=" hidden lg:block max-h-screen  rounded-lg">
-        <img src={bannerHero} alt="" className="w-full h-full object-cover" />
+        <img src={SignBanner} alt="" className="w-full h-full object-cover" />
       </section>
       <section className="px-7 py-7 rounded-md shadow-md
       bg-white/[0.75] flex flex-col gap-6 max-w-lg ml-20  max-h-min my-3"

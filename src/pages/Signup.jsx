@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { useAuthContext } from '../contexts/contextIndex';
-import bannerHero from '../assets/bannerHero.jpg';
+import SignBanner from '../assets/SignBanner.jpg'
 import { Logo } from '../components';
 
 function Signup() {
@@ -46,7 +46,7 @@ function Signup() {
   return (
     <section className="grid grid-rows-1  md:grid-cols-2 w-full h-screen m-auto">
       <figure className=" hidden lg:block max-h-screen rounded-lg w-full ">
-        <img src={bannerHero} alt="bannerHero" className="w-full h-full object-cover" />
+        <img src={SignBanner} alt="bannerHero" className="w-full h-full object-cover" />
       </figure>
       <div className="">
         <section className="px-7 py-7 rounded-md
@@ -127,13 +127,12 @@ shadow-md bg-white/[0.75] flex flex-col gap-6 max-w-lg ml-20  max-h-min my-6"
                   )}
                 </button>
                 <p
-                  className={`pt-1 ${
-                    password
+                  className={`pt-1 ${password
                     && confirmPassword
                     && password !== confirmPassword
-                      ? 'visible text-red-600'
-                      : 'invisible'
-                  }`}
+                    ? 'visible text-red-600'
+                    : 'invisible'
+                    }`}
                 >
                   Password Mismatch
                 </p>
