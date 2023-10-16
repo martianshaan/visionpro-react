@@ -34,6 +34,7 @@ const OrdersHistory = () => {
     }, [user])
 
     console.log('orders', orders.length);
+    console.log('orders', orders.length);
 
     // if (!orders) {
     //     return;
