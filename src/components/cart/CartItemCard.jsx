@@ -30,7 +30,7 @@ function CartItemCard({ product }) {
   };
 
   return (
-      <main className="flex flex-row pt-3 pr-5 pl-3 pb-2 w-[550px] md:w-[550px] font-bold shadow-md bg-white rounded-lg transition-shadow duration-200  gap-3">
+      <main className="flex flex-row pt-3 pr-5 pl-3 pb-2 w-full md:w-[550px] font-bold shadow-md bg-white rounded-lg transition-shadow duration-200  gap-3">
         <figure className="h-1/3 w-1/3 flex-shrink-0 justify-center items-center m-auto overflow-hidden drop-shadow-md  rounded-md  ">
           <img
             src={image}
@@ -82,9 +82,10 @@ function CartItemCard({ product }) {
           </section>
           <hr className="w-full border border-dashed border-purple-haze" />
           <section className="flex gap-3 m-2 justify-between ">
-            <button className="btn-rounded-secondary flex align-middle justify-center gap-2 text-sm mt-2 max-w-xs" onClick={() => removeProductsFromCart(product.id)}>
-              <span> Remove from Bag </span>
-              <BsTrash3 className="text-red-900 text-base hover:text-white " />
+            <button className="btn-rounded-secondary flex align-middle justify-center gap-2  mt-2 max-w-xs" onClick={() => removeProductsFromCart(product.id)}>
+              <span className='text-base  hidden md:block'> Remove from bag </span>
+              <span className='text-base sm:text-sm md:hidden'> Remove  </span>
+              <BsTrash3 className="text-red-900 text-xl sm:text-base hover:text-white " />
             </button>
             <button>
               <Heart size={27} className="text-sm hover:text-rose-600 transition mt-1" />

@@ -25,13 +25,13 @@ function SingleProduct({ product }) {
        hover:shadow-lg y ease-in-out delay-75'
     >
       <figure
-        className="flex items-center justify-center p-10 xs:p-5 md:p-6 bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
+        className="flex items-center justify-center p-7 xs:p-5 md:p-6 bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
       >
         
         <img
           src={image}
           alt=""
-          className="w-full object-  sm:object-cover h-28"
+          className="w-full object-cover  sm:object-cover h-28"
         />
       </figure>
 
