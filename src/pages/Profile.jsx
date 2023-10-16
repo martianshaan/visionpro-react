@@ -6,8 +6,10 @@
 import React, { useState } from 'react';
 import { SignOut } from '@phosphor-icons/react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 import { useAuthContext } from '../contexts/contextIndex';
 import Address from '../components/address/Address';
+
 
 
 function Profile() {
@@ -16,6 +18,7 @@ function Profile() {
   const [loggingOut, setLoggingOut] = useState(false);
   const { logoutHandler, user } = useAuthContext();
 
+  const navigate=useNavigate()
   const handleLogout = () => {
     setLoggingOut(true);
     setTimeout(() => {
@@ -83,6 +86,7 @@ function Profile() {
               type="button"
               className="text-lg w-1/2 items-center bg-gray-900 hover:bg-white  text-white
              hover:text-gray-900 hover:border-gray-900 py-2 px-6 border rounded-md"
+             onClick={()=>navigate('/myorders')}
             >
               Your Orders
             </button>

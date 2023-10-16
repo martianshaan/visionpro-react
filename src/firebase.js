@@ -7,8 +7,10 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import {
   getFirestore, doc, getDoc, setDoc, collection, writeBatch,
-  query, getDocs,
+  query, getDocs, addDoc, serverTimestamp
 } from 'firebase/firestore';
+
+
 // import {
 //   getStorage, ref, listAll, getDownloadURL,
 // } from 'firebase/storage';
@@ -28,7 +30,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export default app;
 
-export const db = getFirestore();
+export const db = getFirestore(app);
 
 // const storage = getStorage();
 
@@ -170,13 +172,111 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData) => {
 };
 
 
-export const addOrderToFirestore = async (orderData) => {
+
+//this method create new order for each user 
+// export const addOrderToFirestorewithNewDocs = async (user, displayName, email, totalAmount, totalItem,cart,PaymentId) => {
+//   try {
+//     // const date = new Date();
+//     // const time = date.getTime();
+
+//     const documentRef = doc(db, "orders", user?.uid);
+
+//     const data = {
+//       BuyerName: displayName,
+//       BuyerEmail: email,
+//       BuyerAddress: 'address',
+//       BuyerPayment: totalAmount,
+//       BuyerQuantity: totalItem,
+//       PaymentIntentId: PaymentId,
+//       PaymentIntentStatus: "succeeded",
+//       name: displayName,
+//       email: email,
+//       createdAt: serverTimestamp(),
+//       cart:cart
+//     };
+//     await setDoc(documentRef, data)
+//     console.log("Document added successfully.");
+//   } catch (err) {
+//     console.error('errororders', err);
+//   }
+// };
+
+
+
+function generateUniqueOrderId() {
+  // Get the current timestamp
+  const timestamp = Date.now();
+
+  // Generate a random number (you can customize the length)
+  const randomPart = Math.floor(Math.random() * 1000000);
+
+  // Combine timestamp and random number to create a unique ID
+  const orderId = `${timestamp}-${randomPart}`;
+
+  return orderId;
+}
+
+
+export const addOrderToFirestore = async (user, displayName, email, totalAmount, totalItem, cart, PaymentId) => {
   try {
-    const orderRef = await addDoc(collection(db, 'orders'), orderData); 
-    console.log('Order placed successfully with ID:', orderRef.id);
-    return orderRef.id; 
-  } catch (error) {
-    console.error('Error placing order:', error);
-    throw error; 
+    // Create a reference to the user's document
+    const userDocRef = doc(db, "users", user?.uid);
+
+    // Generate a unique order ID (you can customize this logic)
+    const orderId = generateUniqueOrderId(); // Implement your own logic for generating unique order IDs
+
+    // Create a reference to the user's order subcollection
+    const userOrdersCollection = collection(userDocRef, "orders");
+
+    // Create a reference to the order document within the user's order subcollection
+    const orderDocRef = doc(userOrdersCollection, orderId);
+
+    // Define order data
+    const orderData = {
+      orderId: orderId,
+      BuyerName: displayName,
+      BuyerEmail: email,
+      BuyerAddress: 'address',
+      BuyerPayment: totalAmount,
+      BuyerQuantity: totalItem,
+      PaymentIntentId: PaymentId,
+      PaymentIntentStatus: "succeeded",
+      name: displayName,
+      email: email,
+      createdAt: serverTimestamp(),
+      cart: cart,
+    };
+
+    // Use setDoc to create the order document within the user's order subcollection
+    await setDoc(orderDocRef, orderData);
+
+    console.log("Order document added successfully.");
+  } catch (err) {
+    console.error('errororders', err);
   }
 };
+
+
+export async function getOrdersForUser(userId) {
+  // Create a reference to the user's document
+  const userDocRef = doc(db, "users", userId);
+
+  // Create a reference to the user's "orders" subcollection
+  const userOrdersCollection = collection(userDocRef, "orders");
+
+  // Create a query to get all orders for the user
+  const userOrdersQuery = query();
+
+  // Execute the query and get the documents
+  const querySnapshot = await getDocs(userOrdersCollection);
+  console.log('query', querySnapshot);
+  const orders = [];
+  querySnapshot.forEach((doc) => {
+    // Extract the order data from each document
+    const orderData = doc.data();
+    console.log('orderData', orderData);
+    orders.push(orderData);
+  });
+
+  return orders;
+}

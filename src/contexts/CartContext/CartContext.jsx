@@ -98,7 +98,7 @@ function CartContextProvider({ children }) {
 
   const orderHandler = () => {
     dispatch({
-      type: 'SUCCESSFUL_ORDER',
+      type: 'CHECKOUT'
     })
   }
 
@@ -108,7 +108,6 @@ function CartContextProvider({ children }) {
     cart: state.cart,
     totalItem: state.totalItem,
     totalAmount: state.totalAmount,
-    orders: state.orders,
     addToCart,
     removeProductsFromCart,
     clearCartHandler,
