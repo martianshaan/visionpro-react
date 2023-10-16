@@ -5,17 +5,26 @@ import ConfirmOrderSummary from "./ConfirmOrderSummary";
 import LoaderYellow from '../../assets/LoaderYellow.svg';
 import { useNavigate } from "react-router";
 import { useAuthContext, useCartContext } from "../../contexts/contextIndex";
-import { addOrderToFirestore } from '../../firebase';
 import toast from "react-hot-toast";
+import { addOrderToFirestore } from '../../firebase'
 
 const OrderConfirmModal = ({ showModal, setShowModal }) => {
   const [disableBtn, setDisableBtn] = useState(false);
   const { user } = useAuthContext();
-  const { totalAmount, shippingFee, orderHandler, orders } = useCartContext();
+  const { totalAmount, shippingFee, orderHandler, orders, totalItem, cart } = useCartContext();
   const navigate = useNavigate();
 
+  const { displayName, email } = user;
+
   let totalPriceOfCartProducts = totalAmount + shippingFee;
-  console.log('orders', orders);
+  let userCart = JSON.parse(localStorage.getItem('userCart'));
+
+  const newOrder = {
+    id: Math.random() * 10000,
+    items: userCart,
+    timestamp: new Date()
+  };
+  console.log('newOrder', newOrder);
 
   const paymentHandler = () => {
     setDisableBtn(true);
@@ -60,13 +69,14 @@ const OrderConfirmModal = ({ showModal, setShowModal }) => {
       description: "Let's Elevate Your Frame Game !",
       image: sunbunLogo,
       handler: function (response) {
+        console.log('response', response);
+        let PaymentId = response.razorpay_payment_id;
+        addOrderToFirestore(user, displayName, email, totalAmount, totalItem, cart, PaymentId);
         orderHandler();
         navigate("/orders", {
           state: "orderSuccess",
         });
-        alert(response.razorpay_payment_id)
-        toast.success(`${orders.length} product added`)
-        console.log('afterupdate', orders);
+        toast.success(`${cart.length} product successfully Ordered`)
       },
       prefill: {
         name: user ? user.displayName : "Test",

@@ -18,7 +18,7 @@ const WishlistItemCard = ({ product }) => {
     const productIsInWishlist = isInWishlist(id);
 
 
-    const handleRemoveWishlistProduct=(event)=>{
+    const handleRemoveWishlistProduct = (event) => {
         //To stop parent evnts from firing use this 
         event.stopPropagation();
 
@@ -35,10 +35,10 @@ const WishlistItemCard = ({ product }) => {
     }
 
     return (
-        <main className='flex flex-col xs:flex-row sm:flex-col bg-white/[0.75] rounded-lg  shadow-sm shadow-amber-50 border-2   border-gray-200 gap-2 
+        <main className='flex flex-col xs:flex-row sm:flex-col bg-white/[0.75] rounded-lg mt-2 shadow-sm shadow-amber-50 border-2   border-gray-200 gap-2 
         overflow-hidden cursor-pointer transition-shadow   hover:scale-[1.05] hover:shadow-md'>
             <figure
-                className=" relative flex items-center justify-center p-30 xs:p-4 sm:p-3 bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
+                className=" relative flex items-center justify-center p-1 xs:p-4 sm:p-3 bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
                 onClick={() => {
                     navigate(`/glasses/${id}`);
                 }}
@@ -46,7 +46,7 @@ const WishlistItemCard = ({ product }) => {
                 <img
                     src={image}
                     alt=""
-                    className="w-full object-contain xs:object-contain sm:object-cover h-28"
+                    className="w-full object-contain xs:object-contain sm:object-cover md:h-28"
                 />
                 <button
                     type='button'
@@ -57,7 +57,7 @@ const WishlistItemCard = ({ product }) => {
                 </button>
             </figure>
             <section className='w-full flex flex-col justify-center items-center'>
-                <section className='flex flex-wrap flex-col sm:flex-row w-full justify-start  sm:justify-between gap-1 sm:gap-10    py-1 px-2 align-middle'>
+                <section className='flex flex-wrap flex-row  w-full justify-between   gap-10 sm:gap-10 py-1 px-2 align-middle'>
                     <span className='text-gray-900 text-sm '>{name}</span>
                     <span className='flex flex-wrap justify-start   sm:justify-center items-center gap-2 '>
                         <span className=" text-amber-600 text-base">
@@ -72,16 +72,19 @@ const WishlistItemCard = ({ product }) => {
                     </span>
                 </section>
                 <hr className="w-full border border-purple-haze" />
-                <section className="flex gap-3 py-1 mb-1 justify-between ">
+                <section className="flex flex-col sm:flex-row gap-3 py-1 my-1 justify-between">
                     <button
-                        type='button'
-                        className="btn-rounded-secondary flex align-end justify-center gap-2 text-sm mt-1  w-full items-end"
+                        type="button"
+                        className="btn-rounded-secondary text-sm w-full" // Remove unnecessary classes
                         onClick={() => moveToBagHandler()}
                     >
-                        <ShoppingBag   size={20} className='mb-[1px]' />
-                        Move to Bag
+                        <div className="flex items-center justify-center gap-2">
+                            <ShoppingBag size={20} className="mb-[1px]" />
+                            Move to Bag
+                        </div>
                     </button>
                 </section>
+
             </section>
 
         </main>

@@ -1,83 +1,75 @@
 import React from "react";
-import { useCartContext } from "../contexts/contextIndex";
+import { useAuthContext } from "../contexts/contextIndex";
 import { Fragment } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getOrdersForUser } from "../firebase";
+import OrderHistoryCard from "../components/orderHistoryCard/OrderHistoryCard";
+import OrderShimmer from "../components/Shimmer/OrderShimmer";
 
-
-export const OrderProductCard = ({ product }) => {
-    const { name, image, newPrice, description } = product
-    return (
-        <section className="flex flex-col gap-3">
-            <section className="flex gap-3">
-                <figure className="w-1/3 h-1/3 bg-black/[0.075] ">
-                    <img src={image} alt="" className="w-full h-full object-cover" />
-                </figure>
-                <article className="flex gap-1">
-                    <h1 className="text-black text-xl font-semibold justify-start">{name}</h1>
-                    <h5 className="text-black text-xl  font-medium justify-start">
-                        ₹
-                        {newPrice}
-                    </h5>
-                    <p className="text-gray-400 text-sm">{description}</p>
-                </article>
-            </section>
-            <section className="flex">
-                <p className="text-gray-400 text-sm">Delivered On</p>
-                <button
-                    type="submit"
-                    className="btn-rounded-secondary rounded-full flex items-center gap-2 md:text-sm lg:text-base"
-                    onClick={() => { }}
-                >
-                    Buy Again
-                </button>
-            </section>
-        </section>
-    )
-};
 
 const OrdersHistory = () => {
-    const { state,orders } = useCartContext();
-    console.log('state', state);
+    const { user } = useAuthContext();
+
+    console.log('user', user);
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(false)
+
+    const userId = user.uid // Replace with the user's UID
+    console.log('userId', userId);
+
+    useEffect(() => {
+        if (user) {
+            const getOrderMap = async () => {
+                setLoading(true)
+                const userOrders = await getOrdersForUser(userId);
+                console.log('userOrders', userOrders);
+                setOrders(userOrders);
+                setLoading(false)
+            }
+            getOrderMap()
+        } else {
+            console.log('login');
+        }
+    }, [user])
+
+    console.log('orders', orders.length);
+    console.log('orders', orders.length);
 
     // if (!orders) {
     //     return;
     // }
+    if (orders.length === 0) {
+        return (
+            < div className="flex flex-col  h-screen justify-center items-center" >
+                <figure className="w-80 h-80">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/visionpro-auth.appspot.com/o/products%2FIMG-6516.JPG?alt=media&token=e5b09e5c-5915-4add-83fd-e670a5cf3983&_gl=1*16upgn0*_ga*MzE3MTgyMTguMTY5MzMwMjkxMw..*_ga_CW55HF8NVT*MTY5NzQ2Nzk2NC4yMy4xLjE2OTc0Njg2ODIuMzguMC4w"
+                        alt="no order" className="w-full h-full object-cover" />
+                </figure>
+                <p className="text-lg text-neutral-900 mt-2">You haven't placed any orders yet.</p>
+                <p className="text-md text-neutral-900 mt-2">Explore our products and start shopping today !</p>
+            </div >
+        )
+    }
     return (
-        <section className="flex flex-col  h-screen gap-1 justify-center items-center">
-            <article className="flex flex-col gap-2">
-                <h1 className="text-black text-4xl font-semibold justify-start">Your Orders</h1>
-                <p className="  text-neutral-400">Check the status of recent orders, manage returns, and discover similar products.</p>
+        <section className="flex mt-[115px] sm:mt-[76px] flex-col gap-1 justify-center items-center">
+            <article className="flex flex-col gap-2 items-center justify-center mb-2">
+                <h1 className="text-black text-2xl sm:text-4xl font-semibold justify-start">Your Orders</h1>
+                <p className="  text-neutral-400 text-sm sm:text-base mx-3 text-center leading-5">Check the status of recent orders, manage returns, and discover similar products.</p>
             </article>
-            <section className="flex-start flex flex-col border p-2 border-1 border-gray-300 rounded-xl bg-white shadow-sm">
-                <section className="flex flex-start justify-between  gap-5">
-                    <article>
-                        <h4 className="text-black text-base font-semibold justify-start">Order Number</h4>
-                        <p className="text-gray-400 text-sm">1234568</p>
-                    </article>
-                    <article>
-                        <h4 className="text-black text-base font-semibold justify-start">Date placed</h4>
-                        <p className="text-gray-400 text-sm">1234568</p>
-                    </article>
-                    <article>
-                        <h4 className="text-black text-base font-semibold justify-start">Total Amount</h4>
-                        <p className="text-gray-400 text-sm">1234568</p>
-                    </article>
-                </section>
-                {orders.length === 0 ? (
-                    <p>No orders available.</p>
-                ) : (
-                    orders.map((product) => (
-                        <Fragment key={product.id}>
-                            <OrderProductCard product={product} />
-                        </Fragment>
-                    ))
-                )}
-            </section>
 
-
-
-
+            {loading ? (
+                <OrderShimmer />
+            ) : (
+                orders.map((order) => (
+                    <Fragment key={order.id}>
+                        <OrderHistoryCard order={order} />
+                    </Fragment>
+                ))
+            )}
         </section>
     )
 }
 
 export default OrdersHistory;
+

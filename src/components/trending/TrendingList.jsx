@@ -2,6 +2,7 @@ import React from 'react';
 import TrendingCard from './TrendingCard';
 // import { popularProducts } from '../../backend/db/popularProducts';
 import { usePopularProductContext } from '../../contexts/contextIndex';
+import PopularProductsShimmer from '../Shimmer/PopularProductsShimmer';
 
 function TrendingList() {
   const { popularProducts, loading } = usePopularProductContext();
@@ -11,10 +12,12 @@ function TrendingList() {
         Popular{' '} Products
       </h1>
       {loading ? (
-        <p>loading ...</p>
+        Array(7).fill().map((item, index) => (
+          <PopularProductsShimmer  key={index}/>
+        ))
       ) : (
         popularProducts.map((product) => (
-          <TrendingCard key={product.id} product={product}  />
+          <TrendingCard key={product.id} product={product} />
         ))
       )}
     </section>

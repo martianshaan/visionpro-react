@@ -31,7 +31,7 @@ function Index() {
 
       <Route element={<SharedLayout />}>
         <Route path="/" element={<Home />} index />
-        <Route path="*" element={<div>Error 404</div>} />
+        <Route path="*" element={<div className='mt-[120px] flex justify-center items-center align-bottom '>Error 404</div>} />
         {contentRoutes.map((route) => (
           <Route key={route.id} path={route.path} element={route.element} />
         ))}

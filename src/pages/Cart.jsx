@@ -10,7 +10,7 @@ function Cart() {
   return (
     <main>
       {cart.length === 0 ? (
-        <section className="flex flex-col h-screen justify-center items-center gap-4">
+        <section className="flex flex-col h-screen justify-center items-center gap-4 ">
           <img src={EmptyCart} alt="" className='w-44 h-44' />
           <h1 class="text-center text-black text-[28px] font-bold font-['DM Sans'] leading-[42.62px]">No Item in your Bag !</h1>
           {/* <h1 className="font-medium text-lg">No Item in the Bag !</h1> */}
@@ -25,9 +25,9 @@ function Cart() {
         </section>
       )
         : (
-          <main className="flex flex-row gap-4 mt-[80px] items-start align-middle justify-center">
+          <main className="flex flex-col sm:flex-row gap-4 mt-[115px] sm:mt-[80px] mb-2 items-center sm:items-start sm:align-middle justify-center">
             <section className="flex flex-col gap-2">
-              <section className="flex flex-row justify-between gap-2">
+              <section className="flex flex-row justify-between gap-2 mx-3">
                 <h1 className="text-xl text-custom-blue">
                   My Cart (
                   {cart.length}
