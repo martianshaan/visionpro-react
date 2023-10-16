@@ -33,13 +33,22 @@ const OrdersHistory = () => {
         }
     }, [user])
 
-    console.log('orders', orders);
+    console.log('orders', orders.length);
 
     // if (!orders) {
     //     return;
     // }
     if (orders.length === 0) {
-        <p>No orders available.</p>
+        return (
+            < div className="flex flex-col  h-screen justify-center items-center" >
+                <figure className="w-80 h-80">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/visionpro-auth.appspot.com/o/products%2FIMG-6516.JPG?alt=media&token=e5b09e5c-5915-4add-83fd-e670a5cf3983&_gl=1*16upgn0*_ga*MzE3MTgyMTguMTY5MzMwMjkxMw..*_ga_CW55HF8NVT*MTY5NzQ2Nzk2NC4yMy4xLjE2OTc0Njg2ODIuMzguMC4w"
+                        alt="no order" className="w-full h-full object-cover" />
+                </figure>
+                <p className="text-lg text-neutral-900">You haven't placed any orders yet.</p>
+                <p className="text-sm text-neutral-900 mt-2">Explore our products and start shopping today!</p>
+            </div >
+        )
     }
     return (
         <section className="flex mt-[115px] sm:mt-[76px] flex-col gap-1 justify-center items-center">
