@@ -1,15 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Mockman from 'mockman-js';
 import Login from '../pages/Login';
 import Todo from './Todo';
 
 import {
-  ProductDetails,
-  ProductListing, Signup, Checkout, Profile, Cart, Orders, OrdersHistory
+  ProductDetails, Signup, Checkout, Profile, Cart, Orders, OrdersHistory
 } from '../pages';
 import Wishlist from '../pages/Wishlist';
 
+const ProductListing = lazy(() => import('../pages/ProductListing'))
 export const authRoutes = [{
   id: 1,
   path: '/login',
@@ -23,7 +23,9 @@ export const authRoutes = [{
 export const contentRoutes = [{
   id: 1,
   path: '/glasses',
-  element: <ProductListing />,
+  element: <Suspense fallback={<p>Loading...</p>}>
+    <ProductListing />
+  </Suspense>,
 }, {
   id: 2,
   path: '/glasses/:productId',
